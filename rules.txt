@@ -2431,7 +2431,6 @@ T;9452;((PRICE(t)/PRICE(t-1)*PA_SPLIT_FACTOR)-1)*100;;0
 T;9453;Source from PRICE_HKD_ND;;0
 T;9454;PRICE_HKD * SHARES_UNADJ;;0
 T;9455;PRICE_HKD * SHARES;;0
-T;9456;If Last traded price = 0, then PRICE = PRICE(t-1);;0
 T;9457;load DIV_PER_SHARE_EX if INFO_BENEFIT is XD and previous value of DIV_PER_SHARE_EX is null);;0
 T;9458;Load 'Y' if Column O of su.csv is equal to Y. If it is 'N', load 'Y' if INFO_BENEFIT is equal to 'XR' but leave it blank if not.;;0
 T;9459;fieldwidth(0,10)£pv£ (First 10 characters);;0
@@ -2461,7 +2460,8 @@ T;9482;Load DIVS(t-1) univ = CONS_ND;;0
 T;9483;Load DIVS_USD(t-1) univ = CONS_ND;;0
 T;9484;Load SPECIAL_DIVS_USD(t-1) univ = CONS_ND;;0
 T;9485;If SHARES(t-1)/SHARES_ND(t-1)=1, load SPLIT_FACTOR(t-1)£pv£ else, return "1".;;0
-T;9486;Load DIVS_NET(t-1) univ = CONS_ND;;0
-T;9487;Load DIVS_NET_USD(t-1) univ = CONS_ND;;0
-T;9488;If ( (SHARES[t-1] / SHARES_ND [t-1]) == 1 , return "1"£pv£ else, return SPLIT_FACTOR[t-1] );;0
+T;9486;Load DIVS_NET(t-1) univ = CONS_ND;NEW CIE SYNTAX;0
+T;9487;Load DIVS_NET_USD(t-1) univ = CONS_ND;;1
+T;9488;If ( (SHARES[t-1] / PIT [t-1]) == 1 , return "1"£pv£ else, return SPLIT_FACTOR[t-1] );;0
+T;9489;Load Async Service;;0
 EOF
