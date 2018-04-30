@@ -1,5 +1,2467 @@
-1. abde
-2. xyze
-3. fqwe
-4. asfas
-5. asffas
+BOF;REPOSITORY;1.0
+TABLE;calculations
+COMMENT;ID;NAME;CIE_SYNTAX;DEPRECATED
+T;1;"GICS";passthrough:'GICS':int;0
+T;2;"ICB";passthrough:'ICB':int;0
+T;3;"INDEX WEIGHT"*CFACTOR*100;;1
+T;4;"ZAR";;1
+T;5;#45*QUOTATION_VALUE;passthrough:SHARES_UNADJ * QUOTATION_VALUE:int;0
+T;6;("INDEX MARKET CAP"*CFACTOR)/1000000;;1
+T;7;("INDEX SHARES"*CFACTOR)/1000000;;1
+T;8;((((PA_PRICE(0)+PA_ACCRUED(0)+PA_COUPON(0))/(PA_PRICE(-1D)+PA_ACCRUED(-1D)))*(PA_INFLATION(0)/PA_INFLATION(-1D))-1)*100;logic:(((PA_PRICE + PA_ACCRUED + PA_COUPON) / (PA_PRICE(-1D) + PA_ACCRUED(-1D))) * (PA_INFLATION / PA_INFLATION(-1D)) - 1) * 100:int;0
+T;9;((((PRICE_LOC+SPIN_DIV_LOC )+DIV_NET_LOC )/PRICE_LOC univ=CONS_ND from t-1 )-1)*100;passthrough:((((PRICE_LOC + SPIN_DIV_LOC) + DIV_NET_LOC) / fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'PRICE_LOC',PREV_DATE)) - 1) * 100:int;0
+T;10;((((PRICE_USD+SPIN_DIV_USD )+DIV_NET_USD )/PRICE_USD univ=CONS_ND from t-1 )-1)*100;passthrough:((((PRICE_USD + SPIN_DIV_USD) + DIV_NET_USD) / fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'PRICE_USD',PREV_DATE)) - 1) * 100:int;0
+T;11;(((MCAP_EUR)*100)/(Sum of MCAP_EUR))*RATE;logic:((MCAP_EUR * 100) / sum(MCAP_EUR)) * RATE:int;0
+T;12;(((PA_ACCRUED(t)+PA_PRICE(t)+PA_COUPON(t))/(PA_ACCRUED(t-1)+PA_PRICE(t-1)))-1)*100;logic:(((PA_ACCRUED + PA_PRICE + PA_COUPON) / (PA_ACCRUED(-1D) + PA_PRICE(-1D))) - 1) * 100:int;0
+T;13;((1+TRET_CHG_1D_GROSS_LOC)*(XRATE_LOC_TO_EUR(0)/XRATE_LOC_EUR(-1D))-1)*100;passthrough:(((1 + TRET_CHG_1D_GROSS_LOC) * (XRATE_LOC_TO_EUR / XRATE_LOC_EUR(-1D))) - 1) * 100:int;0
+T;14;((1+TRET_CHG_1D_GROSS_LOC)*(XRATE_LOC_TO_GBP(0)/XRATE_LOC_GBP(-1D))-1)*100;logic:((1 + TRET_CHG_1D_GROSS_LOC) * (XRATE_LOC_TO_GBP / XRATE_LOC_GBP(-1D)) - 1) * 100:int;0
+T;15;((1+TRET_CHG_1D_GROSS_REAL_LOC)*(XRATE_LOC_TO_EUR(0)/XRATE_LOC_EUR(-1D))-1)*100;passthrough:(((1 + TRET_CHG_1D_GROSS_REAL_LOC) * (XRATE_LOC_TO_EUR / XRATE_LOC_EUR(-1D))) - 1) * 100:int;0
+T;16;((1+TRET_CHG_1D_GROSS_REAL_LOC)*(XRATE_LOC_TO_GBP(0)/XRATE_LOC_GBP(-1D))-1)*100;logic:((1 + TRET_CHG_1D_GROSS_REAL_LOC) * (XRATE_LOC_TO_GBP/XRATE_LOC_GBP(-1D)) - 1) * 100:int;0
+T;17;((1+TRET_CHG_1D_GROSS_REAL_MTD)*(XRATE_LOC_TO_EUR(0)/XRATE_LOC_EUR(-1D))-1)*100;passthrough:(((1 + TRET_CHG_1D_GROSS_REAL_MTD) * (XRATE_LOC_TO_EUR / XRATE_LOC_EUR(-1D))) - 1) * 100:int;0
+T;18;((1+TRET_CHG_1D_GROSS_REAL_MTD)*(XRATE_LOC_TO_GBP(0)/XRATE_LOC_GBP(-1D))-1)*100;logic:((1 + TRET_CHG_1D_GROSS_REAL_MTD) * (XRATE_LOC_TO_GBP/XRATE_LOC_GBP(-1D)) - 1) * 100:int;0
+T;19;((1+TRET_CHG_1D_GROSS_USD)*(XRATE_LOC_TO_USD(-1)/XRATE_LOC_TO_USD(0))-1)*100;logic:((1 + TRET_CHG_1D_GROSS_USD) * (XRATE_LOC_TO_USD(-1D)/XRATE_LOC_TO_USD) - 1) * 100:int;0
+T;20;((1+TRET_CHG_MTD_GROSS_LOC)*(XRATE_LOC_TO_EUR(0)/XRATE_LOC_EUR(-1D))-1)*100;passthrough:(((1 + TRET_CHG_MTD_GROSS_LOC) * (XRATE_LOC_TO_EUR / XRATE_LOC_EUR(-1D))) - 1) * 100:int;0
+T;21;((1+TRET_CHG_MTD_GROSS_LOC)*(XRATE_LOC_TO_GBP(0)/XRATE_LOC_GBP(-1D))-1)*100;logic:((1 + TRET_CHG_MTD_GROSS_LOC) * (XRATE_LOC_TO_GBP/XRATE_LOC_GBP(-1D)) - 1) * 100:int;0
+T;22;((current PRICE_CHF/previous PRICE_CHF)-1)*100;logic:((PRICE_CHF / PRICE_CHF(-1D)) - 1) * 100:int;0
+T;23;((current PRICE_DKK/previous PRICE_DKK)-1)*100;logic:((PRICE_DKK / PRICE_DKK(-1D)) - 1) * 100:int;0
+T;24;((current PRICE_NOK/previous PRICE_NOK)-1)*100;logic:((PRICE_NOK / PRICE_NOK(-1D)) - 1) * 100:int;0
+T;25;((current PRICE_SEK/previous PRICE_SEK)-1)*100;logic:((PRICE_SEK / PRICE_SEK(-1D)) - 1) * 100:int;0
+T;26;((current TOTAL_RETURN_GROSS_CHF/previous TOTAL_RETURN_GROSS_CHF)-1)*100;logic:((TOTAL_RETURN_GROSS_CHF / TOTAL_RETURN_GROSS_CHF(-1D)) - 1) * 100:int;0
+T;27;((current TOTAL_RETURN_GROSS_DKK/previous TOTAL_RETURN_GROSS_DKK)-1)*100;logic:((TOTAL_RETURN_GROSS_DKK / TOTAL_RETURN_GROSS_DKK(-1D)) - 1) * 100:int;0
+T;28;((current TOTAL_RETURN_GROSS_GBP/previous TOTAL_RETURN_GROSS_GBP)-1)*100;logic:((TOTAL_RETURN_GROSS_GBP / TOTAL_RETURN_GROSS_GBP(-1D)) - 1) * 100:int;0
+T;29;((current TOTAL_RETURN_GROSS_JPY/previous TOTAL_RETURN_GROSS_JPY)-1)*100;logic:((TOTAL_RETURN_GROSS_JPY / TOTAL_RETURN_GROSS_JPY(-1D)) - 1) * 100:int;0
+T;30;((current TOTAL_RETURN_GROSS_NOK/previous TOTAL_RETURN_GROSS_NOK)-1)*100;logic:((TOTAL_RETURN_GROSS_NOK / TOTAL_RETURN_GROSS_NOK(-1D)) - 1) * 100:int;0
+T;31;((current TOTAL_RETURN_GROSS_SEK/previous TOTAL_RETURN_GROSS_SEK)-1)*100;logic:((TOTAL_RETURN_GROSS_SEK / TOTAL_RETURN_GROSS_SEK(-1D)) - 1) * 100:int;0
+T;32;((current TOTAL_RETURN_NET/previous TOTAL_RETURN_NET)-1)*100;logic:((TOTAL_RETURN_NET / TOTAL_RETURN_NET(-1D)) - 1) * 100:int;0
+T;33;((current TOTAL_RETURN_NET_CHF/previous TOTAL_RETURN_NET_CHF)-1)*100;logic:((TOTAL_RETURN_NET_CHF / TOTAL_RETURN_NET_CHF(-1D)) - 1) * 100:int;0
+T;34;((current TOTAL_RETURN_NET_DKK/previous TOTAL_RETURN_NET_DKK)-1)*100;logic:((TOTAL_RETURN_NET_DKK / TOTAL_RETURN_NET_DKK(-1D)) - 1) * 100:int;0
+T;35;((current TOTAL_RETURN_NET_EUR/previous TOTAL_RETURN_NET_EUR)-1)*100;logic:((TOTAL_RETURN_NET_EUR / TOTAL_RETURN_NET_EUR(-1D)) - 1) * 100:int;0
+T;36;((current TOTAL_RETURN_NET_GBP/previous TOTAL_RETURN_NET_GBP)-1)*100;logic:((TOTAL_RETURN_NET_GBP / TOTAL_RETURN_NET_GBP(-1D)) - 1) * 100:int;0
+T;37;((current TOTAL_RETURN_NET_JPY/previous TOTAL_RETURN_NET_JPY)-1)*100;logic:((TOTAL_RETURN_NET_JPY / TOTAL_RETURN_NET_JPY(-1D)) - 1) * 100:int;0
+T;38;((current TOTAL_RETURN_NET_NOK/previous TOTAL_RETURN_NET_NOK)-1)*100;logic:((TOTAL_RETURN_NET_NOK / TOTAL_RETURN_NET_NOK(-1D)) - 1) * 100:int;0
+T;39;((current TOTAL_RETURN_NET_SEK/previous TOTAL_RETURN_NET_SEK)-1)*100;logic:((TOTAL_RETURN_NET_SEK / TOTAL_RETURN_NET_SEK(-1D)) - 1) * 100:int;0
+T;40;((current TOTAL_RETURN_NET_USD/previous TOTAL_RETURN_NET_USD)-1)*100;logic:((TOTAL_RETURN_NET_USD / TOTAL_RETURN_NET_USD(-1D)) - 1) * 100:int;0
+T;41;((MCAP/SUM OF MCAP)*100);;1
+T;42;((PA_PRICE(t)/PA_PRICE(t-1))-1)*100;logic:((PA_PRICE / PA_PRICE(-1D)) - 1) * 100:int;0
+T;43;((PA_PRICE(t)/PA_PRICE(t-1))-1)*WEIGHT(t-1);;0
+T;44;((PA_PRICE(t)+ZAV(PA_DIVS(t)))*((SHARES_UNADJ(t-1)/SHARES_UNADJ(t))/CSPLIT(t)))-(PA_PRICE(t)-ZAV(PA_DIVS(t)));logic:((PA_PRICE + ZAV(PA_DIVS)) * ((SHARES_UNADJ(-1D) / SHARES_UNADJ) / CSPLIT)) - (PA_PRICE - ZAV(PA_DIVS)):int;0
+T;45;((PA_PRICE(t)+ZAV(PA_DIVS(t)))*((SHARES_UNADJ(t-1)/SHARES_UNADJ(t))/SPLIT_FACTOR(t)))-(PA_PRICE(t)-ZAV(PA_DIVS(t))) £pv£ If new security, use the calculation: 2*ZAV(PA_DIVS(t));logic:is_new_security():int;0
+T;46;((PRICE(t)/(PRICE(t-1)-DIVS(t)))-1)*100;logic:((PRICE/(PRICE(-1D) - DIVS)) - 1) * 100:int;0
+T;47;((PRICE(t)/PRICE(t-1)-DIVS (t)))-1)*100;;1
+T;48;((PRICE(t)+ZAV(DIVS(t)))*((SHARES_UNADJ(t-1)/SHARES_UNADJ(t))/CSPLIT(t)))-(PRICE(t)-ZAV(DIVS(t)));logic:((PRICE + ZAV(DIVS)) * ((SHARES_UNADJ(-1D) / SHARES_UNADJ) / CSPLIT)) - (PRICE - ZAV(DIVS)):int;0
+T;49;((PRICE(t)+ZAV(DIVS(t)))*((SHARES_UNADJ(t-1)/SHARES_UNADJ(t))/SPLIT_FACTOR(t)))-(PRICE(t)-ZAV(DIVS(t)));passthrough:((PRICE + avail(DIVS, 0)) * ((SHARES_UNADJ(-1D) / SHARES_UNADJ) / SPLIT_FACTOR)) - (PRICE - avail(DIVS, 0)):int;0
+T;50;((PRICE(t)+ZAV(DIVS(t)))*((SHARES_UNADJ(t-1)/SHARES_UNADJ(t))/SPLIT_FACTOR(t)))-(PRICE(t)-ZAV(DIVS(t))) £pv£ If new security, use the calculation: 2*ZAV(DIVS(t));;0
+T;51;((PRICE/previous day PRICE)-1)*100;logic:((PRICE / PRICE(-1D)) - 1) * 100:int;0
+T;52;((PRICE_DIRTY*AMOUNT)/100)/MCAP;passthrough:(PRICE_DIRTY * AMOUNT / 100) / MCAP:int;0
+T;53;((PRICE_DIRTY/(TRET_CHG_1D_GROSS+1))-ACCRUED;passthrough:(PRICE_DIRTY / (TRET_CHG_1D_GROSS + 1)) - ACCRUED:int;0
+T;54;((PRICE_EUR/previous day PRICE_EUR)-1)*100;logic:((PRICE_EUR / PRICE_EUR(-1D)) - 1) * 100:int;0
+T;55;((PRICE_GBP/previous day PRICE_GBP)-1)*100;logic:((PRICE_GBP / PRICE_GBP(-1D)) - 1) * 100:int;0
+T;56;((PRICE_JPY/previous day PRICE_JPY)-1)*100;logic:((PRICE_JPY / PRICE_JPY(-1D)) - 1) * 100:int;0
+T;57;((PRICE_SGD*ACCRUED)*AMOUNT_SGD/100)/1000000;passthrough:((PRICE_SGD * ACCRUED) * AMOUNT_SGD / 100) / 1000000:int;0
+T;58;((PRICE_USD(t)/(PRICE_USD(t-1)-DIVS_USD(t)))-1)*100;logic:((PRICE_USD/(PRICE_USD(-1D) - DIVS_USD)) - 1) * 100:int;0
+T;59;((PRICE_USD(t)/PRICE_USD(t-1)-DIVS_USD(t)))-1)*100;logic:((PRICE_USD / PRICE_USD(-1D)) - DIVS_USD - 1) * 100:int;0
+T;60;((PRICE_USD/previous day PRICE_USD)-1)*100;logic:((PRICE_USD / PRICE_USD(-1D)) - 1) * 100:int;0
+T;61;((PRICE+ACCRUED)*AMOUNT/100)/1000000;passthrough:((PRICE + ACCRUED) * AMOUNT / 100) / 1000000:int;0
+T;62;((SHARES_ISSUED/OFACTOR)*PRICE_LOC)/XRATE_LOC_TO_USD;passthrough:((SHARES_ISSUED / OFACTOR) * PRICE_LOC) / XRATE_LOC_TO_USD:int;0
+T;63;((TOTAL_RETURN_GROSS(0)/TOTAL_RETURN_GROSS (-1))-1)/100;logic:((TOTAL_RETURN_GROSS / TOTAL_RETURN_GROSS(-1)) - 1) / 100:int;0
+T;64;((TOTAL_RETURN_GROSS/previous day TOTAL_RETURN_GROSS)-1)*100;logic:((TOTAL_RETURN_GROSS / TOTAL_RETURN_GROSS(-1D)) - 1) * 100:int;0
+T;65;((TOTAL_RETURN_GROSS/TOTAL_RETURN_GROSS (-1D))-1)*100;logic:((TOTAL_RETURN_GROSS/TOTAL_RETURN_GROSS(-1D)) - 1) * 100:int;0
+T;66;((TOTAL_RETURN_GROSS_EUR/previous day TOTAL_RETURN_GROSS_EUR)-1)*100;logic:((TOTAL_RETURN_GROSS_EUR / TOTAL_RETURN_GROSS_EUR(-1D)) - 1) * 100:int;0
+T;67;((TOTAL_RETURN_GROSS_GBP/previous day TOTAL_RETURN_GROSS_GBP)-1)*100;logic:((TOTAL_RETURN_GROSS_GBP / TOTAL_RETURN_GROSS_GBP(-1D)) - 1) * 100:int;0
+T;68;((TOTAL_RETURN_GROSS_JPY/previous day TOTAL_RETURN_GROSS_JPY)-1)*100;logic:((TOTAL_RETURN_GROSS_JPY / TOTAL_RETURN_GROSS_JPY(-1D)) - 1) * 100:int;0
+T;69;((TOTAL_RETURN_GROSS_SGD(t)/TOTAL_RETURN_GROSS_SGD(t-1))-1)*100;logic:((TOTAL_RETURN_GROSS_SGD/TOTAL_RETURN_GROSS_SGD(-1D)) - 1) * 100:int;0
+T;70;((TOTAL_RETURN_GROSS_USD/previous day TOTAL_RETURN_GROSS_USD)-1)*100;logic:((TOTAL_RETURN_GROSS_USD / TOTAL_RETURN_GROSS_USD(-1D)) - 1) * 100:int;0
+T;71;((TRET_CHG_MTD_GROSS*100)-(TRET_CHG_MTD_GROSS (-1D)*100))/(TRET_CHG_MTD_GROSS (-1D)+100)£pv£ For every First Business day of the month, load TRET_CHG_MTD_GROSS;;0
+T;72;([([(PCHG_MTD+COUPRET_MTD+PYDNRET_MTD)/100]+1)*CURR_RET_CHG_MTD]-1)*100;;0
+T;73;(AMOUNT/SUM OF AMOUNT)*100;logic:(AMOUNT / sum(AMOUNT)) * 100:int;0
+T;74;(AMOUNT_LOC*PRICE_DIRTY);passthrough:AMOUNT_LOC * PRICE_DIRTY:int;0
+T;75;(AMOUNT_LOC/XRATE_LOC_TO_EUR*COUPON_PAID)/100;passthrough:((AMOUNT_LOC / XRATE_LOC_TO_EUR) * COUPON_PAID) / 100:int;0
+T;76;(AMOUNT_MXN*PRICE_DIRTY);passthrough:AMOUNT_MXN * PRICE_DIRTY:int;0
+T;77;(AMOUNT_UNADJ*PRICE_DIRTY)/100;passthrough:(AMOUNT_UNADJ_CNY * PRICE_DIRTY) / 100:int;0
+T;78;(AMOUNT_UNADJ_CNY*PRICE_DIRTY)/100;passthrough:(AMOUNT_UNADJ_CNY * PRICE_DIRTY) / 100:int;0
+T;79;(AMOUNT_UNADJ_LOC*PRICE_DIRTY)/100;passthrough:(AMOUNT_UNADJ_LOC * PRICE_DIRTY) / 100:int;0
+T;80;(CASH_PAY*INDEX_RATIO)+Base Market Value_LC;;1
+T;81;(CASH_PAY*INDEX_RATIO)+MarketValue;;1
+T;82;(cons)PRICE*(mems)SHARES;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'PRICE_USD',DATE) * SHARES:int;0
+T;83;(cons)PRICE_USD*(mems)SHARES;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'PRICE_USD',DATE) * SHARES:int;0
+T;84;(cons_ND)MCAP_UNADJ_LOC*(mems_ND)AFACTOR;passthrough:fetchExternalValue('CONS_ND',<IDFIELD>,'MCAP_UNADJ_LOC',DATE) * AFACTOR:int;0
+T;85;(cons_ND)SHARES_UNADJ*(mems_ND)AFACTOR;passthrough:fetchExternalValue('CONS_ND',<IDFIELD>,'SHARES_UNADJ',DATE) * AFACTOR:int;0
+T;86;(cons_PF)MCAP_UNADJ_LOC*(mems_PF)AFACTOR;passthrough:fetchExternalValue('CONS_PF',<IDFIELD>,'MCAP_UNADJ_LOC',DATE) * AFACTOR:int;0
+T;87;(cons_PF)SHARES_UNADJ*(mems_PF)AFACTOR;passthrough:fetchExternalValue('CONS_PF',<IDFIELD>,'SHARES_UNADJ',DATE) * AFACTOR:int;0
+T;88;(DIVS_TOTAL)*PA_XRATE;passthrough:DIVS_TOTAL * PA_XRATE:int;0
+T;89;(MCAP(t)*100)/(PRICE_DIRTY(t-1)*AMOUNT(t));logic:(MCAP * 100) / (PRICE_DIRTY(-1D) * AMOUNT):int;0
+T;90;(MCAP/AMOUNT)*100;passthrough:(MCAP / AMOUNT) * 100:int;0
+T;91;(MCAP/PRICE_DIRTY)*100;passthrough:(MCAP / PRICE_DIRTY) * 100:int;0
+T;92;(MCAP/SUM(MCAP))*100;logic:(MCAP / sum(MCAP)) * 100:int;0
+T;93;(MCAP_1100/SUM OF MCAP_1100)*100;logic:(MCAP_1100 / sum(MCAP_1100)) * 100:int;0
+T;94;(MCAP_1600/SUM OF MCAP_1600)*100;logic:(MCAP_1600 / sum(MCAP_1600)) * 100:int;0
+T;95;(MCAP_1730/SUM OF MCAP_1730)*100;logic:(MCAP_1730 / sum(MCAP_1730)) * 100:int;0
+T;96;(MCAP_CASH/∑MCAP_CASH)*100;logic:(MCAP_CASH / sum(MCAP_CASH)) * 100:int;0
+T;97;(MCAP_EU/SUM(MCAP_EU))*100;logic:(MCAP_EU / sum(MCAP_EU)) * 100:int;0
+T;98;(MCAP_EUR/PRICE_DIRTY)*100;passthrough:(MCAP_EUR / PRICE_DIRTY) * 100:int;0
+T;99;(MCAP_FE/SUM(MCAP_FE))*100;;0
+T;100;(MCAP_LOC/PRICE_DIRTY)*100;passthrough:(MCAP_LOC / PRICE_DIRTY) * 100:int;0
+T;101;(MCAP_UNADJ/AMOUNT_UNADJ)*100;passthrough:(MCAP_UNADJ / AMOUNT_UNADJ) * 100:int;0
+T;102;(MCAP_US/SUM(MCAP_US))*100;;0
+T;103;(MCAP_USD/PRICE)*1000000;passthrough:(MCAP_USD / PRICE) * 1000000:int;0
+T;104;(MCAP_USD/PRICE_DIRTY)*100;passthrough:(MCAP_USD / PRICE_DIRTY) * 100:int;0
+T;105;(mems)MCAP*(cons)XRATE_LOC_TO_USD;passthrough:MCAP * XRATE_LOC_TO_USD:int;0
+T;106;(NEXT_PRICE*NEXT_ROLL_WEIGHT)+(LEAD_PRICE*LEAD_ROLL_WEIGHT);passthrough:(NEXT_PRICE * NEXT_ROLL_WEIGHT) + (LEAD_PRICE * LEAD_ROLL_WEIGHT):int;0
+T;107;(PA_MCAP/SUM of PA_MCAP)*100;logic:(PA_MCAP / sum(PA_MCAP)) * 100:int;0
+T;108;(PA_PRICE(-1D)+PA_ACCRUED(-1D))*(AMOUNT);logic:(PA_PRICE(-1D) + PA_ACCRUED(-1D)) * (AMOUNT):int;0
+T;109;(PA_PRICE(t)*PA_CSPLIT(t))/((PA_PRICE(t-1)*(PA_CSPLIT(t-1)*PA_SPIN_FACTOR(t-1)))-ZAV(PA_DIVS(t)))-1;logic:(PA_PRICE * PA_CSPLIT) / ((PA_PRICE(-1D) * (PA_CSPLIT(-1D) * PA_SPIN_FACTOR(-1D))) - avail(PA_DIVS,0)) - 1:int;0
+T;110;(PA_PRICE(t)*PA_SPLIT_FACTOR(t))/((PA_PRICE(t-1)*(PA_SPLIT_FACTOR(t-1)*PA_SPIN_FACTOR(t-1)))-ZAV(PA_DIVS(t)))-1;logic:(PA_PRICE * PA_SPLIT_FACTOR) / ((PA_PRICE(-1D) * (PA_SPLIT_FACTOR(-1D) * PA_SPIN_FACTOR(-1D))) - avail(PA_DIVS,0)) - 1:int;0
+T;111;(PA_PRICE(t)/PA_PRICE(t-1))-1;logic:(PA_PRICE/PA_PRICE(-1D)) - 1:int;0
+T;112;(PA_SPOT_RET+PA_ROLL_RET+PA_COLLATERAL_RET)/WEIGHT(t-1);logic:(PA_SPOT_RET + PA_ROLL_RET + PA_COLLATERAL_RET) / WEIGHT(-1D):int;0
+T;113;(PRICE(CONS)*AMOUNT(MEMS)/SUM (PRICE*AMOUNT))*100;logic:(PRICE_AMOUNT / sum(PRICE_AMOUNT)) * 100) * 100:int;0
+T;114;(PRICE*SHARES)/1000000;passthrough:(PRICE_USD * SHARES) / 1000000:int;0
+T;115;(Price[0]-Price[-1])/(Price[-1]+Accrued[-1])*100;logic:(PRICE - PRICE(-1D)) / PRICE(-1D) + ACCRUED(-1D)) * 100:int;0
+T;116;(PRICE[-1]+ACCRUED[-1])*(AMOUNT[0]);logic:(PRICE(-1D) + ACCRUED(-1D)) * (AMOUNT):int;0
+T;117;(PRICE[-1]+ACCRUED[-1])*(AMOUNT_CAD[0]);logic:(PRICE(-1D) + ACCRUED(-1D)) * (AMOUNT_CAD):int;0
+T;118;(PRICE[-1]+ACCRUED[-1])*(AMOUNT_LOC[0]);logic:(PRICE(-1D) + ACCRUED(-1D)) * (AMOUNT_LOC):int;0
+T;119;(PRICE[-1]+ACCRUED_REAL[-1])*(AMOUNT[0]);logic:(PRICE(-1D) + ACCRUED_REAL(-1D)) * (AMOUNT):int;0
+T;120;(PRICE[-1]+ACCRUED_REAL[-1])*(AMOUNT_CAD[0]);logic:(PRICE(-1D) + ACCRUED_REAL(-1D)) * (AMOUNT_CAD):int;0
+T;121;(PRICE[-1]+ACCRUED_REAL[-1])*(AMOUNT_LOC[0]);logic:(PRICE(-1D) + ACCRUED_REAL(-1D)) * (AMOUNT_LOC):int;0
+T;122;(PRICE[-1]+ACCRUED_REAL[-1])*(AMOUNT_UNADJ[0]);logic:(PRICE(-1D) + ACCRUED_REAL(-1D)) * (AMOUNT_UNADJ):int;0
+T;123;(PRICE[-1]+ACCRUED_REAL[-1])*(AMOUNT_UNADJ_CAD[0]);logic:(PRICE(-1D) + ACCRUED_REAL(-1D)) * (AMOUNT_UNADJ_CAD):int;0
+T;124;(PRICE[-1]+ACCRUED_REAL[-1])*(AMOUNT_UNADJ_LOC[0]);logic:(PRICE(-1D) + ACCRUED_REAL(-1D)) * (AMOUNT_UNADJ_LOC):int;0
+T;125;(PRICE_DIRTY*AMOUNT);;1
+T;126;(PRICE_DIRTY*AMOUNT*XRATE_LOC_TO_EUR)/100;passthrough:(PRICE_DIRTY * AMOUNT * XRATE_LOC_TO_EUR) / 100:int;0
+T;127;(PRICE_DIRTY*AMOUNT*XRATE_LOC_TO_USD)/100;passthrough:(PRICE_DIRTY * AMOUNT * XRATE_LOC_TO_USD) / 100:int;0
+T;128;(PRICE_DIRTY*AMOUNT_UNADJ)/1,000,000;passthrough:(PRICE_DIRTY * AMOUNT_UNADJ) / 1000000:int;0
+T;129;(PRICE_DIRTY/100)*AMOUNT;passthrough:(PRICE_DIRTY / 100) * AMOUNT:int;0
+T;130;(PRICE_DIRTY/100)*AMOUNT_EUR;passthrough:(PRICE_DIRTY / 100) * AMOUNT_EUR:int;0
+T;131;(PRICE_DIRTY/100)*AMOUNT_INR;passthrough:(PRICE_DIRTY / 100) * AMOUNT_INR:int;0
+T;132;(PRICE_DIRTY/100)*AMOUNT_LOC;passthrough:(PRICE_DIRTY / 100) * AMOUNT_LOC:int;0
+T;133;(PRICE_LOC*SHARES);passthrough:PRICE_LOC * SHARES:int;0
+T;134;(PRICE_LOC*SHARES_UNADJ);passthrough:PRICE_LOC * SHARES_UNADJ:int;0
+T;135;(PRICE_LOC*SHARES_UNADJ)/1000000;passthrough:(PRICE_LOC * SHARES_UNADJ) / 1000000:int;0
+T;136;(PRICE_USD*SHARES)/1000000;passthrough:(PRICE_USD * SHARES) / 1000000:int;0
+T;137;(PRICE+ACCRUED)*AMOUNT;passthrough:(PRICE + ACCRUED) * AMOUNT:int;0
+T;138;(RO_CPW*RO_WGT)+(RI_CPW*RI_WGT);passthrough:(RO_CPW * RO_WGT) + (RI_CPW * RI_WGT):int;0
+T;139;(RO_PRICE*RO_WGT)+(RI_PRICE*RI_WGT);passthrough:(RO_PRICE * RO_WGT) + (RI_PRICE * RI_WGT):int;0
+T;140;(WAV/(PA_PRICE/PRICE_ADJ_FACTOR));passthrough:(WAV / (PA_PRICE / PRICE_ADJ_FACTOR)):int;0
+T;141;(WEIGHT/PRICE)*1000000;passthrough:(WEIGHT / PRICE) * 1000000:int;0
+T;142;(WEIGHT_BEG/SUM(WEIGHT_BEG))*100;logic:(WEIGHT_BEG / sum(WEIGHT_BEG)) * 100:int;0
+T;143;(WEIGHT_GDP*MCAP_USD(IDX LEVEL))/100;passthrough:(WEIGHT_GDP * fetchExternalValue('IDX',INDEX_ID,MCAP_USD,DATE)) / 100:int;0
+T;144;*100 £pv£ For 20160718 onward, load from Daily Weight;;1
+T;145;*100£pv£ From 20160718 onward, load from Index Weight;;1
+T;146;[((ACCRUED-ACCRUED (-EOM))+COUPON_PAID)/PRICE_DIRTY (-EOM)]*100;logic:(((ACCRUED - ACCRUED(EOM)) + COUPON_PAID) / PRICE_DIRTY(EOM)) * 100:int;0
+T;147;[(AMOUNT_CHG_MTD*(100-PRICE))/PRICE_DIRTY (-EOM)]*100;logic:((AMOUNT_CHG_MTD * (100 - PRICE)) / PRICE_DIRTY(EOM)) * 100:int;0
+T;148;[(PRICE-PRICE (-EOM))/PRICE_DIRTY (-EOM)]*100;logic:((PRICE - PRICE(EOM)) / PRICE_DIRTY(EOM)) * 100:int;0
+T;149;[MCAP_EUR (CONS)/SUM OF MCAP_EUR(CONS)]*100;;0
+T;150;[MCAP_UNADJ/sum(MCAP_UNADJ)]/WEIGHT;logic:(MCAP_UNADJ / sum(MCAP_UNADJ)) / WEIGHT:int;0
+T;151;[TOTAL_RETURN_GROSS (t)/TOTAL_RETURN_GROSS (t-1)]-1;logic:(-1D):int;0
+T;152;^=FI_NAME(ISS);passthrough:FetchFromFqlCodeWithSymbol('FI_NAME(ISS)£pv£',IDENTIFIER):int;0
+T;153;^=FSYM_ISIN(0,VENDOR_ID);passthrough:FetchFromFqlCodeWithSymbol('avail(FSYM_ISIN(),'')£pv£', PERM_ID):col;0
+T;154;^=PROPER_NAME(,,,"SECURITY")£pv£ Use ISIN;;1
+T;155;^=WMR_EXCHANGE_RATE(<CURRENCY_ISO>,EUR,<DATE>);passthrough:FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',EUR,',DATE,')£pv£')):int;0
+T;156;{(Sum of PA_SPOT_RET/100)-[idx (TOTAL_RETURN_EXCESS(t)/TOTAL_RETURN_EXCESS(t-1))-1]}*WEIGHT(t-1);logic:sum:int;0
+T;157;{idx[(TOTAL_RETURN_GROSS(t)/TOTAL_RETURN_GROSS(t-1))-1]-(Sum of PA_SPOT_RET/100)-(Sum of PA_ROLL_RET/100)}*WEIGHT(t-1);logic:sum:int;0
+T;158;1/#18 (Spot FX Rate);passthrough:1 / <SELF>:int;0
+T;159;1/#21 (Spot FX Rate);passthrough:1 / <SELF>:int;0
+T;160;1/column C;;1
+T;161;1/Currency Factor;;1
+T;162;1/FX Rate;;1
+T;163;1/Mid Rate;;1
+T;164;1/NUMBER (IDX)*100;;1
+T;165;1/PRICE_SCALAR(CONS);passthrough:1 / fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'PRICE_SCALAR',DATE):int;0
+T;166;1/rate;;1
+T;167;1/Spot FX Rate;;1
+T;168;1/USD Exchange Rate;;1
+T;169;100*((PA_PRICE(t)*PA_CSPLIT(t))/((PA_PRICE(t-1)*(PA_CSPLIT(t-1)*PA_SPIN_FACTOR(t-1)))-ZAV(PA_DIVS(t)))-1);logic:100 * ((PA_PRICE * PA_CSPLIT) / ((PA_PRICE(-1D) * (PA_CSPLIT(-1D) * PA_SPIN_FACTOR(-1D))) - ZAV(PA_DIVS)) - 1):int;0
+T;170;100*((PRICE_RETURN_LOC(0)/PRICE_RETURN_LOC(t-1))-1)£pv£ If bond is new, source PRICE_RETURN_LOC(0) from CONS_M_FILE;;0
+T;171;100*((TOTAL_RETURN_GROSS_LOC(0)/TOTAL_RETURN_GROSS_LOC(t-1))-1)£pv£ If bond is new, source TOTAL_RETURN_GROSS_LOC(0) from CONS_M_FILE;;0
+T;172;100*(MCAP_USD/PRICE);passthrough:(MCAP_USD / PRICE) * 100:int;0
+T;173;100*(PA_PRICE(t)/((PA_PRICE(t-1)*ZAV(PA_SPLIT_FACTOR(1)*PA_SPIN_FACTOR(t)))-ZAV(PA_DIVS(t)))-1) £pv£ If new security, return '';;0
+T;174;100*[(((PA_PRICE[0]+PA_ACCRUED[0]+PA_COUPON[0])*INDEX_RATIO[0])/((PA_PRICE[-1]+PA_ACCRUED[-1])*INDEX_RATIO[-1]))-1];logic:100 * [(((PA_PRICE + PA_ACCRUED + PA_COUPON) * INDEX_RATIO)/((PA_PRICE(-1D) + PA_ACCRUED(-1D)) * INDEX_RATIO(-1D))) - 1]:int;0
+T;175;100*[(((PRICE[0]+ACCRUED_REAL[0]+COUPON_PAID[0])*INDEX_RATIO[0])/((PRICE[-1]+ACCRUED_REAL[-1])*INDEX_RATIO[-1]))-1];logic:100 * [(((PRICE + ACCRUED_REAL + COUPON_PAID) * INDEX_RATIO)/((PRICE(-1D) + ACCRUED_REAL(-1D)) * INDEX_RATIO(-1D))) - 1]:int;0
+T;176;100*[((PA_PRICE[0]+PA_ACCRUED[0]+PA_COUPON[0])/(PA_PRICE[-1]+PA_ACCRUED[-1]))-1];logic:100 * (((PA_PRICE + PA_ACCRUED + PA_COUPON) / (PA_PRICE(-1D) + PA_ACCRUED(-1D)) - 1):int;0
+T;177;100*[((PRICE[0]+ACCRUED[0]+COUPON_PAID[0])/(PRICE[-1]+ACCRUED[-1]))-1];logic:100 * (((PRICE + ACCRUED + COUPON_PAID) / (PRICE(-1D) + ACCRUED(-1D))) - 1):int;0
+T;178;ACCRUED (0)/100;;0
+T;179;ACCRUED/100;passthrough:ACCRUED / 100:int;0
+T;180;ACCRUED/100£pv£ If bond is new, source ACCRUED/100 from CONS_M_FILE;;0
+T;181;Adjusts historically based on PA_SPLIT_FACTOR;passthrough:1:int;0
+T;182;Adjusts historically based on SPLIT_FACTOR£pv£ Default value is 1;passthrough:1:int;0
+T;183;Adjusts historically bassed on SPLIT_FACTOR;;1
+T;184;All CAPS£pv£ if Cur="ZAc", set to "ZAR";passthrough:if(<SELF> == 'ZAc', 'ZAR', upperCase(<SELF>)):int;0
+T;185;All constituents in COMP_CLIENT_GBI_GDPWGT_yyyymmdd.csv;;1
+T;186;Already in YYYYMM99;passthrough:convertToInt(<SELF>):int;0
+T;187;Already in YYYYMMDD, source from filename;;1
+T;188;AMOUNT;passthrough:AMOUNT:int;0
+T;189;AMOUNT / AMOUNT_UNADJ;passthrough:AMOUNT / AMOUNT_UNADJ:int;0
+T;190;AMOUNT*(PRICE+ACCRUED);;1
+T;191;AMOUNT*XRATE_LOC_TO_EUR;passthrough:AMOUNT * XRATE_LOC_TO_EUR:int;0
+T;192;Amount*XRATE_LOC_TO_USD;passthrough:AMOUNT_LOC * XRATE_LOC_TO_USD:int;0
+T;193;AMOUNT/AFACTOR(MEMS);passthrough:AMOUNT / fetchExternalValue('<UNIV>',<ID_FIELD>,'AFACTOR',DATE):int;0
+T;194;AMOUNT_CAD*(PRICE+ACCRUED);passthrough:AMOUNT_CAD * (PRICE + ACCRUED):int;0
+T;195;AMOUNT_LOC*(PRICE_DIRTY/100);;0
+T;196;AMOUNT_LOC*(PRICE+ACCRUED);passthrough:AMOUNT_LOC * (PRICE + ACCRUED):int;0
+T;197;AMOUNT_LOC*^=WMR_EXCHANGE_RATE(<CURRENCY_ISO>,USD,DATE);passthrough:AMOUNT_LOC * FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',USD,',DATE,')£pv£')):int;0
+T;198;AMOUNT_LOC*XRATE_LOC_TO_CHF;;0
+T;199;AMOUNT_LOC*XRATE_LOC_TO_EUR;passthrough:AMOUNT_LOC * XRATE_LOC_TO_EUR:int;0
+T;200;AMOUNT_LOC*XRATE_LOC_TO_USD;passthrough:AMOUNT_LOC * XRATE_LOC_TO_USD:int;0
+T;201;AMOUNT_ORIG_LOC*^=WMR_EXCHANGE_RATE(<CURRENCY_ISO>,USD,DATE);passthrough:AMOUNT_ORIG_LOC * FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',USD,',DATE,')£pv£')):int;0
+T;202;AMOUNT_UNADJ * AFACTOR;passthrough:AMOUNT_UNADJ * AFACTOR:int;0
+T;203;AMOUNT_UNADJ*OFACTOR;passthrough:AMOUNT_UNADJ_USD * OFACTOR:int;0
+T;204;AMOUNT_UNADJ*PRICE;passthrough:AMOUNT_UNADJ_CNY * PRICE:int;0
+T;205;AMOUNT_UNADJ/AMOUNT;passthrough:AMOUNT_UNADJ / AMOUNT:int;0
+T;206;AMOUNT_UNADJ_CAD*AFACTOR;passthrough:AMOUNT_UNADJ_CAD * AFACTOR:int;0
+T;207;AMOUNT_UNADJ_CNH*PRICE_DIRTY;passthrough:AMOUNT_UNAJD_CNH * PRICE_DIRTY:int;0
+T;208;AMOUNT_UNADJ_CNY*PRICE;passthrough:AMOUNT_UNADJ_CNY * PRICE:int;0
+T;209;AMOUNT_UNADJ_LOC * AFACTOR;passthrough:AMOUNT_UNADJ_LOC * AFACTOR:int;0
+T;210;AMOUNT_UNADJ_LOC*XRATE_LOC_TO_USD;passthrough:AMOUNT_UNADJ_LOC * XRATE_LOC_TO_USD:int;0
+T;211;AMOUNT_UNADJ_LOC/100*CASH(-1);logic:AMOUNT_UNADJ_LOC/100 * CASH(-1D):int;0
+T;212;AMOUNT_UNADJ_LOC/CFACTOR;passthrough:AMOUNT_UNADJ_LOC / CFACTOR:int;0
+T;213;AMOUNT_UNADJ_USD * AFACTOR;passthrough:AMOUNT_UNADJ_USD * AFACTOR:int;0
+T;214;AMOUNT_UNADJ_USD*OFACTOR;passthrough:AMOUNT_UNADJ_USD * OFACTOR:int;0
+T;215;AMOUNT_UNADJ_USD*PRICE_DIRTY;passthrough:AMOUNT_UNADJ_USD * PRICE_DIRTY:int;0
+T;216;AMOUNT_UNADJ_USD*XRATE_USD_TO_EUR;passthrough:AMOUNT_UNADJ_USD * XRATE_USD_TO_EUR:int;0
+T;217;AMOUNT_USD*XRATE_USD_TO_EUR;passthrough:AMOUNT_USD * XRATE_USD_TO_EUR:int;0
+T;218;Append "X" to 8 digits;passthrough:if(isBlank(<SELF>),'',rightPad(<SELF>,'X',8)):col;0
+T;219;Avail(CUSIP,ISIN);passthrough:avail(CUSIP,ISIN):col;0
+T;220;Avail(CUSIP,ISIN,SEDOL);passthrough:avail(CUSIP,ISIN,SEDOL):col;0
+T;221;Avail(CUSIP,ISIN,SEDOL,VENDOR_ID);passthrough:avail(CUSIP,ISIN,SEDOL,VENDOR_ID):col;0
+T;222;Avail(CUSIP,ISIN,VENDOR_ID);passthrough:avail(CUSIP,ISIN,VENDOR_ID):col;0
+T;223;Avail(CUSIP,VENDOR_ID);passthrough:avail(CUSIP,VENDOR_ID):col;0
+T;224;Avail(ISIN);;1
+T;225;Avail(ISIN, VENDOR_ID);passthrough:avail(ISIN,VENDOR_ID):int;0
+T;226;Avail(ISIN, VENDOR_ID)£pv£ Load only first 12 digits of ISIN;;1
+T;227;Avail(ISIN,CUSIP);passthrough:avail(ISIN,CUSIP):col;0
+T;228;Avail(ISIN,CUSIP,SEDOL);passthrough:avail(ISIN,CUSIP,SEDOL):col;0
+T;229;Avail(ISIN,CUSIP,SEDOL,VENDOR_ID);passthrough:avail(ISIN,CUSIP,SEDOL,VENDOR_ID):col;0
+T;230;Avail(ISIN,CUSIP,VENDOR_ID);passthrough:avail(ISIN,CUSIP,VENDOR_ID):col;0
+T;231;Avail(ISIN,PERM_ID);passthrough:avail(ISIN,PERM_ID):col;0
+T;232;Avail(ISIN,VENDOR_ID);passthrough:avail(ISIN,VENDOR_ID):col;0
+T;233;Avail(ISIN,VENDOR_ID,CUSIP);passthrough:avail(ISIN,VENDOR_ID,CUSIP):col;0
+T;234;Avail(LOC_TO_USD,LOC_TO_USD_ND);;1
+T;235;Avail(LX_ID,VENDOR_ID);passthrough:avail(LX_ID,VENDOR_ID):col;0
+T;236;Avail(PRICE (CONS_ND), PRICE);;1
+T;237;Avail(PRICE_LOC,PRICE_LOC_ND);;1
+T;238;Avail(PRICE_ND(t),PRICE(t));passthrough:avail(fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'PRICE',DATE),PRICE):int;0
+T;239;Avail(PRICE_ND(t-1),PRICE(t));passthrough:avail(fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'PRICE',PREV_DATE),PRICE):int;0
+T;240;Avail(PRICE_ND,PRICE);;1
+T;241;Avail(PRICE_USD_ND,PRICE_USD);;1
+T;242;Avail(SEDOL);;1
+T;243;Avail(SEDOL, ISIN);;1
+T;244;Avail(SEDOL, ISIN, CUSIP, VENDOR_ID, TICKER);passthrough:avail(SEDOL,ISIN,CUSIP,VENDOR_ID,TICKER):col;0
+T;245;Avail(SEDOL, ISIN, VENDOR_ID);passthrough:avail(SEDOL,ISIN,VENDOR_ID):col;0
+T;246;Avail(SEDOL,CUSIP,ISIN);passthrough:avail(SEDOL,CUSIP,ISIN):col;0
+T;247;Avail(SEDOL,CUSIP,ISIN,VENDOR_ID);passthrough:avail(SEDOL,CUSIP,ISIN,VENDOR_ID):col;0
+T;248;Avail(SEDOL,CUSIP,ISIN,VENDOR_ID)£pv£ If length < 7, Pad with 0s (7) then trim the last digit;;1
+T;249;Avail(SEDOL,CUSIP,ISIN,VENDOR_ID)£pv£ Remove check digit;;1
+T;250;Avail(SEDOL,CUSIP,ISIN,VENDOR_ID,TICKER);passthrough:avail(SEDOL,CUSIP,ISIN,VENDOR_ID,TICKER):col;0
+T;251;Avail(SEDOL,CUSIP,VENDOR_ID);passthrough:avail(SEDOL,CUSIP,VENDOR_ID):col;0
+T;252;Avail(SEDOL,ISIN);passthrough:avail(SEDOL,ISIN):col;0
+T;253;Avail(SEDOL,ISIN, CUSIP);;1
+T;254;Avail(SEDOL,ISIN,CUSIP);passthrough:avail(SEDOL,ISIN,CUSIP):col;0
+T;255;Avail(SEDOL,ISIN,CUSIP,VENDOR_ID);passthrough:avail(SEDOL,ISIN,CUSIP,VENDOR_ID):col;0
+T;256;Avail(SEDOL,ISIN,CUSIP,VENDOR_ID,TICKER);passthrough:avail(SEDOL,ISIN,CUSIP,VENDOR_ID,TICKER):col;0
+T;257;Avail(SEDOL,ISIN,VENDOR_ID);passthrough:avail(SEDOL,ISIN,VENDOR_ID):col;0
+T;258;Avail(SEDOL,VENDOR_ID);passthrough:avail(SEDOL,VENDOR_ID):col;0
+T;259;Avail(VENDOR_ID);;1
+T;260;Avail(VENDOR_ID, ISIN);;1
+T;261;Avail(VENDOR_ID,CUSIP,ISIN);passthrough:avail(VENDOR_ID,CUSIP,ISIN):col;0
+T;262;Avail(VENDOR_ID,ISIN);passthrough:avail(VENDOR_ID,ISIN):col;0
+T;263;Avail(VENDOR_ID,ISIN)£pv£ Load only first 12 digits of ISIN;;1
+T;264;Avail(VENDOR_ID,ISIN,SEDOL);passthrough:avail(VENDOR_ID,ISIN,SEDOL):col;0
+T;265;By default, set to "1"£pv£ adjusts historically according to PA_SPLIT_FACTOR£pv£ next updates should be "1";passthrough:1:int;0
+T;266;calculate as (MCAP/sum of MCAP of all cons in both "cembibroadfc_0103_yyyymmdd.csv" and "cembibroadfc_0305_yyyymmdd.csv")*100;;1
+T;267;Calculate as (MCAP/SUM(MCAP))*100 WHERE CONTINENT_CODE=AME;;1
+T;268;Calculate as (MCAP/SUM(MCAP))*100 WHERE CONTINENT_CODE=ASI;;1
+T;269;Calculate as (MCAP/SUM(MCAP))*100 WHERE CONTINENT_CODE=EUR;;1
+T;270;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=AUS;;1
+T;271;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=BEL;;1
+T;272;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=CAN;;1
+T;273;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=FRA;;1
+T;274;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=GBR;;1
+T;275;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=HKG;;1
+T;276;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=JPN;;1
+T;277;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=NLD;;1
+T;278;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=SGP;;1
+T;279;Calculate as (MCAP/SUM(MCAP))*100 WHERE COUNTRY_ISO=USA;;1
+T;280;Calculate as (MCAP/SUM(MCAP))*100 WHERE SECTOR=DIV;;1
+T;281;Calculate as (MCAP/SUM(MCAP))*100 WHERE SECTOR=HCR;;1
+T;282;Calculate as (MCAP/SUM(MCAP))*100 WHERE SECTOR=HOT;;1
+T;283;Calculate as (MCAP/SUM(MCAP))*100 WHERE SECTOR=IND;;1
+T;284;Calculate as (MCAP/SUM(MCAP))*100 WHERE SECTOR=OFF;;1
+T;285;Calculate as (MCAP/SUM(MCAP))*100 WHERE SECTOR=OTH;;1
+T;286;Calculate as (MCAP/SUM(MCAP))*100 WHERE SECTOR=RES;;1
+T;287;Calculate as (MCAP/SUM(MCAP))*100 WHERE SECTOR=RET;;1
+T;288;calculated SHARES_UNADJ*PRICE_EUR;passthrough:SHARES_UNADJ * PRICE_EUR:int;0
+T;289;calculated SHARES_UNADJ*PRICE_PREV;passthrough:SHARES_UNADJ * PRICE_PREV:int;0
+T;290;CASH(-1)*AMOUNT_UNADJ/100;logic:(CASH(-1D) * AMOUNT_UNADJ) / 100:int;0
+T;291;CASH(-1)*AMOUNT_UNADJ_LOC (-1)/100;logic:(CASH * AMOUNT_UNADJ_LOC (-1D)) / 100:int;0
+T;292;CASH*AMOUNT_UNADJ/100;logic:(CASH(-1D) * AMOUNT_UNADJ) / 100:int;0
+T;293;CASH_PAY+Base Market Value_LC£pv£ Divide by 10,000;;1
+T;294;CASH_PAY+MarketValue;;1
+T;295;Cell A1£pv£ Convert from DD/MM/YYYY to YYYYMMDD;;1
+T;296;CFACTOR;passthrough:CFACTOR:int;0
+T;297;CFACTOR * OFACTOR;passthrough:CFACTOR * OFACTOR:int;0
+T;298;Change date format from mm/dd/yyyy to YYYYMMDD;;1
+T;299;Change from mm/dd/yyyy;;0
+T;300;CIM/PRICE_ADJ_FACTOR;passthrough:CIM / PRICE_ADJ_FACTOR:int;0
+T;301;cons(MCAP*100)/(PRICE_DIRTY*AMOUNT);passthrough:(fetchExternalValue('CONS',<CONSTITUENTS_ID>,'MCAP',DATE) * 100) / (PRICE_DIRTY * AMOUNT):int;0
+T;302;CONS_FILE_RETURN;;1
+T;303;Convert "n.nnnE+nnn" values to "nnnnEnnn"£pv£Pad with 0s to 9 digit;;1
+T;304;Convert "n.nnnE+nnn" values to "nnnnEnnn"£pv£Pad with 0s to 9 digit£pv£ remove check digit;;1
+T;305;Convert DD/MM/YYYY to YYYYMMDD;;1
+T;306;Convert DD-MMM-YYYY to YYYYMMDD;;1
+T;307;Convert DD-MM-YY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD-MM-YY')):col;0
+T;308;Convert from "mm/dd/yyyy" to "yyyymmdd";;1
+T;309;Convert from "yyyymmdd" to "yyyymm99";;1
+T;310;Convert from DD MMM YYYY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(substituteRegex('\s','',<SELF>),'DD MMM YYYY')):col;0
+T;311;Convert from DD.MM.YYYY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD.MM.YYYY')):col;0
+T;312;Convert from DD/MM/YY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD/MM/YY')):col;0
+T;313;Convert from DD/MM/YYYY;;1
+T;314;Convert from DD/MM/YYYY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD/MM/YYYY')):col;0
+T;315;Convert from DD/MMM/YY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD/MMM/YY')):col;0
+T;316;Convert from DD/MMM/YYYY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD/MMM/YYYY')):col;0
+T;317;Convert from dd-mmm-yy to yyyymmdd;;1
+T;318;Convert from DD-MMM-YYYY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD-MMM-YYYY')):col;0
+T;319;Convert from ddmmyy to yyyymmdd;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DDMMYY')):col;0
+T;320;Convert from DD-MM-YYYY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD-MM-YYYY')):col;0
+T;321;Convert from MM - DDD - YY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'MM - DDD - YY')):col;0
+T;322;Convert from mm/dd/yyyy hh:mm to YYYYMMDD;;1
+T;323;Convert from MM/DD/YYYY or YYYY-MM-DD to YYYYMMDD;passthrough:avail(convertToInt(convertDateYYYYMMDD(<SELF>,'MM/DD/YYYY')),convertToInt(convertDateYYYYMMDD(<SELF>,'YYYY-MM-DD'))):col;0
+T;324;Convert from MM/DD/YYYY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'MM/DD/YYYY')):col;0
+T;325;Convert from MM/DD/YYYY to YYYYMMDD£pv£ N_DATE-1D;passthrough:UPDATE_DATE:col;0
+T;326;Convert from MM/DD/YYYY, N_DATE-1D;;1
+T;327;Convert from MMDDYYYY to YYYYMMDD;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'MMDDYYYY')):col;0
+T;328;Convert from YYYY/MM/DD to YYYYMMDD;passthrough:substituteRegex(<SELF>,'/',''):col;0
+T;329;Convert from YYYY_MM_DD to YYYYMMDD;passthrough:substituteRegex(<SELF>,'_',''):col;0
+T;330;Convert from YYYYMM to YYYYMM99;passthrough:month99Date(UPDATE_DATE,1):int;0
+T;331;Convert from YYYY-MM-99;;1
+T;332;Convert from YYYYMMDD to YYYYMM99;passthrough:month99Date(UPDATE_DATE,1):int;0
+T;333;Convert from YYYY-MM-DD to YYYYMMDD;passthrough:convertToInt(substituteRegex(<SELF>,'-','')):col;0
+T;334;Convert MM/DD/YYYY or YYYY-MM-DD to YYYYMMDD;;1
+T;335;Convert to Mln. SHARES=SHARES OUTSTANDING/1000000;;1
+T;336;Convert to MM/DD/YYYY to YYYYMMDD;;1
+T;337;Convert to YYYYMM;;1
+T;338;Convert to YYYYMMDD;;1
+T;339;COUPON_PAID/100;passthrough:COUPON_PAID / 100:int;0
+T;340;Covert dd/mmm/yy to yyyymmdd;;1
+T;341;CSPLIT;passthrough:CSPLIT:int;0
+T;342;Cum Tot Ret Idx(-1D)*(1+TRET_CHG_1D_GROSS(0));;1
+T;343;CURRENCY_IDX;passthrough:CURRENCY_IDX:int;0
+T;344;CURRENCY_ISO;passthrough:CURRENCY_ISO:int;0
+T;345;CUSIP;passthrough:CUSIP:col;0
+T;346;DATE - 1D;;1
+T;347;DATE + 1D;;1
+T;348;DATE+1£pv£ Format already in yyyymmdd;passthrough:convertToInt(FetchFromFqlCode(append('PSETCAL(<CALENDAR>)£pv£DATE(',UPDATE_DATE,' +1D,,,,&quot£pv£YYYYMMDD&quot£pv£)£pv£'))):int;0
+T;349;DATE+1D£pv£ Convert from MM/DD/YYYY to YYYYMMDD;;1
+T;350;DATE-1D;;1
+T;351;DAYE+1D;;1
+T;352;DD/MM/YYYY;;1
+T;353;Derive from ICB_SS_NUM;;1
+T;354;Derive from ICB_SUBSEC_NUM;;1
+T;355;Derive using ^=PROPER_NAME for ISIN;passthrough:FetchFromFqlCodeWithSymbol('PROPER_NAME(&apos£pv£DATE&apos£pv£)£pv£',ISIN):int;0
+T;356;Derived from METADATA£pv£ In YYYYMMDD;;1
+T;357;Developed World or Emerging Market;;1
+T;358;DEX+Scotia ID;;1
+T;359;DEX+Scotia ID£pv£ See Mappings "INDEX_ID";;1
+T;360;Dirty Price/PRICE_SCALAR;passthrough:PRICE_DIRTY / PRICE_SCALAR:int;0
+T;361;DIV_YIELD_NET*100;passthrough:DIV_YIELD_NET * 100:int;0
+T;362;Divide by 1,000,000;passthrough:<SELF> / 1000000:int;0
+T;363;Divide by 1,000,000£pv£ ((MCAP*100)/PRICE_DIRTY) for dates prior 20161004;;1
+T;364;divide by 1,000,000£pv£ to be populated starting 20160613;;1
+T;365;Divide by 1,000,0000;passthrough:<SELF> / 1000000:int;0
+T;366;Divide by 10;passthrough:<SELF> / 10:int;0
+T;367;Divide by 10,000;passthrough:<SELF> / 10000:int;0
+T;368;Divide by 100;passthrough:<SELF> / 100:int;0
+T;369;Divide by 100 for 20130215 and prior;;1
+T;370;Divide by 1000;passthrough:<SELF> / 1000:int;0
+T;371;Divide by1,000,000;passthrough:<SELF>, 1000000:int;0
+T;372;Divide the calculated Mcap in the constituents file by the SUM OF the calculated Mcap then multiply by 100;;1
+T;373;divided by 1000;passthrough:<SELF>, 1000:int;0
+T;374;DIVIDEND or DISTRIBUTION AMOUNT*XRATE_LOC_TO_USD£pv£ Source from "DISTRIBUTION AMOUNT" for 20141231-20150410;;1
+T;375;DIVIDEND*FX_RATE where DIVIDEND is not null;passthrough:DIVIDEND * FX_RATE:int;0
+T;376;DIVIDEND*XRATE_LOC_TO_EUR;passthrough:DIVIDEND * XRATE_LOC_TO_EUR:int;0
+T;377;DIVIDEND*XRATE_LOC_TO_USD;passthrough:DIVIDEND * XRATE_LOC_TO_USD:int;0
+T;378;DIVS converted from DIVS_ISO to CURRENCY_ISO;;0
+T;379;DIVS(t)*XRATE_LOC_TO_USD(t);passthrough:DIVS * XRATE_LOC_TO_USD:int;0
+T;380;DIVS*PA_XRATE;passthrough:DIVS_NET * PA_XRATE:int;0
+T;381;DIVS*XRATE_LOC_TO_USD;passthrough:DIVS_LOC * XRATE_LOC_TO_USD:int;0
+T;382;DIVS_CAD*XRATE_CAD_TO_USD;passthrough:DIVS_CAD * XRATE_CAD_TO_USD:int;0
+T;383;DIVS_EUR*XRATE_LOC_TO_EUR;passthrough:DIVS_EUR * XRATE_LOC_TO_EUR:int;0
+T;384;DIVS_JPY*XRATE_LOC_TO_EUR;passthrough:DIVS_JPY * XRATE_LOC_TO_EUR:int;0
+T;385;DIVS_LOC(CONS)*XRATE_LOC_TO_EUR(CONS);;0
+T;386;DIVS_LOC(CONS)*XRATE_LOC_TO_USD(CONS);;0
+T;387;DIVS_LOC*XRATE_LOC_TO_AUD;passthrough:DIVS_LOC * XRATE_LOC_TO_AUD:int;0
+T;388;DIVS_LOC*XRATE_LOC_TO_CAD;passthrough:DIVS_LOC * XRATE_LOC_TO_CAD:int;0
+T;389;DIVS_LOC*XRATE_LOC_TO_EUR;passthrough:DIVS_LOC * XRATE_LOC_TO_EUR:int;0
+T;390;DIVS_LOC*XRATE_LOC_TO_JPY;passthrough:DIVS_LOC * XRATE_LOC_TO_JPY:int;0
+T;391;DIVS_LOC*XRATE_LOC_TO_USD;passthrough:DIVS_LOC * XRATE_LOC_TO_USD:int;0
+T;392;DIVS_LOC*XRATE_LOC_TO_USD£pv£ do not multiply to XRATE_LOC_TO_USD if DIVS_ISO=CURRENCY_IDX;passthrough:if(DIVS_ISO == CURRENCY_IDX,<SELF>,DIVS_LOC * XRATE_LOC_TO_USD):int;0
+T;393;DIVS_LOC*XRATE_LOC_TO_ZAR;passthrough:DIVS_LOC * XRATE_LOC_TO_ZAR:int;0
+T;394;DIVS_LOC*XRATE_TO_USD;passthrough:DIVS_LOC * XRATE_TO_USD:int;0
+T;395;DIVS_NET converted from DIVS_ISO to CURRENCY_ISO;;0
+T;396;DIVS_NET(MEMS)/XRATE_LOC_TO_EUR(CONS);;0
+T;397;DIVS_NET(MEMS)/XRATE_LOC_TO_USD(CONS);;0
+T;398;DIVS_NET*PA_XRATE;passthrough:DIVS_NET * PA_XRATE:int;0
+T;399;DIVS_NET*XRATE_LOC_TO_USD;passthrough:DIVS_NET_LOC * XRATE_LOC_TO_USD:int;0
+T;400;DIVS_NET_CAD*XRATE_CAD_TO_USD;passthrough:DIVS_NET_CAD * XRATE_CAD_TO_USD:int;0
+T;401;DIVS_NET_EUR*XRATE_LOC_TO_EUR;;0
+T;402;DIVS_NET_JPY*XRATE_LOC_TO_EUR;;0
+T;403;DIVS_NET_LOC*XRATE_LOC_TO_AUD;;0
+T;404;DIVS_NET_LOC*XRATE_LOC_TO_EUR;passthrough:DIVS_NET_LOC * XRATE_LOC_TO_EUR:int;0
+T;405;DIVS_NET_LOC*XRATE_LOC_TO_JPY;passthrough:DIVS_NET_LOC * XRATE_LOC_TO_JPY:int;0
+T;406;DIVS_NET_LOC*XRATE_LOC_TO_USD;passthrough:DIVS_NET_LOC * XRATE_LOC_TO_USD:int;0
+T;407;DIVS_NET_LOC*XRATE_LOC_TO_ZAR;passthrough:DIVS_NET_LOC * XRATE_LOC_TO_ZAR:int;0
+T;408;DIVS_NET_LOC*XRATE_TO_USD;passthrough:DIVS_NET_LOC * XRATE_TO_USD:int;0
+T;409;DIVS_NET_USD*XRATE_LOC_TO_USD;;0
+T;410;DIVS_NET_USD*XRATE_USD_TO_SGD;passthrough:DIVS_NET_USD * XRATE_USD_TO_SGD:int;0
+T;411;DIVS_NET+SPECIAL_DIVS;passthrough:DIVS_NET + SPECIAL_DIVS:int;0
+T;412;DIVS_NET+SPECIAL_DIVS_NET;passthrough:DIVS_NET + SPECIAL_DIVS_NET:int;0
+T;413;DIVS_TOTAL;passthrough:DIVS_TOTAL:int;0
+T;414;DIVS_TOTAL*PA_XRATE;passthrough:DIVS_TOTAL * PA_XRATE:int;0
+T;415;DIVS_USD*XRATE_LOC_TO_USD;;0
+T;416;DIVS_USD*XRATE_USD_TO_EUR;passthrough:DIVS_USD * XRATE_USD_TO_EUR:int;0
+T;417;DIVS_USD*XRATE_USD_TO_SGD;passthrough:DIVS_USD * XRATE_USD_TO_SGD:int;0
+T;418;DIVS+SPECIAL_DIVS;passthrough:DIVS + SPECIAL_DIVS:int;0
+T;419;FACTSET_PERM_ID;passthrough:getSymbologyPermId(IDENTIFIER):col;0
+T;420;FFLOAT (CONS)*OFACTOR;;0
+T;421;FFLOAT (CONS_ND)*OFACTOR;;0
+T;422;FFLOAT * CFACTOR;passthrough:FFLOAT * CFACTOR:int;0
+T;423;FFLOAT * CFACTOR / OFACTOR;passthrough:(FFLOAT * CFACTOR) / OFACTOR:int;0
+T;424;FFLOAT * CFACTOR / OFACTOR_NRI;;0
+T;425;FFLOAT * OFACTOR;passthrough:FFLOAT * OFACTOR:int;0
+T;426;FFLOAT(MEMS)*OFACTOR(MEMS)£pv£ For dates without OFACTOR(MEMS), source from FFLOAT(MEMS);;1
+T;427;FFLOAT*AFACTOR;passthrough:FFLOAT * AFACTOR:int;0
+T;428;FFLOAT*CFACTOR(index_specific_fields);passthrough:fetchExternalValue(<CONS_UNIV>,<ID_FIELD>,'CFACTOR',DATE) * FFLOAT:int;0
+T;429;FFLOAT*CFACTOR*OFACTOR;passthrough:FFLOAT * CFACTOR * OFACTOR:int;0
+T;430;FFLOAT*CFACTOR/OFACTOR_TRI;passthrough:(FFLOAT * CFACTOR) / OFACTOR_TRI:int;0
+T;431;FFLOAT*CONS_PF (SHARES_UNADJ);;0
+T;432;For "embigfc_nonig_yyyymmdd.csv", load only if CREDIT_BUCKET="BB";;1
+T;433;For 20120531-20170531, Load from SHARES£pv£ For 20170601-onwards, (WEIGHT/PRICE)*1000000;;1
+T;434;For 20160718 onward, load from Base Market Value;;1
+T;435;For 20160718 onward, load from Coupon Income Index;;1
+T;436;For 20160718 onward, load from Daily Return;;1
+T;437;For 20160718 onward, load from Gross Price Index;;1
+T;438;For 20160718 onward, load from Income Index;;1
+T;439;For 20160718 onward, load from Market Value;;1
+T;440;For 20160718 onward, load from Month-to-Date Return;;1
+T;441;For 20160718 onward, load from Paid Cash;;1
+T;442;For 20160718 onward, load from Redemption Income Index;;1
+T;443;For 20161219-20170111, vendor file header is Exchange Code;;1
+T;444;For 20161219-20170111, vendor file header is ISO Code;;1
+T;445;For 20161219-20170111, vendor file header is WAF;;1
+T;446;For 20161220-20170112, vendor file header is Exchange Code;;1
+T;447;For 20161220-20170112, vendor file header is ISO Code;;1
+T;448;for daily EOM history, load col D;;1
+T;449;for daily EOM history, load col E;;1
+T;450;For DE000SLA2RA3, Source from B1£pv£ Convert to YYYYMMDD from YYYY-MM-DD;;1
+T;451;For duplicate identifiers, set to "Both".;;0
+T;452;For duplicate identifiers, sum the values from both rows for this field and load the result.;;0
+T;453;for JPM00908 only;;1
+T;454;for monthly history, load col D;;1
+T;455;for monthly history, load col E;;1
+T;456;For SDE: If (CORP_ACTION_CODE="PRICE ADJUSTMENT", NEW PRICE/CURRENT PRICE, Null)£pv£ For SPA: If (CHANGE TYPE="Price Adjustment" or "rights", ADJUSTMENT FACTOR, null);;1
+T;457;For SDE: If (CORP_ACTION_CODE="RIGHTS_OFFERING", NEW PRICE/CURRENT PRICE, Null)£pv£ For SPA: IF((CHANGE TYPE="Rights" && SHARES CHANGE>0)=1,SHARES CHANGE,null);;1
+T;458;For SDE: If (CORP_ACTION_CODE="STOCK SPLIT" or "REVERSE SPLIT", NEW PRICE/CURRENT PRICE, Null)£pv£ For SPA: IF((CHANGE TYPE="Split" && SHARES CHANGE > 0)=1,SHARES CHANGE,null);;1
+T;459;FQL PROPER_NAME;passthrough:FetchFromFqlCodeWithSymbol('PROPER_NAME()£pv£',PERM_ID):int;0
+T;460;From 20110503-20150108, divide by 100;;1
+T;461;From 20160718 onward, do not populate;;1
+T;462;From 20160718 onward, load from Capped Base Market Value and divide by 1,000,000;;1
+T;463;From 20160718 onward, load from Capped Cash Payment;;1
+T;464;From 20160718 onward, load from Capped Market Value and divide by 1,000,000;;1
+T;465;From 20160718 onward, load from Capped Notional Amount and divide by 1,000,000;;1
+T;466;From 20160718 onward, load from CPi_Today;;1
+T;467;From 20160718 onward, load from Dirty Index Price;;1
+T;468;From 20160718 onward, load from Ex-Dividend;;1
+T;469;From 20160718 onward, load from ISIN_CPi;;1
+T;470;From 20160718 onward, load from Markit iBoxx Rating;;1
+T;471;From 20160718 onward, load from Month-to-Date Return;;1
+T;472;From 20160718 onward, load from Street Convexity;;1
+T;473;From 20160718 onward, load from Street Modified Duration;;1
+T;474;From 20160718 onward, load from Street Yield;;1
+T;475;From 20160718 onward, load from TRi_Today;;1
+T;476;From MMM-YY to YYYYMM99;passthrough:month99Date(DATE,1):int;0
+T;477;from YYYMMDD to YYYYMM99;;1
+T;478;From YYYY/MM/DD to YYYYMM99;passthrough:convertToInt(month99Date(substituteRegex(<SELF>,'/',''),1)):int;0
+T;479;From YYYYMM to YYYYMM99;;1
+T;480;From YYYYMMDD to YYYYMM99;;1
+T;481;FROM: Between 0 and 1;;1
+T;482;FTSE NAREIT Classification Structure;passthrough:'FTSE NAREIT Classification Structure':int;0
+T;483;Further Details="x for y", SPLIT="y/x";;1
+T;484;FX_local_to_Index_Currency;;1
+T;485;GB00B60ZKY08;;1
+T;486;GPR;passthrough:'GPR':int;0
+T;487;IDX universe should not be affected by EEGInstComp_yyyymmdd.csv;;1
+T;488;If "Private", blank out;passthrough:if(<SELF> == 'Private','',<SELF>):col:forcedcalc;0
+T;489;If (ACTION TYPE="Spin-Off",load SPIN/TARGET STOCK KEY ("S"+Pad with 0s+SPIN/TARGET STOCK KEY=LEN(8)), else NA;;1
+T;490;If (CORP_ACTION_CODE= "RIGHTS OFFERING", NEW PRICE / CURRENT PRICE, Null);passthrough:if(CORP_ACTION_CODE == 'RIGHTS OFFERING',NEW_PRICE / CURRENT_PRICE,''):col;0
+T;491;If (CORP_ACTION_CODE="Cash and Stock Dividend or Split", "Stock Dividend or Split" or "Reverse Split", T1 Adjusted Close/Close Price, Null);passthrough:if(CORP_ACT_CODE == 'Cash and Stock Dividend or Split' or CORP_ACT_CODE == 'Stock Dividend or Split' or CORP_ACT_CODE == 'Reverse Split',avail(PRICE_ADJ / PRICE,''), ''):col;0
+T;492;If (CORP_ACTION_CODE="Cash/Stock Dividend or Split", "Stock Dividend or Split" or "Reverse Split", T1 Adjusted Close/Close Price, Null);;1
+T;493;If (CORP_ACTION_CODE="Ex-Rights", T1 Adjusted Close/Close Price, Null);passthrough:if(CORP_ACT_CODE == 'Ex - Rights',avail(PRICE_ADJ,PRICE),''):col;0
+T;494;If (CORP_ACTION_CODE="PRICE ADJUSTMENT", NEW PRICE / CURRENT PRICE, Null);;1
+T;495;If (CORP_ACTION_CODE="PRICE ADJUSTMENT", NEW PRICE/CURRENT PRICE, Null)£pv£ For 20141231-20150410, if CORP_ACTION_CODE="PRICE ADJUSTMENT", load ADJUSTMENT FACTOR;;1
+T;496;If (CORP_ACTION_CODE="RIGHTS OFFERING", NEW PRICE/CURRENT PRICE, Null)£pv£ For 20141231-20150410, IF (CORP_ACTION_CODE="RIGHTS",ADJUSTMENT FACTOR,Null);;1
+T;497;If (CORP_ACTION_CODE="Spin Off", T1 Adjusted Close/Close Price, Null);passthrough:if(CORP_ACTION_CODE == 'Spin Off',avail(PRICE_ADJ,PRICE),''):col;0
+T;498;If (CORP_ACTION_CODE="STOCK SPLIT" or "REVERSE SPLIT", NEW PRICE / CURRENT PRICE, Null);;1
+T;499;If (CORP_ACTION_CODE="STOCK SPLIT" or "REVERSE SPLIT", NEW PRICE/CURRENT PRICE, Null)£pv£ For 20141231-20150410, if CORP_ACTION_CODE="SPLIT" or "RIGHTS", load ADJUSTMENT FACTOR;;1
+T;500;If (PRICE_ADJ_FACTOR-SPLIT_FACTOR) >0.005 then (PRICE_ADJ_FACTOR-SPLIT_FACTOR)/SPLIT_FACTOR, else Null;passthrough:if((PRICE_ADJ_FACTOR - SPLIT_FACTOR) ge 0.005,(PRICE_ADJ_FACTOR - SPLIT_FACTOR) / SPLIT_FACTOR,''):int;0
+T;501;If 0 or blank, load "1";passthrough:if(isBlank(<SELF>) or <SELF> == 0,1):col;0
+T;502;If 0, Set to blank;passthrough:if(<SELF> == 0,'',<SELF>):col:forcedcalc;0
+T;503;If 3rd digit in Cur is a small letter, then divide by 100;;1
+T;504;If 3rd digit in Cur is a small letter, then multiply to 100;;1
+T;505;If 3rd digit in CURRENCY_ISO is small letter, then divide by 100;passthrough:TODO: implment regex£pv£ if(,<SELF> / 100, <SELF>):int;0
+T;506;If 3rd digit in CURRENCY_ISO is small letter, then multiply by 101;passthrough:TODO: implment regex£pv£ if(,<SELF> * 101, <SELF>):int;0
+T;507;If ACCRUED (-1) > ACCRUED (0), PA_COUPON=ACCRUED (-1)-ACCRUED(0)£pv£ otherwise "0";;1
+T;508;If ACCRUED (t-1) > ACCRUED (0), ACCRUED (t-1)-ACCRUED (0), else 0;logic:if(ACCRUED(-1D) gt ACCRUED,ACCRUED(-1D) - ACCRUED,0):int;0
+T;509;If ACCRUED (t-1) > ACCRUED (0), then CASH/100£pv£ If bond is new, source ACCRUED(0) from CONS_M_FILE;;0
+T;510;If ACCRUED (t-1)> ACCRUED (0), (COUPON/ROUND(COUPON/ACCRUED(t-1))/100, else 0;logic:if(ACCRUED(-1D) gt ACCRUED,(COUPON / round_off(COUPON / ACCRUED(-1D),2)) / 100,0):int;0
+T;511;If Accrued Interest (-1D)> Accrued Interest (0), (Coupon Amt/Round(Coupon Amt/Accrued Interest (-1D)), else 0;;1
+T;512;If bond is new, (ACCRUED+COUPON_ADJ)/100 (from EOM PF file)£pv£ Else, ACCRUED+COUPON_ADJ/100;;0
+T;513;If bond is new, (ACCRUED+COUPON_ADJ)/100 (from EOM PF file)£pv£else, ACCRUED+COUPON_ADJ/100;;0
+T;514;If bond is new, populate with (ACCRUED+COUPON_ADJ)/100 from CONS_PF£pv£ else ACRRUED (-1D)+COUPON_ADJ)/100;;0
+T;515;if bond is new, populate with (ACCRUED+COUPON_ADJ)/100 from the PF data, else ACCRUED+COUPON_ADJ)/100;;0
+T;516;If bond is new, populate with PRICE/100 from CONS_PF£pv£ else, PRICE_BID (-1D)/100;;0
+T;517;If bond is new, PRICE/100 (from EOM PF file)£pv£ else, PRICE_BID/100;;0
+T;518;If CORP_ACTION_CODE="Price Adjustment", ADJUSTMENT FACTOR, NA;passthrough:If(CORP_ACTION_CODE == "Price Adjustment",  ADJUSTMENT FACTOR, ''):int;0
+T;519;If CORP_ACTION_CODE="Rights", ADJUSTMENT FACTOR, NA;passthrough:If(CORP_ACTION_CODE == "Rights", ADJUSTMENT FACTOR, ''):int;0
+T;520;If CORP_ACTION_CODE="Split", ADJUSTMENT FACTOR, NA;passthrough:If(CORP_ACTION_CODE == "Split", ADJUSTMENT FACTOR, ''):int;0
+T;521;if CORP_ACTION_NOTES begins with "R " or contains "+R " then load ( PRICE_ADJFACTOR*SHARES_UNADJ(t-1)/SHARES_UNADJ) );logic:if(matchRegex(CORP_ACTION_NOTES, '^R') or matchRegex(CORP_ACTION_NOTES, '\+R'), PRICE_ADJFACTOR * SHARES_UNADJ(-1D) / SHARES_UNADJ, <SELF>):col;0
+T;522;If CURRENCY_ISO = "GBX", Divide by 100;passthrough:if(CURRENCY_ISO == 'GBX',<SELF> / 100,<SELF>):int;0
+T;523;If CURRENCY_ISO = "GBX", Set to "GBP";passthrough:if(CURRENCY_ISO == 'GBX','GBP',CURRENCY_ISO):int;0
+T;524;If CURRENCY_ISO="CKH", Convert to CNH;passthrough:if(CURRENCY_ISO == 'CKH','CNH',CURRENCY_ISO):int;0
+T;525;If CURRENCY_ISO="CNH" change to "CNY";passthrough:if(CURRENCY_ISO == 'CNH','CNY',CURRENCY_ISO):int;0
+T;526;IF CURRENCY_ISO="EUR", load "1", otherwise XRATE_LOC_TO_EUR/XRATE_LOC_TO_EUR (-EOM);;1
+T;527;If CURRENCY_ISO="EUR", load data£pv£ XRATE_LOC_TO_EUR*AMOUNT_LOC;;1
+T;528;If CURRENCY_ISO="EUR", load data£pv£ XRATE_LOC_TO_EUR*MCAP_LOC;;1
+T;529;If CURRENCY_ISO="EUR",1£pv£ ^=WMR_EXCHANGE_RATE(GBP,EUR);;1
+T;530;IF CURRENCY_ISO="GBP", (((AMOUNT (-EOM)/XRATE_LOC_TO_EUR (-EOM))-AMOUNT_LOC)/(AMOUNT (-EOM)/XRATE_LOC_TO_EUR (-EOM))), otherwise, (AMOUNT (-EOM)-AMOUNT_LOC)/AMOUNT (-EOM);;1
+T;531;If CURRENCY_ISO="GBX", change to "GBP"£pv£ If CURRENCY_ISO="BWT", change to "BWP";;1
+T;532;If data contains "%"£pv£ Remove then divide by 100£pv£ Divide by 100;passthrough:substituteRegex(<SELF>,'%',''):col|passthrough:<SELF> / 100:int;0
+T;533;If data is present for SPLIT_FACTOR, load DATE;passthrough:if(isBlank(SPLIT_FACTOR),'',UPDATE_DATE):int;0
+T;534;If DATE_CALL_FIRST=0,set to blank.;passthrough:if(DATE_CALL_FIRST == 0,'',<SELF>):int;0
+T;535;If DIVS_ISO="GBX", change to "GBP";passthrough:if(DIVS_ISO == 'GBX', 'GBP', DIVS_ISO):int;0
+T;536;If DIVS_ISO="GBX", display "GBP" instead;passthrough:if(DIVS_ISO == 'GBX','GBP',DIVS_ISO):int;0
+T;537;If DIVS_ISO="GBX", display "GBP" instead£pv£ for file fdevcpftddmm.csv load from header name: "ISO code";;1
+T;538;If DIVS_ISO="GBX", divide by 100;passthrough:if(DIVS_ISO == 'GBX',DIVS_ISO / 100,DIVS_ISO):int;0
+T;539;If IDENTIFIER="JPM20059", (MCAP/AMOUNT)*100;;1
+T;540;If INDEX_ID=LPX50TR or LPXDITU, set to "USD"£pv£ if INDEX_ID=NMXI30TR or LPXMMITR, set to "EUR";passthrough:if(INDEX_ID == 'LPX50TR' or INDEX_ID == 'LPXDITU', 'USD', if(INDEX_ID == 'NMXI30TR' or INDEX_ID == 'NMXI30TR', 'EUR', <SELF>)):int;0
+T;541;If INDUSTRY_SECTOR="*" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;542;If INDUSTRY_SECTOR="*" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;543;If INDUSTRY_SECTOR="*" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;544;If INDUSTRY_SECTOR="*" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND VENDOR_RATING="*";;1
+T;545;If INDUSTRY_SECTOR="*" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;546;If INDUSTRY_SECTOR="*" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND VENDOR_RATING="*";;1
+T;547;If INDUSTRY_SECTOR="*" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;548;If INDUSTRY_SECTOR="*" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND VENDOR_RATING="*";;1
+T;549;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;550;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="A";;1
+T;551;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="AA";;1
+T;552;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="BBB";;1
+T;553;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;554;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="A/AA/AAA";;1
+T;555;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;556;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="A";;1
+T;557;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="AA";;1
+T;558;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="BBB";;1
+T;559;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;560;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="A";;1
+T;561;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="AA";;1
+T;562;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="BBB";;1
+T;563;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;564;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="A";;1
+T;565;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="AA";;1
+T;566;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="BBB";;1
+T;567;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Communication" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;568;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Communication" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;569;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Communication" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;570;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Communication" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;571;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Communication" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;572;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Energy" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;573;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Energy" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;574;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Energy" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;575;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Energy" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;576;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Energy" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;577;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Financial" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;578;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Financial" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;579;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Financial" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;580;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Financial" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;581;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Financial" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;582;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Industrial" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;583;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Industrial" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;584;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Industrial" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;585;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Industrial" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;586;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Industrial" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;587;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Infrastructure" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;588;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Infrastructure" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;589;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Infrastructure" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;590;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Infrastructure" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;591;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Real Estate" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;592;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Real Estate" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;593;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Securitization" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;594;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Securitization" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;595;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="Securitization" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;596;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;597;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;598;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;599;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND VENDOR_RATING="*";;1
+T;600;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;601;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND VENDOR_RATING="*";;1
+T;602;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;603;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND VENDOR_RATING="*";;1
+T;604;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;605;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;606;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;607;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND VENDOR_RATING="*";;1
+T;608;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;609;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND VENDOR_RATING="*";;1
+T;610;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;611;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND VENDOR_RATING="*";;1
+T;612;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="Agency" AND TERM="*" AND RATING_VENDOR="*";;1
+T;613;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="Agency" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;614;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="Agency" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;615;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="Agency" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;616;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="Non-Agency" AND TERM="*" AND RATING_VENDOR="*";;1
+T;617;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="Non-Agency" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;618;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="Non-Agency" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;619;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Federal" AND INDUSTRY_SUBGROUP="Non-Agency" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;620;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Municipal" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;621;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Municipal" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;622;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Municipal" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;623;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Municipal" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;624;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="*";;1
+T;625;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND VENDOR_RATING="*";;1
+T;626;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;627;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND VENDOR_RATING="*";;1
+T;628;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;629;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND VENDOR_RATING="*";;1
+T;630;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;631;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="*" AND TERM="short" AND VENDOR_RATING="*";;1
+T;632;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="Quebec" AND TERM="*" AND RATING_VENDOR="*";;1
+T;633;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="Quebec" AND TERM="Long" AND RATING_VENDOR="*";;1
+T;634;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="Quebec" AND TERM="Mid" AND RATING_VENDOR="*";;1
+T;635;If INDUSTRY_SECTOR="Government" AND INDUSTRY_GROUP="Provincial" AND INDUSTRY_SUBGROUP="Quebec" AND TERM="Short" AND RATING_VENDOR="*";;1
+T;636;If ISIN does not exist from file, use ^=P_SYMBOL("ISIN");;0
+T;637;If ISSUER="UK Gilt Index-linked Stk", (WEIGHT*91.5)/100£pv£ If ISSUER="Uk Gilt Treasury Stk", (WEIGHT*8.5)/100;passthrough:if(ISSUER == 'UK Gilt Index-linked Stk', (WEIGHT * 91.5) / 100, if(ISSUER == 'Uk Gilt Treasury Stk', (WEIGHT * 8.5) / 100, <SELF>)):int;0
+T;638;If LEAD/NEXT=L ,1 else NA;passthrough:if(<SELF> == 'L',1,''):col;0
+T;639;If LEAD/NEXT=N ,1 else NA;passthrough:if(<SELF> == 'L',1,''):col;0
+T;640;If length < 7, Pad with 0s (7);;1
+T;641;If length < 7, Pad with 0s (7) then trim the last digit;;1
+T;642;If length < 9, Pad with 0s (9);;1
+T;643;If length < 9, Pad with 0s (9) then trim the last digit;;1
+T;644;If Level 0="CNY", set value to "CNH";;1
+T;645;If Mode de cotation="Dirty", load value£pv£ If Mode de cotation="Clean", (Nb titres ECI-Europe*Nominal)/100;;1
+T;646;If Mode de cotation="Dirty", load value£pv£ If Mode de cotation="Clean", Closing+ACCRUED;;1
+T;647;If NA, load blank;passthrough:if(<SELF> == 'NA','',<SELF>):col;0
+T;648;If NaN, load blank;passthrough:if(<SELF> == 'NaN','',<SELF>):col;0
+T;649;If none, leave blank;passthrough:if(<SELF> == 'none','',<SELF>):col;0
+T;650;If PA_PRICE is present, PA_CURRENCY_ISO=USD else, null;;1
+T;651;If PA_PRICE is present,"USD",null;passthrough:if(isBlank(PA_PRICE),<SELF>,'USD'):int;0
+T;652;If PA_PRICE is present,USD,null;;1
+T;653;If PRICING_ID clashes due to different VENDOR_ID, but same PRICING_ID, load the vendor_id with the larger value (i.e. the newer record) as SPLU6C+vendor_id into the PERM_ID field. We keep this consist;;0
+T;654;If SECURITY_CODE appears more than once and DIVS_NOTES <> "Extra", load SUM OF instances;;0
+T;655;If SPLI_FACTOR is present, write date in YYYYMMDD;;1
+T;656;If SPLIT_DATE is present, write date in YYYYMMDD;;1
+T;657;If there's a value for SPLIT_FACTOR, load DATE. Otherwise, leave blank;passthrough:if(isBlank(SPLIT_FACTOR),'',DATE):int;0
+T;658;If there's a value for SPLIT_FACTOR, load N_DATE. Otherwise, leave blank;passthrough:if(isBlank(SPLIT_FACTOR),'',N_DATE):int;0
+T;659;If VENDOR_ID="BB_CODE" (file), load ISIN;passthrough:if(VENDOR_ID == 'BB_CODE',ISIN,''):int;0
+T;660;If VENDOR_ID="RXYH000000000" or "RXYRH00000000" or "RXYBH00000000", load "CNH"£pv£ otherwise, load "CNY";passthrough:if(VENDOR_ID == 'RXYH000000000' or VENDOR_ID == 'RXYRH00000000' or VENDOR_ID == 'RXYBH00000000', 'CNH', 'CNY'):int;0
+T;661;If we have a value for SPLIT_FACTOR, write the date. Otherwise, leave it NA£pv£ source from N_DATE;passthrough:if(isBlank(SPLIT_FACTOR),'',N_DATE):int;0
+T;662;If( PA_ACCRUED(0) < PA_ACCRUED(-1D) , "Cash Payment"/PA_AMOUNT, 0);;1
+T;663;if(ACCRUED(-1) > ACCRUED(0), coupon payment(0)=ACCRUED(-1)-ACCRUED(0), else 0);logic:if(ACCRUED(-1D) gt ACCRUED,ACCRUED(-1D) - ACCRUED,0):int;0
+T;664;IF(CORP_ACTION_CODE(t)=="CX",IF(PA_SPECIAL_DIVIDEND(t)>0,1,SPLIT_FACTOR(t)),IF(CORP_ACTION_CODE(t)=="CP",if(PA_SPECIAL_DIVIDEND(t)>0,1,SPLIT_FACTOR(t)),SPLIT_FACTOR(t));;0
+T;665;IF(CORP_ACTION_CODE(t)=="CX",IF(PA_SPECIAL_DIVS(t)>0,(SHARES_UNADJ(T-1)/SHARES_UNADJ(T)),SPLIT_FACTOR(t)),IF(CORP_ACTION_CODE(t)=="CP",if(PA_SPECIAL_DIVS(t)>0,1,SPLIT_FACTOR(t)),SPLIT_FACTOR(t));logic:if(CORP_ACTION_CODE == 'CX', if(SPECIAL_DIVS > 0, SHARES_UNADJ(-1D) / SHARES_UNADJ, 1), if(CORP_ACTION_CODE == 'CP', if(SPECIAL_DIVS > 0, SPLIT_FACTOR, 1), 1)):int;0
+T;666;IF(CORP_ACTION_CODE(t)=="CX",IF(PA_SPECIAL_DIVS(t)>0,(SPLIT_FACTOR/(SHARES_UNADJ(t-1)/SHARES_UNADJ(t))),1),IF(CORP_ACTION_CODE(t)=="CP",if(PA_SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1) £pv£ If new security,;;0
+T;667;IF(CORP_ACTION_CODE(t)=="CX",IF(PA_SPECIAL_DIVS(t)>0,1,SPLIT_FACTOR(t)),IF(CORP_ACTION_CODE(t)=="CP",if(PA_SPECIAL_DIVS(t)>0,1,SPLIT_FACTOR(t)),SPLIT_FACTOR(t));;0
+T;668;IF(CORP_ACTION_CODE(t)=="CX",IF(PA_SPECIAL_DIVS(t)>0,SHARES_UNADJ(t-1)/SHARES_UNADJ(t),1),IF(CORP_ACTION_CODE(t)=="CP",if(PA_SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1);;0
+T;669;IF(CORP_ACTION_CODE(t)=="CX",IF(SPECIAL_DIVS(t)>0,(SPLIT_FACTOR/(SHARES_UNADJ(t-1)/SHARES_UNADJ(t))),1),IF(CORP_ACTION_CODE(t)=="CP",if(SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1) £pv£ If new security, use t;logic:(-1D):int;0
+T;670;IF(CORP_ACTION_CODE(t)=="CX",IF(SPECIAL_DIVS(t)>0,SPLIT_FACTOR/(SHARES_UNADJ(t-1)/SHARES_UNADJ(t)),1),IF(CORP_ACTION_CODE(t)=="CP",if(SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1);logic:if(CORP_ACTION_CODE == 'CX', if(SPECIAL_DIVS > 0, SPLIT_FACTOR / SHARES_UNADJ(-1D) / SHARES_UNADJ, 1), if(CORP_ACTION_CODE == 'CP', if(SPECIAL_DIVS > 0, SPLIT_FACTOR, 1), 1)):int;0
+T;671;If(ILRatio=0,1,ILRatio);;1
+T;672;In millions;;1
+T;673;In millions. Shares freefloat common to all indices;;1
+T;674;Index Close;passthrough:PRICE:int;0
+T;675;Index Divisor;passthrough:DIVISOR:int;0
+T;676;INDEX WEIGHT*100;passthrough:INDEX_WEIGHT * 100:int;0
+T;677;INDEX_CURRENCY;;1
+T;678;INDEX_ID;;1
+T;679;INDEX_NAME;;1
+T;680;ISIN;passthrough:ISIN:int;0
+T;681;ISSUER + COUPON(%) + MATURITY (in DD-MMM-YYYY);passthrough:buildFixedIncomeName(<ID_FIELD>,ISSUER,COUPON,MATURITY):int;0
+T;682;ISSUER + COUPON_AMOUNT(%) + MATURITY (in DD-MMM-YYYY);passthrough:buildFixedIncomeName(<ID_FIELD>,ISSUER,COUPON_AMOUNT,MATURITY):int;0
+T;683;ISSUER NAME (proper case)+COUPON+MATURITY DATE (DD-Mmm-YYYY);;1
+T;684;ISSUER+FACILITY_TYPE+MATURITY(dd-Mmm-YYYY);passthrough:buildFixedIncomeName(<ID_FIELD>,ISSUER,FACILITY_TYPE,MATURITY):int;0
+T;685;It comes in percentage format. Import as it is;;1
+T;686;IWF*AWF;passthrough:IWF * AWF:int;0
+T;687;JPM;passthrough:'JPM':int;0
+T;688;LEAD_ROLL_WEIGHT+NEXT_ROLL_WEIGHT;passthrough:LEAD_ROLL_WEIGHT + NEXT_ROLL_WEIGHT:int;0
+T;689;LEAD_WAV_PREV+NEXT_WAV_PREV;passthrough:LEAD_WAV_PREV + NEXT_WAV_PREV:int;0
+T;690;LEAD_WAV+NEXT_WAV;passthrough:LEAD_WAV + NEXT_WAV:int;0
+T;691;Load "CURRENCY CODE" for 20141231-20150410;;1
+T;692;Load "RUEDIF0000000" from cell "B5"£pv£ Load "RUEDIG0000000" from cell "F5";;1
+T;693;Load "RUEDIF0000000" from cell "C5"£pv£ Load "RUEDIG0000000" from cell "G5";;1
+T;694;Load "RUEDIF0000000" from cell "D5"£pv£ Load "RUEDIG0000000" from cell "H5";;1
+T;695;Load "RUEDIF0000000" from cell "E5"£pv£ Load "RUEDIG0000000" from cell "I5";;1
+T;696;Load "RUEDIF0000000" from column "B"-"E"£pv£ Load "RUEDIG0000000" from column "F"-"I";;1
+T;697;Load "RUEDIF0000000" from column "B"£pv£ Load "RUEDIG0000000" from column "F";;1
+T;698;Load "RUEDIF0000000" from column "C"£pv£ Load "RUEDIG0000000" from column "G";;1
+T;699;Load "RUEDIF0000000" from column "D"£pv£ Load "RUEDIG0000000" from column "H";;1
+T;700;Load "RUEDIF0000000" from column "E"£pv£ Load "RUEDIG0000000" from column "I";;1
+T;701;Load "SSUST00000000" from cell "C5"£pv£ Remove leading 0s;;1
+T;702;Load “1” if SHARES_NOTES is 'cap', 'cash', or 'spec', else “0”;passthrough:if(SHARES_NOTES == 'cap' or SHARES_NOTES == 'cash' or SHARES_NOTES == 'spec',1,0):int;0
+T;703;load all cons from fdxucpcddmm.csv;;1
+T;704;load all cons from fecpcddmm.csv;;1
+T;705;load all cons from r1cpfcddmm.csv;;1
+T;706;load all cons from r1dcddmm.csv;;1
+T;707;load all cons from r2fccddmm.csv;;1
+T;708;Load all constituents;;1
+T;709;Load all historical data every day£pv£ Changed from dd-Mmm-yy;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DD-MMM-YY')):col;0
+T;710;Load based on "ISO Currency Code"£pv£ 1/USD Exchange Rate;passthrough:1 / XRATE_LOC_TO_USD:int;0
+T;711;LOAD DATA if INDEX=FDSITPR;passthrough:if(INDEX_ID == 'FDSITPR0',<SELF>,''):col;0
+T;712;Load data in column R and multiply by 100;;1
+T;713;Load from AMOUNT;passthrough:AMOUNT:int;0
+T;714;Load from AMOUNT (ISF);passthrough:AMOUNT:int;0
+T;715;Load from AMOUNT_LOC;passthrough:AMOUNT_LOC:int;0
+T;716;Load from EEGInstComp_yyyymmdd.csv£pv£ See MEMBERSHIP_MAPPING: Exclude whose NAME prepended with: BR, CL, CN, ID, MA, MX, PE, ZA;;1
+T;717;Load from embig_ig_yyyymmdd.csv;;1
+T;718;Load from embigfc_0305_yyyymmdd.csv;;1
+T;719;Load from embigfc_ig_yyyymmdd.csv;;1
+T;720;Load from embigfc_nonig_yyyymmdd.csv;;1
+T;721;Load from embigfcwgt_0103_yyyymmdd.csv;;1
+T;722;Load from fc_euro_embig_europe_yyyymmdd.csv;;1
+T;723;Load from ICB_SUBSEC_NUM£pv£ Replace last 2 digits with 0;;0
+T;724;Load from ICB_SUBSEC_NUM£pv£ Replace last 3 digits with 0;;0
+T;725;Load from ICB_SUBSEC_NUM£pv£ Replace last digit with 0;;0
+T;726;Load from NAME;passthrough:NAME:int;0
+T;727;Load from PA_PRICE;passthrough:PA_PRICE:int;0
+T;728;Load from TRET_CHG_1D_GROSS;passthrough:TRET_CHG_1D_GROSS:int;0
+T;729;Load from TRET_CHG_MTD_GROSS;passthrough:TRET_CHG_MTD_GROSS:int;0
+T;730;load from XRATE_LOC_TO_EUR;passthrough:XRATE_LOC_TO_EUR:int;0
+T;731;load from XRATE_LOC_TO_JPY;passthrough:XRATE_LOC_TO_JPY:int;0
+T;732;load from XRATE_LOC_TO_USD;passthrough:XRATE_LOC_TO_USD:int;0
+T;733;Load if column B="DB(SAGE,FC_JACI_IG,hedgedIndexLevelEUR)";;1
+T;734;Load if constituent is in JPM01334;;1
+T;735;Load if constituent is in JPM01632;;1
+T;736;Load if CURRENCY_ISO="ISO Currency Code"£pv£ 1/USD Exchange Rate;;1
+T;737;Load if CURRENCY_ISO="ISO Currency Code"£pv£ 1/USD Exchange Rate£pv£ If CURRENCY_ISO="GBX", load data for "GBP";;1
+T;738;Load if IDENTIFIER in column SECURITY FUTURE.*\.04 #3 is '707826';;1
+T;739;Load if IDENTIFIER in column SECURITY FUTURE.*\.04 #3 is '707827';;1
+T;740;Load if IDENTIFIER in column SECURITY FUTURE.*\.04 #3 is '707828';;1
+T;741;Load if IDENTIFIER in column SECURITY FUTURE.*\.04 #3 is '707829';;1
+T;742;Load if INDEX FUTURE.*\.02 #2=N_DATE;;1
+T;743;Load if Index Marker=(IDX)IDENTIFIER;;1
+T;744;Load if INDEX SAME DAY.*\.01 #7=INDEX FUTURE.*\.02 #2;;1
+T;745;Load if INDEX SAME DAY.*\.01 #7=SECURITY FUTURE.*\.04 #2£pv£ Format is in YYYYMMDD;;1
+T;746;Load if SECURITY FUTURE.*\.04 #2=N_DATE£pv£ Format is in YYYYMMDD;;1
+T;747;load NAME;passthrough:NAME:int;0
+T;748;Load only 13th to 16th digits;passthrough:substr(<SELF>,13,4):col;0
+T;749;Load only 5th to 8th digits;passthrough:substr(<SELF>,5,4):col;0
+T;750;Load only 9th to 12th digits;passthrough:substr(<SELF>,9,4):col;0
+T;751;Load only except if TICKER_ISSUER is not "REPO" or AMOUNT is not negative);;1
+T;752;Load only first 2 digits;passthrough:substr(<SELF>,0,2):col;0
+T;753;Load only first 2 digits£pv£ append "00";passthrough:if(isBlank(<SELF>),'',rightPad(substr(<SELF>,0,2),'0',4)):col;0
+T;754;Load only first 3 digits;passthrough:substr(<SELF>,0,3):col;0
+T;755;Load only first 3 digits£pv£ append "0";passthrough:if(isBlank(<SELF>),'',rightPad(substr(<SELF>,0,3),'0',4)):col;0
+T;756;Load only first 4 digits;passthrough:substr(<SELF>,0,4):col;0
+T;757;Load only first 6 digits;passthrough:substr(<SELF>,0,6):col;0
+T;758;Load only first digit;passthrough:substr(<SELF>,0,1):col;0
+T;759;Load only first digit£pv£ append "000";passthrough:if(isBlank(<SELF>),'',rightPad(substr(<SELF>,0,1),'0',4)):int;0
+T;760;Load only for GPLAG115;;1
+T;761;Load only IDENTIFIER="JACI_IG_CN","JPM01676","JPM01677";;1
+T;762;Load only if B="DB(SAGE,JACI_IG,hedgedIndexLevelSGD)","DB(SAGE,JACI_LION_0107,hedgedIndexLevelSGD)","DB(SAGE,JACI_LION_07LONG,hedgedIndexLevelSGD)";;1
+T;763;Load only if Bam Id="FC_JACI_IG";;1
+T;764;Load only if column 4 of="DHED" && CURRENCY_ISO_HEDGED="EUR" && digits 10-12 of column 5="GRO";;1
+T;765;Load only if column 4 of="DHED" && CURRENCY_ISO_HEDGED="EUR" && digits 10-12 of column 5="NET";;1
+T;766;Load only if column 4 of="DHED" && CURRENCY_ISO_HEDGED="PLN" && digits 10-12 of column 5="GRO";;1
+T;767;Load only if column 4 of="DHED" && CURRENCY_ISO_HEDGED="PLN" && digits 10-12 of column 5="NET";;1
+T;768;Load only if column 4 of="DHED" && CURRENCY_ISO_HEDGED="USD" && digits 10-12 of column 5="GRO";;1
+T;769;Load only if column 4 of="DHED" && CURRENCY_ISO_HEDGED="USD" && digits 10-12 of column 5="NET";;1
+T;770;Load only if column 4 of="DHED" && digits 10-12 of column 5="GRO";;1
+T;771;Load only if column 4 of="DHED" && digits 10-12 of column 5="NET";;1
+T;772;Load only if column 4="DHED" && CURRENCY_ISO_HEDGED="GBP" && digits 10-12 of column 5="GRO";;1
+T;773;Load only if column 4="DHED" && CURRENCY_ISO_HEDGED="GBP" && digits 10-12 of column 5="NET";;1
+T;774;Load only if column 4="GRTR";;1
+T;775;Load only if column 4="NETR";;1
+T;776;Load only if column 4="STRD";;1
+T;777;Load only if CURRENCY_ISO="EUR";;1
+T;778;Load only if CURRENCY_ISO="GBP";;1
+T;779;Load only if CURRENCY_ISO="JPY";;1
+T;780;Load only if CURRENCY_ISO="USD";;1
+T;781;Load only if Index Code="EMTT6C";;1
+T;782;Load only if INDEX KEY=INDEX_KEY_CPI in Mappings;;1
+T;783;Load only if INDEX KEY=INDEX_KEY_EXRET in Mappings;;1
+T;784;Load only if INDEX_ID=SPXESRP000000;;1
+T;785;Load only if ISIN_TRI="GB00B57G6H43";;1
+T;786;Load only if Payment Date=Date of filename;;1
+T;787;Load only if VENDOR_ID="GBI_RGNBROAD_ASIA_DIV Composite", "China ", "China CNH";;1
+T;788;Load only last 3 digits;passthrough:extractRegex(<SELF>, '(\d){3}$'):col;0
+T;789;Load only on the first date of COUPON_PAID, otherwise value should be 0s (0) until next date of COUPON_PAID£pv£ Source from COUPON_PAID/100;;1
+T;790;Load only those listed in mappings;logic:map('INDEX_MAPPING','IDENTIFIER',<ID_FIELD>,'IDENTIFIER'):int;0
+T;791;Load Previous day CASH_PAY_LOC£pv£ Set to 0s in every first business day of the month;passthrough:if(UPDATE_DATE == FIRST_BUSINESS_DATE,0,CASH_PAY_LOC(-1)):int;0
+T;792;Load previous day REDEMPTION_FACTOR;logic:REDEMPTION_FACTOR(-1D):int;0
+T;793;Load REDEMPTION_FACTOR(t-1)£pv£ If bond is new, source from EOM PF file;;0
+T;794;load SHARES_UNADJ;passthrough:SHARES_UNADJ:int;0
+T;795;Load SPLIT_FACTOR_ND (-1D);logic:SPLIT_FACTOR_ND(-1D):int;0
+T;796;Load to existing constituent;;1
+T;797;Load to existing constituent, add if constituent not yet existing;;1
+T;798;Load to existing constituent£pv£ DIVS_LOC*XRATE_LOC_TO_USD£pv£ If DIVS_ISO="GBX" or "BWT", divide by 100;passthrough:if(DIVS_ISO == 'GBX' or DIVS_ISO == 'BWT', DIVS_LOC * XRATE_LOC_TO_USD / 100, DIVS_LOC * XRATE_LOC_TO_USD):int;0
+T;799;Load to existing constituent£pv£ DIVS_NET_LOC*XRATE_LOC_TO_USD£pv£ If DIVS_ISO="GBX" or "BWT", divide by 100;passthrough:if(DIVS_ISO == 'GBX' or DIVS_ISO == 'BWT', DIVS_NET_LOC * XRATE_LOC_TO_USD / 100, DIVS_NET_LOC * XRATE_LOC_TO_USD):int;0
+T;800;Load to existing constituent£pv£ If CURRENCY_ISO="GBX", divide by 100;passthrough:if(CURRENCY_ISO == 'GBX', <SELF> / 100, <SELF>):int;0
+T;801;Load to existing constituent£pv£ If DIVS_ISO = "GBX", Divide by 100;passthrough:if(DIVS_ISO == 'GBX',<SELF> / 100,''):int;0
+T;802;Load to existing constituent£pv£ if DIVS_ISO = "GBX", Set to "GBP";passthrough:if(DIVS_ISO == 'GBX','GBP',''):int;0
+T;803;Load to existing constituent£pv£ If DIVS_ISO="GBX" or "BWT", divide by 100;passthrough:if(DIVS_ISO == 'GBX' or DIVS_ISO == 'BWT', <SELF> / 100, ''):int;0
+T;804;Load to existing constituent£pv£ if DIVS_ISO="GBX", change to "GBP"£pv£ If DIVS_ISO="BWT", change to "BWP";passthrough:if(DIVS_ISO == 'GBX', 'GBP', if(DIVS_ISO == 'BWT', 'BWP', '')):int;0
+T;805;load when idIndex="10912";;1
+T;806;LOCAL PRICE*XRATE_LOC_TO_EUR;passthrough:LOCAL_PRICE * XRATE_LOC_TO_EUR:int;0
+T;807;LOCAL PRICE*XRATE_LOC_TO_USD;passthrough:LOCAL_PRICE * XRATE_LOC_TO_USD:int;0
+T;808;MARKET CAP must be converted in Mln. Calculate as follows MCAP=MARKET CAP/1000000. MARKET CAP is converted into Euros. The calculation in the file is as follows: MARKET CAP=LOCAL PRICE*CURRENCY ;;1
+T;809;MARKET_UNADJ for SPIN_STOCK_KEY symbol, else NA;;1
+T;810;MARKET_UNADJ_LOC for SPIN_STOCK_KEY symbol, else NA;;1
+T;811;MAX(0,(CASH(0)-CASH(-1))/100);logic:max(0,(CASH - CASH(-1D)) / 100):int;0
+T;812;MCAP (ISF)-SHARES*DIVS;;1
+T;813;MCAP / AFACTOR;passthrough:MCAP / AFACTOR:int;0
+T;814;MCAP / AMOUNT;passthrough:MCAP / AMOUNT:int;0
+T;815;MCAP / DIVISOR;passthrough:MCAP / DIVISOR:int;0
+T;816;MCAP / MCAP_UNADJ;passthrough:MCAP / MCAP_UNADJ:int;0
+T;817;MCAP / PRICE_DIRTY;passthrough:MCAP / PRICE_DIRTY:int;0
+T;818;MCAP / XRATE_LOC_TO_USD;passthrough:MCAP / XRATE_LOC_TO_USD:int;0
+T;819;MCAP*(TRET_CHG_1D_GROSS/100);passthrough:MCAP * (TRET_CHG_1D_GROSS / 100):int;0
+T;820;MCAP*PRICE_LOC;passthrough:MCAP_LOC / PRICE_LOC:int;0
+T;821;MCAP/((PRICE_DIRTY*AMOUNT)/100);passthrough:MCAP / ((PRICE_DIRTY * AMOUNT) / 100):int;0
+T;822;MCAP/(PRICE_DIRTY)*100;passthrough:MCAP / PRICE_DIRTY * 100:int;0
+T;823;MCAP/(PRICE_DIRTY*100);;1
+T;824;MCAP/(PRICE_DIRTY*AMOUNT);passthrough:MCAP / (PRICE_DIRTY * AMOUNT):int;0
+T;825;MCAP/(PRICE+ACCRUED)*100;passthrough:MCAP / (PRICE + ACCRUED) * 100:int;0
+T;826;MCAP/(SUM OF MCAP);logic:MCAP / sum(MCAP):int;0
+T;827;MCAP/(SUM OF MCAP)*100;;1
+T;828;MCAP/AMOUNT*100;passthrough:MCAP / AMOUNT * 100:int;0
+T;829;MCAP/PRICE;passthrough:MCAP / PRICE:int;0
+T;830;MCAP/SHARES;passthrough:MCAP / SHARES:int;0
+T;831;MCAP/SUM OF MCAP (only for ISSUER="BELGIUM")*100;;1
+T;832;MCAP/SUM OF MCAP (only for ISSUER="FRANCE")*100;;1
+T;833;MCAP/SUM OF MCAP (only for ISSUER="GERMANY")*100;;1
+T;834;MCAP/SUM OF MCAP (only for ISSUER="ITALY")*100;;1
+T;835;MCAP/SUM OF MCAP (only for ISSUER="NETHERLANDS")*100;;1
+T;836;MCAP/SUM OF MCAP (only for ISSUER="SPAIN")*100;;1
+T;837;MCAP/SUM OF MCAP*100;;1
+T;838;MCAP/SUM(MCAP)*100 whose SECTOR_NAME="OTH";;1
+T;839;MCAP/XRATE_LOC_TO_EUR;passthrough:MCAP / XRATE_LOC_TO_EUR:int;0
+T;840;MCAP/XRATE_LOC_TO_USD£pv£ divided by 1000;;1
+T;841;MCAP_AUD/SHARES;passthrough:MCAP_AUD / SHARES:int;0
+T;842;MCAP_CAD/SHARES;passthrough:MCAP_CAD / SHARES:int;0
+T;843;MCAP_CHF/AFACTOR;passthrough:MCAP_CHF / AFACTOR:int;0
+T;844;MCAP_CHF/SHARES;passthrough:MCAP_CHF / SHARES:int;0
+T;845;MCAP_CZK/(PRICE+ACCRUED)*100;passthrough:MCAP_CZK / (PRICE + ACCRUED) * 100:int;0
+T;846;MCAP_EOM/XRATE_LOC_TO_USD;passthrough:MCAP_EOM / XRATE_LOC_TO_USD:int;0
+T;847;MCAP_EOM_LOC*XRATE_LOC_TO_USD;passthrough:MCAP_EOM_LOC * XRATE_LOC_TO_USD:int;0
+T;848;MCAP_EOM_LOC/XRATE_LOC_TO_USD;passthrough:MCAP_EOM_LOC / XRATE_LOC_TO_USD:int;0
+T;849;MCAP_EUR/((PRICE+ACCRUED)/100);passthrough:MCAP_EUR / (PRICE + ACCRUED) / 100:int;0
+T;850;MCAP_EUR/(PRICE_DIRTY)*100;passthrough:MCAP_EUR / PRICE_DIRTY * 100:int;0
+T;851;MCAP_EUR/(PRICE+ACCRUED);passthrough:MCAP_EUR / (PRICE + ACCRUED):int;0
+T;852;MCAP_EUR/(PRICE+ACCRUED)*100;passthrough:MCAP_EUR / (PRICE + ACCRUED) * 100:int;0
+T;853;MCAP_EUR/AFACTOR;passthrough:MCAP_EUR / AFACTOR:int;0
+T;854;MCAP_EUR/MCAP_LOC;passthrough:MCAP_EUR / MCAP_LOC:int;0
+T;855;MCAP_EUR/PRICE;passthrough:MCAP_EUR / PRICE:int;0
+T;856;MCAP_EUR/PRICE_DIRTY;passthrough:MCAP_EUR / PRICE_DIRTY:int;0
+T;857;MCAP_EUR/SHARES;passthrough:MCAP_EUR / SHARES:int;0
+T;858;MCAP_EUR_PREV*1000000;passthrough:MCAP_EUR_PREV * 1000000:int;0
+T;859;MCAP_GBP/AFACTOR;passthrough:MCAP_GBP / AFACTOR:int;0
+T;860;MCAP_GBP/AFACTOR(MEMS);passthrough:MCAP_GBP / AFACTOR(MEMS):int;0
+T;861;MCAP_GBP/DIVISOR;passthrough:MCAP_GBP / DIVISOR:int;0
+T;862;MCAP_GBP/SHARES;passthrough:MCAP_GBP / SHARES:int;0
+T;863;MCAP_GBP+CASH_FLAT;passthrough:MCAP_GBP + CASH_FLAT:int;0
+T;864;MCAP_ILS/PRICE_ILS;passthrough:MCAP_ILS / PRICE_ILS:int;0
+T;865;MCAP_JPY/SHARES;passthrough:MCAP_JPY / SHARES:int;0
+T;866;MCAP_LOC / AFACTOR;passthrough:MCAP_LOC / AFACTOR:int;0
+T;867;MCAP_LOC*WMR_EXCHANGE_RATE(CURRENCY_ISO,SGD,current date);passthrough:MCAP_LOC * FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',SGD,',UPDATE_DATE,')£pv£')):int;0
+T;868;MCAP_LOC*XRATE_LOC_TO_CHF;passthrough:MCAP_LOC * XRATE_LOC_TO_CHF:int;0
+T;869;MCAP_LOC*XRATE_LOC_TO_USD;passthrough:MCAP_LOC * XRATE_LOC_TO_USD:int;0
+T;870;MCAP_LOC*XRATE_LOC_TO_USD (cons);;1
+T;871;MCAP_LOC/MCAP_UNADJ_LOC;passthrough:MCAP_LOC / MCAP_UNADJ_LOC:int;0
+T;872;MCAP_LOC/PRICE;passthrough:MCAP_LOC / PRICE:int;0
+T;873;MCAP_LOC/PRICE_LOC;passthrough:MCAP_LOC / PRICE_LOC:int;0
+T;874;MCAP_LOC/SHARES;passthrough:MCAP_LOC / SHARES:int;0
+T;875;MCAP_LOC/XRATE_LOC_TO_USD;passthrough:MCAP_LOC / XRATE_LOC_TO_USD:int;0
+T;876;MCAP_LOC+CASH_FLAT;passthrough:MCAP_LOC + CASH_FLAT:int;0
+T;877;MCAP_NRI/XRATE_LOC_TO_USD;passthrough:MCAP_NRI / XRATE_LOC_TO_USD:int;0
+T;878;MCAP_NRI_LOC*XRATE_LOC_TO_USD (cons);passthrough:MCAP_NRI_LOC * XRATE_LOC_TO_USD:int;0
+T;879;MCAP_TRI/SUM OF MCAP_TRI*100;logic:(MCAP_TRI / sum(MCAP_TRI)) * 100:int;0
+T;880;MCAP_TRI/XRATE_LOC_TO_USD;passthrough:MCAP_TRI / XRATE_LOC_TO_USD:int;0
+T;881;MCAP_TRI/XRATE_LOC_TO_USD£pv£ divided by 1000;;1
+T;882;MCAP_TRI_LOC*XRATE_LOC_TO_USD (cons);passthrough:MCAP_TRI_LOC * XRATE_LOC_TO_USD:int;0
+T;883;MCAP_UNADJ*AFACTOR;passthrough:MCAP_UNADJ_EUR * AFACTOR:int;0
+T;884;MCAP_UNADJ*FFLOAT/MCAP;passthrough:MCAP_UNADJ * FFLOAT / MCAP:int;0
+T;885;MCAP_UNADJ/PRICE;passthrough:MCAP_UNADJ / PRICE:int;0
+T;886;MCAP_UNADJ/PRICE (CONS);passthrough:MCAP_UNADJ /  fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'PRICE',DATE):int;0
+T;887;MCAP_UNADJ/PRICE_DIRTY;passthrough:MCAP_UNADJ / PRICE_DIRTY:int;0
+T;888;MCAP_UNADJ/SHARES_UNADJ;passthrough:MCAP_UNADJ / SHARES_UNADJ:int;0
+T;889;MCAP_UNADJ/XRATE_LOC_TO_EUR;passthrough:MCAP_UNADJ / XRATE_LOC_TO_EUR:int;0
+T;890;MCAP_UNADJ/XRATE_LOC_TO_USD;passthrough:MCAP_UNADJ / XRATE_LOC_TO_USD:int;0
+T;891;MCAP_UNADJ/XRATE_LOC_TO_USD£pv£ divided by 1000;;1
+T;892;MCAP_UNADJ_EUR / SHARES_UNADJ;passthrough:MCAP_UNADJ_EUR / SHARES_UNADJ:int;0
+T;893;MCAP_UNADJ_EUR/((PRICE+ACCRUED)/100);passthrough:MCAP_UNADJ_EUR / ((PRICE + ACCRUED) / 100):int;0
+T;894;MCAP_UNADJ_EUR/MCAP_UNADJ_LOC;passthrough:MCAP_UNADJ_EUR / MCAP_UNADJ_LOC:int;0
+T;895;MCAP_UNADJ_EUR/MCAP_UNADJ_USD;passthrough:MCAP_UNADJ_EUR / MCAP_UNADJ_USD:int;0
+T;896;MCAP_UNADJ_EUR_PREV*1000000;passthrough:MCAP_UNADJ_EUR_PREV * 1000000:int;0
+T;897;MCAP_UNADJ_GBP / SHARES_UNADJ;passthrough:MCAP_UNADJ_GBP / SHARES_UNADJ:int;0
+T;898;MCAP_UNADJ_HKD/SHARES_UNADJ;passthrough:MCAP_UNADJ_HKD / SHARES_UNADJ:int;0
+T;899;MCAP_UNADJ_JPY/SHARES_UNADJ;passthrough:MCAP_UNADJ_JPY / SHARES_UNADJ:int;0
+T;900;MCAP_UNADJ_LOC * AFACTOR;passthrough:MCAP_UNADJ_LOC * AFACTOR:int;0
+T;901;MCAP_UNADJ_LOC * FFLOAT;passthrough:MCAP_UNADJ_LOC * FFLOAT:int;0
+T;902;MCAP_UNADJ_LOC*WMR_EXCHANGE_RATE(CURRENCY_ISO,SGD,current date);passthrough:MCAP_UNADJ_LOC * FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',SGD,',UPDATE_DATE,')£pv£')):int;0
+T;903;MCAP_UNADJ_LOC*XRATE_LOC_TO_USD;passthrough:MCAP_UNADJ_LOC * XRATE_LOC_TO_USD:int;0
+T;904;MCAP_UNADJ_LOC/CFACTOR;passthrough:MCAP_UNADJ_LOC / CFACTOR:int;0
+T;905;MCAP_UNADJ_LOC/PRICE;passthrough:MCAP_UNADJ_LOC / PRICE:int;0
+T;906;MCAP_UNADJ_LOC/PRICE_LOC;passthrough:MCAP_UNADJ_LOC / PRICE_LOC:int;0
+T;907;MCAP_UNADJ_LOC/XRATE_LOC_TO_USD;passthrough:MCAP_UNADJ_LOC / XRATE_LOC_TO_USD:int;0
+T;908;MCAP_UNADJ_MXN/PRICE;passthrough:MCAP_UNADJ_MXN / PRICE:int;0
+T;909;MCAP_UNADJ_NRI/PRICE;passthrough:MCAP_UNADJ_NRI / PRICE:int;0
+T;910;MCAP_UNADJ_NRI/XRATE_LOC_TO_USD;passthrough:MCAP_UNADJ_NRI / XRATE_LOC_TO_USD:int;0
+T;911;MCAP_UNADJ_NRI_LOC*AFACTOR_NRI;passthrough:MCAP_UNADJ_NRI_LOC * AFACTOR_NRI:int;0
+T;912;MCAP_UNADJ_NRI_LOC*XRATE_LOC_TO_USD;passthrough:MCAP_UNADJ_NRI_LOC * XRATE_LOC_TO_USD:int;0
+T;913;MCAP_UNADJ_PREV*1million;;1
+T;914;MCAP_UNADJ_TRI/PRICE;passthrough:MCAP_UNADJ_TRI / PRICE:int;0
+T;915;MCAP_UNADJ_TRI/XRATE_LOC_TO_USD;passthrough:MCAP_UNADJ_TRI / XRATE_LOC_TO_USD:int;0
+T;916;MCAP_UNADJ_TRI/XRATE_LOC_TO_USD£pv£ divided by 1000;;1
+T;917;MCAP_UNADJ_TRI_LOC*AFACTOR_TRI;passthrough:MCAP_UNADJ_TRI_LOC * AFACTOR_TRI:int;0
+T;918;MCAP_UNADJ_TRI_LOC*XRATE_LOC_TO_USD;passthrough:MCAP_UNADJ_TRI_LOC * XRATE_LOC_TO_USD:int;0
+T;919;MCAP_UNADJ_USD / SHARES_UNADJ;passthrough:MCAP_UNADJ_USD / SHARES_UNADJ:int;0
+T;920;MCAP_UNADJ_USD*XRATE_USD_TO_EUR;passthrough:MCAP_UNADJ_USD * XRATE_USD_TO_EUR:int;0
+T;921;MCAP_UNADJ_USD/((PRICE+ACCRUED)/100);passthrough:MCAP_UNADJ_USD / ((PRICE + ACCRUED) / 100):int;0
+T;922;MCAP_UNADJ_USD/CFACTOR;passthrough:MCAP_UNADJ_USD / CFACTOR:int;0
+T;923;MCAP_UNADJ_USD/MCAP_UNADJ_LOC;passthrough:MCAP_UNADJ_USD / MCAP_UNADJ_LOC:int;0
+T;924;MCAP_UNADJ_USD/SHARES_UNADJ£pv£ MCAP/SHARES until 20160415;;1
+T;925;MCAP_UNADJ_USD/SHARES_UNADJ£pv£ MCAP_USD/SHARES until 20160415;;1
+T;926;MCAP_UNADJ_USD/SHRAES_UNADJ;passthrough:MCAP_UNADJ_USD / SHRAES_UNADJ:int;0
+T;927;MCAP_UNADJ_USD/XRATE_LOC_TO_USD;passthrough:MCAP_UNADJ_USD / XRATE_LOC_TO_USD:int;0
+T;928;MCAP_UNADJ_ZAR/SHARES_UNADJ;passthrough:MCAP_UNADJ_ZAR / SHARES_UNADJ:int;0
+T;929;MCAP_USD * XRATE_USD_TO_CAD;passthrough:MCAP_USD * XRATE_USD_TO_CAD:int;0
+T;930;MCAP_USD / DIVISOR;passthrough:MCAP_USD / DIVISOR:int;0
+T;931;MCAP_USD / PRICE_DIRTY;passthrough:MCAP_USD / PRICE_DIRTY:int;0
+T;932;MCAP_USD / SHARES;passthrough:MCAP_USD / SHARES:int;0
+T;933;MCAP_USD / XRATE_LOC_TO_USD;passthrough:MCAP_USD / XRATE_LOC_TO_USD:int;0
+T;934;MCAP_USD*XRATE_USD_TO_EUR;passthrough:MCAP_USD * XRATE_USD_TO_EUR:int;0
+T;935;MCAP_USD/((PRICE+ACCRUED)/100);passthrough:MCAP_USD / ((PRICE + ACCRUED) / 100):int;0
+T;936;MCAP_USD/(PRICE_DIRTY)*100;passthrough:MCAP_USD / (PRICE_DIRTY) * 100:int;0
+T;937;MCAP_USD/(PRICE_DIRTY*100);passthrough:MCAP_USD / (PRICE_DIRTY * 100):int;0
+T;938;MCAP_USD/(PRICE+ACCRUED);passthrough:MCAP_USD / (PRICE + ACCRUED):int;0
+T;939;MCAP_USD/(PRICE+ACCRUED)*100;passthrough:(MCAP_USD / (PRICE + ACCRUED)) * 100:int;0
+T;940;MCAP_USD/AFACTOR;passthrough:MCAP_USD / AFACTOR:int;0
+T;941;MCAP_USD/MCAP_LOC;passthrough:MCAP_USD / MCAP_LOC:int;0
+T;942;MCAP_USD/PRICE (CONS);passthrough:MCAP_USD / fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'PRICE',DATE):int;0
+T;943;MCAP_USD/Sum of MCAP_USD*100;logic:(MCAP_USD / sum(MCAP_USD)) * 100:int;0
+T;944;MCAP+CASH_FLAT;passthrough:MCAP + CASH_FLAT:int;0
+T;945;Multiply by 1,000,000;passthrough:<SELF> * 1000000:int;0
+T;946;Multiply by 100;passthrough:<SELF> * 100:int;0
+T;947;Multiply by 100 for 20140413 onwards only;;1
+T;948;Multiply by 100 for 20150413 onwards only;;1
+T;949;Multiply by 1000000;passthrough:<SELF> * 1000000:int;0
+T;950;Multiply by RATE;passthrough:<SELF> * RATE:int;0
+T;951;Multiply to 100 without the %;;1
+T;952;Multiply to XRATE_LOC_TO_EUR;passthrough:<SELF> * XRATE_LOC_TO_EUR:int;0
+T;953;N_DATE - 1D;passthrough:UPDATE_DATE:int;0
+T;954;N_DATE(-1D);passthrough:UPDATE_DATE:int;0
+T;955;N_DATE+1D;;1
+T;956;N_DATE-1 Day (format in YYYYMMDD);;1
+T;957;N_DATE-1D£pv£ Convert from YYYY/MM/DD to YYYYMMDD;passthrough:UPDATE_DATE:int;0
+T;958;N_DATE-1D£pv£ In YYYYMMDD;passthrough:UPDATE_DATE:int;0
+T;959;N_DATE-1Day;;1
+T;960;NAME;passthrough:NAME:int;0
+T;961;ND_DATE-1D;;1
+T;962;NDATE-1D;;0
+T;963;NET DIVIDEND*XRATE_LOC_TO_EUR;passthrough:NET_DIVIDEND * XRATE_LOC_TO_EUR:int;0
+T;964;NET DIVIDEND*XRATE_LOC_TO_USD;passthrough:NET_DIVIDEND * XRATE_LOC_TO_USD:int;0
+T;965;not to be included in BDI formulas;;1
+T;966;Not to be populated going forward from 20150130;;1
+T;967;OFACTOR;passthrough:OFACTOR:int;0
+T;968;OFACTOR*CFACTOR;passthrough:OFACTOR * CFACTOR:int;0
+T;969;Omiy"D"£pv£ load only first 4 digits;;1
+T;970;on first of month, 0s, else, CASH_PAY (-1D);;0
+T;971;On first of month, 0s£pv£ else, CASH_PAY/100,000,000;;0
+T;972;Ordinary Dividend Amount*(1-Tax Rate/100);;1
+T;973;PA_ACCRUED (-1) > PA_ACCRUED (0), coupon payment (0)=PA_ACCRUED (-1)-PA_ACCRUED(0);;1
+T;974;PA_AMOUNT*(PA_PRICE_PREV+PA_ACCRUED_PREV)/100;passthrough:(PA_AMOUNT * (PA_PRICE_PREV + PA_ACCRUED_PREV)) / 100:int;0
+T;975;PA_DIVS+PA_SPECIAL_DIVS;passthrough:PA_DIVS + PA_SPECIAL_DIVS:int;0
+T;976;Pad "0s" up to nine digits;;1
+T;977;Pad "0s" up to nine digits£pv£ Remove check digit;;1
+T;978;Pad "0s" up to seven digits;;1
+T;979;Pad "0s" up to seven digits£pv£ Remove check digit;;1
+T;980;Pad seroes to 7 digits;;1
+T;981;Pad seroes to 7 digits£pv£ remove check digit;;1
+T;982;Pad to "000000000"£pv£ If string displays as exponential form,=MID(ISIN,3,9);;1
+T;983;Pad to "000000000"£pv£ Remove check digit£pv£ If string displays as exponential form,=MID(ISIN,3,8);;1
+T;984;Pad with 0s;;1
+T;985;Pad with 0s to 12 digits;passthrough:if(isBlank(<SELF>),'',LeftPad(<SELF>,'0',12)):col;0
+T;986;Pad with 0s to 13 digits;passthrough:if(isBlank(<SELF>),'',LeftPad(<SELF>,'0',13)):col;0
+T;987;Pad with 0s to 13 digits£pv£ See Mappings;;1
+T;988;Pad with 0s to 4 digits;;1
+T;989;Pad with 0s to 6 digits;passthrough:if(isBlank(<SELF>),'',LeftPad(<SELF>,'0',6)):col;0
+T;990;Pad with 0s to 7 digit£pv£ avail(SEDOL,ISIN,STOCK_KEY) £pv£remove check digit;;1
+T;991;Pad with 0s to 7 digits;passthrough:if(isBlank(<SELF>),'',LeftPad(<SELF>,'0',7)):col;0
+T;992;Pad with 0s to 7 digits£pv£ Remove check digit;passthrough:if(isBlank(<SELF>),'',substr(LeftPad(<SELF>,'0',7),0,6)):col;0
+T;993;Pad with 0s to 7 digits£pv£ remove check digits;;1
+T;994;Pad with 0s to 8 digits;passthrough:if(isBlank(<SELF>),'',LeftPad(<SELF>,'0',8)):col;0
+T;995;Pad with 0s to 9 digits;passthrough:if(isBlank(<SELF>),'',LeftPad(<SELF>,'0',9)):col;0
+T;996;Pad with 0s to 9 digits£pv£ Remove check digit;passthrough:if(isBlank(<SELF>),'',substr(LeftPad(<SELF>,'0',9),0,8)):col;0
+T;997;Pad with 0s£pv£ Remove Check Digit;;1
+T;998;Pad with 0s£pv£ Remove Check Digit£pv£ avail(ISIN,PERM_ID);;1
+T;999;PCHG_1D;passthrough:PCHG_1D:int;0
+T;1000;PCHG_1D*100;passthrough:PCHG_1D_USD * 100:int;0
+T;1001;PCHG_1D_USD*100;passthrough:PCHG_1D_USD * 100:int;0
+T;1002;Percentage format;;1
+T;1003;Please See Mappings£pv£ INDEX_NAME;;1
+T;1004;Please see the calculation in the Notes column;;1
+T;1005;populate using ^=WMR_EXCHANGE_RATE(<CURRENCY_ISO>,EUR,<DATE>);passthrough:FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',EUR,',UPDATE_DATE,')£pv£')):int;0
+T;1006;populate using ^=WMR_EXCHANGE_RATE(<CURRENCY_ISO>,USD,<DATE>);passthrough:FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',USD,',UPDATE_DATE,')£pv£')):int;0
+T;1007;prefix with "ML";;1
+T;1008;Prepend "CFS";;1
+T;1009;Prepend "MS"£pv£ Except If VENDOR_ID=106506 or 891800;;1
+T;1010;Prepend "S" and Pad 0s to 8 digits;passthrough:if(isBlank(<SELF>),'',rightPad(append('S',<SELF>),'0',8)):col;0
+T;1011;Prepend with "TS";;1
+T;1012;Prepend with 0s to 7 digits£pv£ remove check digit;;0
+T;1013;PRICE (CONS)*SHARES;passthrough:fetchExternalValue('CONS',<CONSTITUENTS_ID>,PRICE) * SHARES:int;0
+T;1014;PRICE (CONS)*SHARES_CPI;passthrough:fetchExternalValue('CONS',<CONSTITUENTS_ID>,PRICE) * SHARES_CPI:int;0
+T;1015;PRICE * SHARES;passthrough:PRICE * SHARES:int;0
+T;1016;PRICE * SHARES_UNADJ;passthrough:PRICE * SHARES_UNADJ:int;0
+T;1017;PRICE(CONS_ND)*SHARES;passthrough:fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,PRICE,DATE) * SHARES:int;0
+T;1018;PRICE(CONS_PF)*SHARES;passthrough:fetchExternalValue('CONS_PF',<CONSTITUENTS_ID>,PRICE,DATE) * SHARES:int;0
+T;1019;PRICE(t) OR ( PRICE_ND(t) if PRICE(t) not available);logic:avail(PRICE,fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'PRICE',DATE)):int;0
+T;1020;PRICE(t)/((PRICE_ND(t-1)*-ZAV(DIVS(t)))-1£pv£ If new security, return '';;0
+T;1021;PRICE*ACCRUED*AMOUNT_UNADJ;passthrough:PRICE * ACCRUED * AMOUNT_UNADJ:int;0
+T;1022;PRICE*ACCRUED*AMOUNT_UNADJ_USD;passthrough:PRICE * ACCRUED * AMOUNT_UNADJ_USD:int;0
+T;1023;PRICE*AMOUNT;passthrough:PRICE * AMOUNT:int;0
+T;1024;PRICE*AMOUNT_CNY;passthrough:PRICE_DIRTY * AMOUNT_CNY:int;0
+T;1025;PRICE*FX_RATE;passthrough:PRICE * FX_RATE:int;0
+T;1026;PRICE*SHARES_CPI;passthrough:fetchExternalValue('CONS',<CONSTITUENTS_ID>,PRICE) * SHARES_CPI:int;0
+T;1027;PRICE*XRATE_LOC_TO_CAD;passthrough:PRICE * XRATE_LOC_TO_CAD:int;0
+T;1028;PRICE*XRATE_LOC_TO_USD;passthrough:PRICE_DIRTY * AMOUNT_LOC * XRATE_LOC_TO_USD:int;0
+T;1029;PRICE/100;passthrough:PRICE / 100:int;0
+T;1030;PRICE/100£pv£ If bond is new, source PRICE/100 from CONS_M_FILE;;0
+T;1031;PRICE/XRATE_LOC_TO_USD;passthrough:PRICE / XRATE_LOC_TO_USD:int;0
+T;1032;PRICE_BID/100;passthrough:PRICE_BID / 100:int;0
+T;1033;PRICE_CAD*SHARES;passthrough:PRICE_CAD * SHARES:int;0
+T;1034;PRICE_CAD*SHARES_UNADJ;passthrough:PRICE_CAD * SHARES_UNADJ:int;0
+T;1035;PRICE_CAD*XRATE_CAD_TO_USD;passthrough:PRICE_CAD * XRATE_CAD_TO_USD:int;0
+T;1036;PRICE_CLP*SHARES_UNADJ;passthrough:PRICE_CLP * SHARES_UNADJ:int;0
+T;1037;PRICE_DIRTY - ACCRUED;passthrough:PRICE_DIRTY - ACCRUED:int;0
+T;1038;PRICE_DIRTY - PRICE;passthrough:PRICE_DIRTY - PRICE:int;0
+T;1039;PRICE_DIRTY (Cons)*AMOUNT_LOC (Mems)/SHARES;passthrough:fetchExternalValue('CONS',<ID_FIELD>,'PRICE_DIRTY',DATE) * fetchExternalValue('MEMBERSHIPS',<ID_FIELD>,'AMOUNT_LOC',DATE) / SHARES:int;0
+T;1040;PRICE_DIRTY (CONS_PF)*AMOUNT_EUR;passthrough:fetchExternalValue('CONS_PF',<ID_FIELD>,'PRICE_DIRTY',DATE) * AMOUNT_EUR:int;0
+T;1041;PRICE_DIRTY * AMOUNT;passthrough:PRICE_DIRTY * AMOUNT:int;0
+T;1042;PRICE_DIRTY * AMOUNT / 1000000;passthrough:(PRICE_DIRTY * AMOUNT) / 1000000:int;0
+T;1043;PRICE_DIRTY * AMOUNT_LOC;passthrough:PRICE_DIRTY * AMOUNT_LOC:int;0
+T;1044;PRICE_DIRTY * AMOUNT_LOC / 1000000;passthrough:(PRICE_DIRTY * AMOUNT_LOC) / 1000000:int;0
+T;1045;PRICE_DIRTY * AMOUNT_UNADJ;passthrough:PRICE_DIRTY * AMOUNT_UNADJ:int;0
+T;1046;PRICE_DIRTY * AMOUNT_UNADJ_LOC;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_LOC:int;0
+T;1047;PRICE_DIRTY * AMOUNT_UNADJ_SGD;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_SGD:int;0
+T;1048;PRICE_DIRTY * AMOUNT_USD;passthrough:PRICE_DIRTY * AMOUNT_USD:int;0
+T;1049;PRICE_DIRTY _EU-ACCRUED;;1
+T;1050;PRICE_DIRTY _FE-ACCRUED;;1
+T;1051;PRICE_DIRTY _US-ACCRUED;;1
+T;1052;PRICE_DIRTY + ACCRUED;passthrough:PRICE_DIRTY + ACCRUED:int;0
+T;1053;PRICE_DIRTY*AMOUNT(CONS);passthrough:PRICE_DIRTY / fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'AMOUNT',DATE):int;0
+T;1054;PRICE_DIRTY*AMOUNT£pv£ If first business day of the month, PRICE_DIRTY(-1D)*AMOUNT;;0
+T;1055;PRICE_DIRTY*AMOUNT_CAD;passthrough:PRICE_DIRTY * AMOUNT_CAD:int;0
+T;1056;PRICE_DIRTY*AMOUNT_CNH;passthrough:PRICE_DIRTY * AMOUNT_CNH:int;0
+T;1057;PRICE_DIRTY*AMOUNT_CNH£pv£ If first business day of the month, PRICE_DIRTY(-1D)*AMOUNT;;0
+T;1058;PRICE_DIRTY*AMOUNT_CNY;passthrough:PRICE_DIRTY * AMOUNT_CNY:int;0
+T;1059;PRICE_DIRTY*AMOUNT_EUR;passthrough:fetchExternalValue('CONS_PF',<ID_FIELD>,'PRICE_DIRTY',DATE) * AMOUNT_EUR:int;0
+T;1060;PRICE_DIRTY*AMOUNT_EUR£pv£ Divide by 1,000,000;passthrough:(PRICE_DIRTY * AMOUNT_EUR) / 1000000:int;0
+T;1061;PRICE_DIRTY*AMOUNT_GBP;passthrough:PRICE_DIRTY * AMOUNT_GBP:int;0
+T;1062;PRICE_DIRTY*AMOUNT_LOC;passthrough:PRICE_DIRTY * AMOUNT_LOC:int;0
+T;1063;PRICE_DIRTY*AMOUNT_LOC*XRATE_LOC_TO_EUR;passthrough:PRICE_DIRTY * AMOUNT_LOC * XRATE_LOC_TO_EUR:int;0
+T;1064;PRICE_DIRTY*AMOUNT_LOC*XRATE_LOC_TO_USD;passthrough:PRICE_DIRTY * AMOUNT_LOC * XRATE_LOC_TO_USD:int;0
+T;1065;PRICE_DIRTY*AMOUNT_PHP;passthrough:PRICE_DIRTY * AMOUNT_PHP:int;0
+T;1066;PRICE_DIRTY*AMOUNT_SGD;passthrough:PRICE_DIRTY * AMOUNT_SGD:int;0
+T;1067;PRICE_DIRTY*AMOUNT_UNADJ_CNH;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_CNH:int;0
+T;1068;PRICE_DIRTY*AMOUNT_UNADJ_CNY;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_CNY:int;0
+T;1069;PRICE_DIRTY*AMOUNT_UNADJ_EUR;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_EUR:int;0
+T;1070;PRICE_DIRTY*AMOUNT_UNADJ_PHP;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_PHP:int;0
+T;1071;PRICE_DIRTY*AMOUNT_UNADJ_USD;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_USD:int;0
+T;1072;PRICE_DIRTY*AMOUNT_USD;passthrough:PRICE_DIRTY * AMOUNT_USD:int;0
+T;1073;PRICE_DIRTY_AMOUNT_UNADJ_SGD;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_SGD:int;0
+T;1074;PRICE_DIRTY_REAL_EU-ACCRUED_REAL;;0
+T;1075;PRICE_DIRTY_REAL_FE-ACCRUED_REAL;;0
+T;1076;PRICE_DIRTY_REAL_US-ACCRUED_REAL;;0
+T;1077;PRICE_DIRTY_REAL-ACCRUED_REAL;passthrough:PRICE_DIRTY_REAL - ACCRUED_REAL:int;0
+T;1078;PRICE_DIRTY_UNADJ/PRICE_SCALAR;passthrough:PRICE_DIRTY_UNADJ / PRICE_SCALAR:int;0
+T;1079;PRICE_DIRTY-PRICE_BID;passthrough:PRICE_DIRTY - PRICE_BID:int;0
+T;1080;PRICE_EUR (CONS)*SHARES_CPI;passthrough:fetchExternalValue('CONS',<ID_FIELD>,'PRICE_EUR',DATE) * SHARES_CPI:int;0
+T;1081;PRICE_EUR * SHARES;passthrough:PRICE_EUR * SHARES:int;0
+T;1082;PRICE_EUR * SHARES_UNADJ;passthrough:PRICE_EUR * SHARES_UNADJ:int;0
+T;1083;PRICE_EUR / PRICE_LOC;passthrough:PRICE_EUR / PRICE_LOC:int;0
+T;1084;PRICE_EUR*SHARES;passthrough:PRICE_EUR * SHARES:int;0
+T;1085;PRICE_GBP;passthrough:PRICE_GBP:int;0
+T;1086;PRICE_GBP*SHARES;passthrough:PRICE_GBP * SHARES:int;0
+T;1087;PRICE_GBP*SHARES_UNADJ;passthrough:PRICE_GBP * SHARES_UNADJ:int;0
+T;1088;PRICE_HIGH_LOC*XRATE_LOC_TO_EUR;passthrough:PRICE_HIGH_LOC * XRATE_LOC_TO_EUR:int;0
+T;1089;PRICE_HIGH_LOC*XRATE_LOC_TO_GBP;passthrough:PRICE_HIGH_LOC * XRATE_LOC_TO_GBP:int;0
+T;1090;PRICE_HIGH_LOC*XRATE_LOC_TO_USD;passthrough:PRICE_HIGH_LOC * XRATE_LOC_TO_USD:int;0
+T;1091;PRICE_JPY*SHARES_UNADJ;passthrough:PRICE_JPY * SHARES_UNADJ:int;0
+T;1092;PRICE_LOC * SHARES;passthrough:PRICE_LOC * SHARES:int;0
+T;1093;PRICE_LOC * SHARES£pv£ Divide by 1,000,000;passthrough:(PRICE_LOC * SHARES) / 1000000:int;0
+T;1094;PRICE_LOC * SHARES_CPI;passthrough:PRICE_LOC * SHARES_CPI:int;0
+T;1095;PRICE_LOC * SHARES_UNADJ;passthrough:PRICE_LOC * SHARES_UNADJ:int;0
+T;1096;PRICE_LOC * SHARES_UNADJ * FFLOAT * OFACTOR;passthrough:PRICE_LOC * SHARES_UNADJ * FFLOAT * OFACTOR:int;0
+T;1097;PRICE_LOC * XRATE_LOC_TO_EUR;passthrough:PRICE_LOC * XRATE_LOC_TO_EUR:int;0
+T;1098;PRICE_LOC * XRATE_LOC_TO_USD;passthrough:PRICE_LOC * XRATE_LOC_TO_USD:int;0
+T;1099;PRICE_LOC(CONS)*XRATE_LOC_TO_EUR(CONS);passthrough:PRICE_LOC * XRATE_LOC_TO_EUR:int;0
+T;1100;PRICE_LOC(CONS)*XRATE_LOC_TO_USD(CONS);passthrough:PRICE_LOC * XRATE_LOC_TO_USD:int;0
+T;1101;PRICE_LOC(CONS_M)*SHARES;passthrough:fetchExternalValue(<CONS_M_UNIV>,<ID_FIELD>,'PRICE_LOC',DATE) * SHARES:int;0
+T;1102;PRICE_LOC(CONS_ND)*SHARES;passthrough:PRICE_LOC * SHARES:int;0
+T;1103;PRICE_LOC*SHARES*UNADJ;passthrough:PRICE_LOC * SHARES_UNADJ:int;0
+T;1104;PRICE_LOC*SHARES_UNADJ£pv£ Divide by 1,000,000;passthrough:(PRICE_LOC * SHARES_UNADJ) / 1000000:int;0
+T;1105;PRICE_LOC*SPECIAL_DIV_FACTOR;passthrough:PRICE_LOC * SPECIAL_DIV_FACTOR:int;0
+T;1106;PRICE_LOC*SPIN_FACTOR_LOC;passthrough:PRICE_LOC * SPIN_FACTOR_LOC:int;0
+T;1107;PRICE_LOC*WMR_EXCHANGE_RATE(CURRENCY_ISO,SGD,current date);passthrough:PRICE_LOC * FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',USD,',DATE,')£pv£')):int;0
+T;1108;PRICE_LOC*XRATE_LOC_TO_AUD;passthrough:PRICE_LOC * XRATE_LOC_TO_AUD:int;0
+T;1109;PRICE_LOC*XRATE_LOC_TO_CHF;passthrough:PRICE_LOC * XRATE_LOC_TO_CHF:int;0
+T;1110;PRICE_LOC*XRATE_LOC_TO_EUR;passthrough:PRICE_LOC * XRATE_LOC_TO_EUR:int;0
+T;1111;PRICE_LOC*XRATE_LOC_TO_GBP;passthrough:PRICE_LOC * XRATE_LOC_TO_GBP:int;0
+T;1112;PRICE_LOC*XRATE_LOC_TO_JPY;passthrough:PRICE_LOC * XRATE_LOC_TO_JPY:int;0
+T;1113;PRICE_LOC*XRATE_LOC_TO_USD£pv£ for daily EOM history, MCAP/SHARES;;1
+T;1114;PRICE_LOC*XRATE_LOC_TO_USD£pv£ for monthly history, MCAP/SHARES;;1
+T;1115;PRICE_LOC*XRATE_LOC_TO_ZAR;passthrough:PRICE_LOC * XRATE_LOC_TO_ZAR:int;0
+T;1116;PRICE_LOC*XRATE_USD_TO_JPY;passthrough:PRICE_LOC * XRATE_USD_TO_JPY:int;0
+T;1117;PRICE_LOC/XRATE_LOC_TO_USD;passthrough:PRICE_LOC / XRATE_LOC_TO_USD:int;0
+T;1118;PRICE_LOC_XRATE_LOC_TO_USD;;1
+T;1119;PRICE_LOW_LOC*XRATE_LOC_TO_EUR;passthrough:PRICE_LOW_LOC * XRATE_LOC_TO_EUR:int;0
+T;1120;PRICE_LOW_LOC*XRATE_LOC_TO_GBP;passthrough:PRICE_LOW_LOC * XRATE_LOC_TO_GBP:int;0
+T;1121;PRICE_LOW_LOC*XRATE_LOC_TO_USD;passthrough:PRICE_LOW_LOC * XRATE_LOC_TO_USD:int;0
+T;1122;PRICE_ND(t)/PRICE(t);passthrough:fetchExternalValue(<UNIV>,<ID_FIELD>,'PRICE',DATE) / PRICE:int;0
+T;1123;PRICE_PREV_LOC * SHARES;passthrough:PRICE_PREV_LOC * SHARES:int;0
+T;1124;PRICE_PREV_LOC(CONS_M)*SHARES;passthrough:fetchExternalValue('CONS_M',<ID_FIELD>,'PRICE_PREV_LOC',DATE) * SHARES:int;0
+T;1125;PRICE_PREV+ACCRUED_PREV;passthrough:PRICE_PREV + ACCRUED_PREV:int;0
+T;1126;PRICE_REAL+ACCRUED_REAL;passthrough:PRICE_REAL + ACCRUED_REAL:int;0
+T;1127;PRICE_SGD*SHARES_UNADJ;passthrough:PRICE_SGD * SHARES_UNADJ:int;0
+T;1128;PRICE_TRI_LOC*XRATE_LOC_TO_USD;passthrough:PRICE_TRI_LOC * XRATE_LOC_TO_USD:int;0
+T;1129;PRICE_USD;passthrough:PRICE_USD:int;0
+T;1130;PRICE_USD (CONS)*SHARES_CPI;passthrough:fetchExternalValue('CONS',<ID_FIELD>,'PRICE_USD',DATE) * SHARES_CPI:int;0
+T;1131;PRICE_USD * SHARES;passthrough:PRICE_USD * SHARES:int;0
+T;1132;PRICE_USD * SHARES_UNADJ;passthrough:PRICE_USD * SHARES_UNADJ:int;0
+T;1133;PRICE_USD * XRATE_USD_TO_CAD;passthrough:PRICE_USD * XRATE_USD_TO_CAD:int;0
+T;1134;PRICE_USD*SHARED_UNADJ;passthrough:PRICE_USD * SHARED_UNADJ:int;0
+T;1135;PRICE_USD*SPIN_FACTOR_LOC;passthrough:PRICE_USD * SPIN_FACTOR_LOC:int;0
+T;1136;PRICE_USD*XRATE_LOC_TO_USD (CONS_ND);passthrough:PRICE_USD * fetchExternalValue('CONS_ND',<ID_FIELD>,'XRATE_LOC_TO_USD',DATE):int;0
+T;1137;PRICE_USD*XRATE_USD_TO_EUR;passthrough:PRICE_USD * XRATE_USD_TO_EUR:int;0
+T;1138;PRICE_USD*XRATE_USD_TO_SGD;passthrough:PRICE_USD * XRATE_USD_TO_SGD:int;0
+T;1139;PRICE_USD/PRICE_LOC;passthrough:PRICE_USD / PRICE_LOC:int;0
+T;1140;PRICE_USD/XRATE_LOC_TO_USD;passthrough:PRICE_USD / XRATE_LOC_TO_USD:int;0
+T;1141;PRICE_ZAR/PRICE_LOC;passthrough:PRICE_ZAR / PRICE_LOC:int;0
+T;1142;prior to 20160613, calculated from ^=proper_name;;1
+T;1143;Prior to 20160718, calculate: PRICE_DIRTY-ACCRUED£pv£ From 20160718 onward, source from Index Price;;1
+T;1144;PUBLIC_ID;;1
+T;1145;Refer from Mappings Sheet;;1
+T;1146;Refer to Cell B1 from VENDOR_FILE£pv£ Convert to YYYYMMDD;;1
+T;1147;Refer to Cell B1£pv£ Convert to YYYYMMDD;;1
+T;1148;Refer to Cell B1£pv£ From DD.MM.YYYY to YYYYMMDD;;1
+T;1149;Refer to Cell B1£pv£ From DD-MM-YYYY to YYYYMMDD;;1
+T;1150;Refer to Cell B2;;1
+T;1151;Refer to Cell B2£pv£ Load if A2="Index Close";;1
+T;1152;Refer to Cell B3;;1
+T;1153;Refer to Cell B3£pv£ Load if A3="Index Divisor";;1
+T;1154;Remove " Composite" from "GBI_RGNBROAD_ASIA_DIV Composite";passthrough:substituteRegex(<SELF>,'Composite',''):col;0
+T;1155;Remove " Index";;1
+T;1156;Remove "%";passthrough:substituteRegex(<SELF>,'%',''):col;0
+T;1157;Remove "%" and divide by 100;passthrough:substituteRegex(<SELF>,'%',''):col|passthrough:<SELF> / 100:int;0
+T;1158;Remove "%" and multiply by 100;passthrough:substituteRegex(<SELF>,'%',''):col|passthrough:<SELF> * 100:int;0
+T;1159;Remove "%" then divide by 100;;1
+T;1160;Remove "%", then multiply by 100;;1
+T;1161;Remove "%"£pv£ if blank , (MCAP/SUM of MCAP)*100;logic:substituteRegex(<SELF>,'%',''):col|passthrough:(MCAP / sum(MCAP)) * 100:int;0
+T;1162;Remove ",";passthrough:substituteRegex(<SELF>,',',''):col;0
+T;1163;Remove ".";passthrough:substituteRegex(<SELF>,'\.',''):col;0
+T;1164;Remove "." before the ID;passthrough:substituteRegex(<SELF>,'\.',''):col;0
+T;1165;Remove "--BATCH--2" for History up to 20121218;;1
+T;1166;Remove "D", Load only 13th-16th digits;;0
+T;1167;Remove "D", Load only 5th-8th digits;;0
+T;1168;Remove "D", Load only 9th-12th digits;;0
+T;1169;Remove "D"£pv£ Load only the first 4 digits;;0
+T;1170;Remove "D"£pv£ Load only the last 4 digits;;0
+T;1171;Remove "D"£pv£ Remove first 4 and last 8 digits;;0
+T;1172;Remove "D"£pv£ Remove first 8 and last 4 digits;;0
+T;1173;Remove "due YY" from Instrument,+dd-Mmm-YYYY(MATURITY);;1
+T;1174;Remove "Equity";passthrough:substituteRegex(<SELF>,'Equity',''):col;0
+T;1175;Remove % then divide by 100;passthrough:substituteRegex(<SELF>,'%',''):col|passthrough:<SELF> / 100:int;0
+T;1176;Remove '%' then divide by 100;passthrough:substituteRegex(<SELF>,'%',''):col|passthrough:<SELF> / 100:int;0
+T;1177;Remove % then multiply to 100;;1
+T;1178;Remove %, Multiply by 100;passthrough:substituteRegex(<SELF>,'%',''):col|passthrough:<SELF> * 100:int;0
+T;1179;Remove '%'. Divide by 100. For 20161219-20170111, vendor file header is Dividend Yield;;1
+T;1180;Remove '%'. Divide by 100. For 20161220-20170112, vendor file header is Dividend Yield;;1
+T;1181;Remove '%'£pv£ Divide by 100.;passthrough:substituteRegex(<SELF>,'%',''):col|passthrough:<SELF> / 100:int;0
+T;1182;Remove '%'£pv£ For files starting from 20170117 onwards, divide WEIGHT by 1,000,000;;1
+T;1183;Remove (");passthrough:substituteRegex(<SELF>,'\'',''):col;0
+T;1184;Remove ();;1
+T;1185;Remove check digit;passthrough:substituteRegex(<SELF>,'\w$',''):col;0
+T;1186;Remove check digit£pv£ See Mappings;;1
+T;1187;Remove 'D'£pv£ Load only 13th-16th digit;;1
+T;1188;Remove 'D'£pv£ Load only 5th-8th digit;;1
+T;1189;Remove 'D'£pv£ Load only 9th-12th digit;;1
+T;1190;Remove extra quotes and commas;passthrough:substituteRegex(<SELF>,'(\'|\,)',''):col;0
+T;1191;Remove extra quotes and commas£pv£ for duplicate identifiers, sum the values from both rows for this field and load the result.;;0
+T;1192;Remove extra quotes and commas£pv£ for duplicate identifiers, sum the values from both rows for this field and load the result£pv£ FOR START OF MONTH: Expect BEGINM header;;0
+T;1193;Remove last 2 digits£pv£ Pad "00";;1
+T;1194;Remove last 3 digits£pv£ Pad "000";;1
+T;1195;Remove last digit(check digit);;1
+T;1196;replicate core behaviour;;1
+T;1197;RETIRED;;1
+T;1198;RO for "RANGE OVER" or "RU" for "RANGE UNDER" or "RR" for fixed range;passthrough:if(<SELF> == 'RANGEOVER','RO',if(<SELF> == 'RANGEUNDER','RU',if(<SELF> == 'fixedrange','RR',<SELF>))):col;0
+T;1199;Row 1£pv£ Convert from DD/MM/YYYY to YYYYMMDD;;1
+T;1200;Row 19£pv£ RETIRED;;1
+T;1201;SAHRES_UANDJ*PRICE_JPY;;1
+T;1202;Same with database date;;1
+T;1203;SEDOLCHK-check digit;;1
+T;1204;See INDEX_NAME (Mappings);;1
+T;1205;See Mappings;;1
+T;1206;See Mappings (INDEX_CURRENCY);;1
+T;1207;See Mappings [CURRENCY_IDX];;1
+T;1208;See Mappings, avail(SEDOL,CUSIP,ISIN,VENDOR_ID);;1
+T;1209;See Mappings, Pad with 0s to 13 digits;;1
+T;1210;See Mappings£pv£ "DEX"+Scotia ID;;1
+T;1211;See Mappings£pv£ "DEXTR"+Scotia ID;;1
+T;1212;See Mappings£pv£ append "T1";;1
+T;1213;See Mappings£pv£ avail(SEDOL,CUSIP,ISIN,VENDOR_ID);;1
+T;1214;See Mappings£pv£ change "Dow Jones" to "DJ";;1
+T;1215;See Mappings£pv£ Changed "Dow Jones" to DJ;;1
+T;1216;See Mappings£pv£ derive index IDs from filename "<INDEX ID>_Hedged_YYYYMMDD" and Pad with 0s to 13 digits;;1
+T;1217;See Mappings£pv£ For SEDOL, if length < 7, Pad with 0s (7 length) then trim last digit£pv£ For CUSIP, if length < 9, Pad with 0s (9 length) then trim last digit;;1
+T;1218;See Mappings£pv£ INDEX_CURRENCY;logic:map('INDEX_MAPPING','INDEX_ID',<ID_FIELD>,'CURRENCY'):int;0
+T;1219;See Mappings£pv£ INDEX_ID;logic:map('INDEX_MAPPING','VENDOR_ID',VENDOR_ID,'INDEX_ID'):col;0
+T;1220;See Mappings£pv£ INDEX_NAME;logic:map('INDEX_MAPPING','INDEX_ID',<ID_FIELD>,'NAME'):int;0
+T;1221;See Mappings£pv£ Load only if VENDOR_ID="ASEANAS" and "ASEAN40";;1
+T;1222;See Mappings£pv£ Pad with 0s to 12 digits and add "T" in the end;;1
+T;1223;See Mappings£pv£ Remove "(PR)" or "(TR)" or "PR" or "TR";;1
+T;1224;See Mappings£pv£ Source from "CHANGE TYPE" for 20141231-20150410;;1
+T;1225;See Mappings£pv£ VENDOR_ID=ISIN;passthrough:ISIN:col;0
+T;1226;set as "FRAW3XXX";;1
+T;1227;set as "GPRGQMNCI";;1
+T;1228;Set as "MXN";passthrough:'MXN':int;0
+T;1229;Set to "161441";;1
+T;1230;Set to "AUD";passthrough:'AUD':int;0
+T;1231;Set to "BICS";passthrough:'BICS':int;0
+T;1232;Set to "BWP";passthrough:'BWP':col;0
+T;1233;Set to "CAD";passthrough:'CAD':int;0
+T;1234;Set to "CHF";passthrough:'CHF':int;0
+T;1235;Set to "Citigroup Custom 80/20 Emerging Markets Bond Index";;1
+T;1236;Set to "CLIENT_EM_SOV50_LM50U_AUD";;1
+T;1237;Set to "CLP";passthrough:'CLP':col;0
+T;1238;Set to "CNH";passthrough:'CNH':col;0
+T;1239;Set to "CNY";passthrough:'CNY':int;0
+T;1240;Set to "CO_STATIC.AGGRB";passthrough:'CO_STATIC.AGGRB':col;0
+T;1241;Set to "CZK";passthrough:'CZK':col;0
+T;1242;Set to "DE000SLA7AY8";;1
+T;1243;Set to "Denver Workplace Equality Index";;1
+T;1244;Set to "DKK";passthrough:'DKK':col;0
+T;1245;Set to "EUR";passthrough:'EUR':int;0
+T;1246;Set to "EUR" for ITPRBENCH and "USD" for the other;;1
+T;1247;set to "Euromoney 50% Global Mining and 50% Global Energy Index";;1
+T;1248;SET TO "FTSE RAFI All World 3000 Index";;1
+T;1249;Set to "GBP";passthrough:'GBP':int;0
+T;1250;Set to "GICS";passthrough:'GICS':int;0
+T;1251;set to "GLOBME";;1
+T;1252;set to "GLOBMEXX";;1
+T;1253;Set to "GPR7462X";;1
+T;1254;Set to "HKD";passthrough:'HKD':int;0
+T;1255;Set to "ICB";passthrough:'ICB':int;0
+T;1256;Set to "INR";passthrough:'INR':int;0
+T;1257;Set to "JOD";passthrough:'JOD':int;0
+T;1258;Set to "JP Morgan Blend-50% EMBIGD+50% GBI-EM GD both hedge in GBP";;1
+T;1259;Set to "JP Morgan CEMBI Broad Diversified Index";;1
+T;1260;Set to "JP Morgan EMBIG Diversified Custom no CCC";;1
+T;1261;Set to "JPM01628";;1
+T;1262;Set to "JPY";passthrough:'JPY':int;0
+T;1263;Set to "KRW";passthrough:'KRW':col;0
+T;1264;Set to "LOC";passthrough:'LOC':int;0
+T;1265;Set to "LU0916824781";;1
+T;1266;Set to "MYR";passthrough:'MYR':int;0
+T;1267;set to "NAD";passthrough:'NAD':int;0
+T;1268;Set to "NOK";passthrough:'NOK':col;0
+T;1269;Set to "NZD";passthrough:'NZD':int;0
+T;1270;Set to "PHP";passthrough:'PHP':int;0
+T;1271;Set to "Proper Case";;1
+T;1272;Set to "RBICS";passthrough:'RBICS':int;0
+T;1273;Set to "SEK";passthrough:'SEK':int;0
+T;1274;Set to "SGD";passthrough:'SGD':int;0
+T;1275;Set to "Stoxx Global Select Dividend 100";;1
+T;1276;Set to "Thomson Reuters Convertible Bond Global Focus" if VENDOR_ID=1683£pv£ Set to "Thomson Reuters Global Focus Investment Grade" if VENDOR_ID=1596;;1
+T;1277;Set to "TRBC";passthrough:'TRBC':int;0
+T;1278;Set to "TWD";passthrough:'TWD':int;0
+T;1279;Set to "USD";passthrough:'USD':int;0
+T;1280;Set to "VTSCI";passthrough:'VTSCI':int;0
+T;1281;Set to "WAGG0000";;1
+T;1282;Set to "ZAR";passthrough:'ZAR':int;0
+T;1283;Set to blank going forward;;1
+T;1284;Set to Proper Case;passthrough:properCase(<SELF>):int;0
+T;1285;Set to Proper Case (ISSUER)+COUPON_AMOUNT_REAL+"%"+dd-Mmm-YYYY(MATURITY);passthrough:buildFixedIncomeName(<ID_FIELD>,ISSUER,COUPON_AMOUNT_REAL,MATURITY):int;0
+T;1286;Set to Proper Case (ISSUER)+COUPON_AMOUNT+""%""+dd-Mmm-YYYY(MATURITY);;1
+T;1287;Set to Proper Case ISSUER+COUPON_AMOUNT+"%"+dd-Mmm-YYYY(MATURITY)";passthrough:buildFixedIncomeName(<ID_FIELD>,ISSUER,COUPON_AMOUNT,MATURITY):int;0
+T;1288;Set to Proper Case£pv£ for daily EOM history, load col E;;1
+T;1289;Set to Proper Case£pv£ for monthly history, load col E;;1
+T;1290;Set to UPPERCASE;passthrough:upperCase(<SELF>):int;0
+T;1291;Set to YYYYTMMDD;;1
+T;1292;Set to"EUR";passthrough:'EUR':col;0
+T;1293;set where Currency (vendor file header)="USD";;1
+T;1294;set where CURRENCY_ISO="EUR";;1
+T;1295;set where CURRENCY_ISO="GBP";;1
+T;1296;set where CURRENCY_ISO="USD";;1
+T;1297;set where CURRENCY_ISO="USD" and RET_TYPE="1"£pv£ set to "30837";;1
+T;1298;set where CURRENCY_ISO="USD" and RET_TYPE="1"£pv£ set to "30837_RET";;1
+T;1299;Set where IDENTIFIER="BBGCIBBUXALC";;1
+T;1300;Set where IDENTIFIER="BBGCIBCOMXHM";;1
+T;1301;Set where INDEX CODE="SPTD10";;1
+T;1302;Set where INDEX CODE="SPTD15";;1
+T;1303;Set where INDEX CODE="SPTD20";;1
+T;1304;Set where INDEX CODE="SPTD25";;1
+T;1305;Set where INDEX CODE="SPTD30";;1
+T;1306;Set where INDEX CODE="SPTD35";;1
+T;1307;Set where INDEX CODE="SPTD40";;1
+T;1308;Set where INDEX CODE="SPTD45";;1
+T;1309;Set where INDEX CODE="SPTD50";;1
+T;1310;Set where INDEX CODE="SPTD55";;1
+T;1311;Set where INDEX CODE="SPTD60";;1
+T;1312;Set where INDEX CODE="SPTDR10";;1
+T;1313;Set where INDEX CODE="SPTDR15";;1
+T;1314;Set where INDEX CODE="SPTDR20";;1
+T;1315;Set where INDEX CODE="SPTDR25";;1
+T;1316;Set where INDEX CODE="SPTDR30";;1
+T;1317;Set where INDEX CODE="SPTDR35";;1
+T;1318;Set where INDEX CODE="SPTDR40";;1
+T;1319;Set where INDEX CODE="SPTDR45";;1
+T;1320;Set where INDEX CODE="SPTDR50";;1
+T;1321;Set where INDEX CODE="SPTDR55";;1
+T;1322;Set where INDEX CODE="SPTDR60";;1
+T;1323;Set where INDEX CODE="SPTDRI";;1
+T;1324;Set where INDEX CODE="SPTDRRI";;1
+T;1325;Set where INDEX CODE="SPTGT55";;1
+T;1326;Set where INDEX CODE="SPTGT60";;1
+T;1327;Set where IX_Cr="AUD";;1
+T;1328;Set where IX_Cr="CHF";;1
+T;1329;Set where IX_Cr="EUR";;1
+T;1330;Set where IX_Cr="GBP";;1
+T;1331;Set where IX_Cr="JPY";;1
+T;1332;Set where IX_Cr="USD";;1
+T;1333;Set where Return Code="P";;1
+T;1334;Set where Return Code="T";;1
+T;1335;Set where Return_Code="P" and where IX_Cr="AUD";;1
+T;1336;Set where Return_Code="P" and where IX_Cr="CHF";;1
+T;1337;Set where Return_Code="P" and where IX_Cr="EUR";;1
+T;1338;Set where Return_Code="P" and where IX_Cr="GBP";;1
+T;1339;Set where Return_Code="P" and where IX_Cr="JPY";;1
+T;1340;Set where Return_Code="P" and where IX_Cr="USD";;1
+T;1341;Set where Return_Code="T" and where IX_Cr="AUD";;1
+T;1342;Set where Return_Code="T" and where IX_Cr="CHF";;1
+T;1343;Set where Return_Code="T" and where IX_Cr="EUR";;1
+T;1344;Set where Return_Code="T" and where IX_Cr="GBP";;1
+T;1345;Set where Return_Code="T" and where IX_Cr="JPY";;1
+T;1346;Set where Return_Code="T" and where IX_Cr="USD";;1
+T;1347;Set where TRI|PI=PI;;1
+T;1348;Set where TRI|PI=TRI;;1
+T;1349;Set 'Y'=1£pv£ Set 'N'=0;passthrough:substituteRegex(substituteRegex(<SELF>,'Y','1'),'N','0'):col;0
+T;1350;SHARES;passthrough:SHARES:int;0
+T;1351;SHARES / AFACTOR;passthrough:SHARES / AFACTOR:int;0
+T;1352;SHARES / SHARES_UNADJ;passthrough:SHARES / SHARES_UNADJ:int;0
+T;1353;SHARES*PRICE;passthrough:SHARES * PRICE:int;0
+T;1354;SHARES*PRICE_EUR;;0
+T;1355;SHARES*PRICE_LOC;passthrough:SHARES_UNADJ * PRICE_LOC:int;0
+T;1356;SHARES*PRICE_LOC(CONS_ND);passthrough:SHARES * fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'PRICE_LOC',DATE):int;0
+T;1357;SHARES*PRICE_LOC(CONS_PF);passthrough:SHARES * fetchExternalValue('CONS_PF',<CONSTITUENTS_ID>,'PRICE_LOC',DATE):int;0
+T;1358;SHARES*PRICE_PREV;passthrough:SHARES * PRICE_PREV:int;0
+T;1359;SHARES/FFLOAT;passthrough:SHARES / FFLOAT:int;0
+T;1360;SHARES_UNADJ (cons_nd)*AFACTOR;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'SHARES_UNADJ',DATE) * AFACTOR:int;0
+T;1361;SHARES_UNADJ * AFACTOR;passthrough:SHARES_UNADJ * AFACTOR:int;0
+T;1362;SHARES_UNADJ * CFACTOR;passthrough:SHARES_UNADJ * CFACTOR:int;0
+T;1363;SHARES_UNADJ * FFLOAT;passthrough:SHARES_UNADJ * FFLOAT:int;0
+T;1364;SHARES_UNADJ * FFLOAT * CFACTOR;passthrough:SHARES_UNADJ * FFLOAT * CFACTOR:int;0
+T;1365;SHARES_UNADJ(cons)*FFLOAT;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'SHARES_UNADJ',DATE) * FFLOAT:int;0
+T;1366;SHARES_UNADJ(CONS_M)*CFACTOR;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'SHARES_UNADJ',DATE) * CFACTOR:int;0
+T;1367;SHARES_UNADJ(CONS_ND)*CFACTOR;passthrough:fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'SHARES_UNADJ',DATE) * CFACTOR:int;0
+T;1368;SHARES_UNADJ(t)/SHARES_UNADJ(t-1)£pv£ blank if 1;logic:if(<SELF> == '1','',SHARES_UNADJ/SHARES_UNADJ(-1D)):int;0
+T;1369;SHARES_UNADJ(t-1)/SHARES_UNADJ(t)£pv£ blank if 1£pv£ If SHARES_UNADJ(t-1) or SHARES_UNADJ(t) is 0 or Null then Null;;0
+T;1370;SHARES_UNADJ*1million;;1
+T;1371;SHARES_UNADJ*CFACTOR;passthrough:SHARES_UNADJ * CFACTOR:int;0
+T;1372;SHARES_UNADJ*FFLOAT*1million;;1
+T;1373;SHARES_UNADJ*PRICE_LOC;passthrough:SHARES_UNADJ * PRICE_LOC:int;0
+T;1374;SHARES_UNADJ/SHARES;passthrough:SHARES_UNADJ / SHARES:int;0
+T;1375;Should sum to 100;;1
+T;1376;Size Large (L), Medium (M) or Small (S);passthrough:if(<SELF> == 'Large','L',if(<SELF> == 'Medium','M',if(<SELF> == 'Small','S',''),'')):col;0
+T;1377;Source form Cell A1 and convert from DD/MM/YYYY to YYYYMMDD;;1
+T;1378;Source form CURRENCY_ISO;passthrough:CURRENCY_ISO:col|CURRENCY_ISO:int;0
+T;1379;Source form NAME;passthrough:NAME:col|NAME:int;0
+T;1380;Source fr om PRICE;;1
+T;1381;Source fro NAME;;1
+T;1382;Source from "AFACTOR";passthrough:AFACTOR:int;0
+T;1383;Source from "AMOUNT";passthrough:AMOUNT:int;0
+T;1384;Source from "AMOUNT"£pv£ If bond is new, source from CONS_M_FILE;;0
+T;1385;Source from "COUNTRY" for 20141231-20150410;;1
+T;1386;Source from "CURRENCY_ISO";passthrough:CURRENCY_ISO:int;0
+T;1387;Source from "DIVS". If DIVS='', return '';;0
+T;1388;Source from "DIVS_NET";passthrough:DIVS_NET:int;0
+T;1389;Source from "DIVS_TOTAL";passthrough:DIVS_TOTAL:int;0
+T;1390;Source from "DIVS_TOTAL". If DIVS_TOTAL='', return '';passthrough:if(isBlank(DIVS_TOTAL),'',DIVS_TOTAL):int;0
+T;1391;Source from "MCAP";passthrough:MCAP:int;0
+T;1392;Source from "NAME"£pv£ If bond is new, source from CONS_M_FILE;;0
+T;1393;Source from "PCHG_1D";passthrough:PCHG_1D:int;0
+T;1394;Source from "SPECIAL_DIVS";passthrough:SPECIAL_DIVS:int;0
+T;1395;Source from "SPIN_FACTOR";passthrough:SPIN_FACTOR:int;0
+T;1396;Source from "TRET_CHG_1D_GROSS";passthrough:TRET_CHG_1D_GROSS:int;0
+T;1397;Source from "XRATE_LOC_TO_USD";passthrough:XRATE_LOC_TO_USD:int;0
+T;1398;Source from 1st line of CONS_FILE£pv£ See Vendor-Files;;1
+T;1399;Source from 1st line of CONS_ND_FILE£pv£ See Vendor-Files;;1
+T;1400;Source from A1£pv£ Convert from "mm/dd/yyyy" to yyyymmdd;;1
+T;1401;Source from A1£pv£ Convert from DD/MM/YYYY to YYYYMMDD;;1
+T;1402;Source from A2;;1
+T;1403;Source from ACCRUED;passthrough:ACCRUED:int;0
+T;1404;Source from AFACTOR;passthrough:AFACTOR:int;0
+T;1405;Source from AMOUNT;passthrough:AMOUNT:int;0
+T;1406;Source from AMOUNT_UANDJ;;1
+T;1407;Source from AMOUNT_UNADJ;passthrough:AMOUNT_UNADJ:int;0
+T;1408;Source from B1£pv£ Already in YYYYMMDD;;1
+T;1409;Source from B1£pv£ Convert DD-MM-YY to YYYYMMDD;;1
+T;1410;Source from B1£pv£ Convert from YYYY-MM-DD to YYYYMMDD;;1
+T;1411;Source from B1£pv£ YYYYMMDD;;1
+T;1412;Source from B11;;1
+T;1413;Source from B15;;1
+T;1414;Source from B2£pv£ convert to YYYYMMDD;;1
+T;1415;source from B3£pv£ Divide by 1,000,000;;1
+T;1416;Source from cell A1 from 20160617 onwards£pv£ Convert from DD/MM/YYYY;;1
+T;1417;Source from Cell A1£pv£ Convert to YYYYMMD;;1
+T;1418;Source from cell A1-Convert from DD/MM/YYYY to YYYYMMDD;;1
+T;1419;Source from cell B1 and convert from DD.MM.YYYY to YYYYMMDD;;1
+T;1420;Source from Cell B2;;1
+T;1421;Source from cell B2 and multiply by 1000000;;1
+T;1422;source from col F then divide by 1,000,000;;1
+T;1423;source from col G then divide by 1,000,000;;1
+T;1424;Source from column B£pv£ convert MM-DD-YYYY to YYYYMMDD;;1
+T;1425;Source from COUPON_PAID;passthrough:COUPON_PAID:int;0
+T;1426;Source from CSPLIT;passthrough:CSPLIT:int;0
+T;1427;source from CSPLIT_ND(t-1);passthrough:CSPLIT_ND(-1D):int;0
+T;1428;Source from CSPLITS;;1
+T;1429;Source from CURRENCY_IDX;passthrough:CURRENCY_IDX:int;0
+T;1430;Source from CURRENCY_ISO;passthrough:CURRENCY_ISO:int;0
+T;1431;Source from DATE (cons);passthrough:DATE:int;0
+T;1432;Source from DIVS;passthrough:DIVS:int;0
+T;1433;source from DIVS_TOTAL;passthrough:DIVS_TOTAL:int;0
+T;1434;Source from E11;;1
+T;1435;Source from E15;;1
+T;1436;Source from file;;1
+T;1437;Source from file name (1st line);;1
+T;1438;Source from file name, Use YYYYMMDD format;;1
+T;1439;Source from file£pv£ already in yyyymmdd;;1
+T;1440;Source from filename "idxdetail_dbi_tr_YYYYMMDD.csv";;1
+T;1441;Source from filename "idxdetail_hyi_tr_YYYYMMDD.csv";;1
+T;1442;Source from filename "idxdetail_mbi_tr_yyyymmdd.csv";;1
+T;1443;Source from filename "idxdetail_rrbi_tr_YYYYMMDD.csv";;1
+T;1444;Source from filename "idxdetail_sbi_tr_YYYYMMDD.csv";;1
+T;1445;Source from filename DDMMYYYY_SingaporeIDX.csv£pv£ Should be "YYYYMMDD";;1
+T;1446;source from filename 'YYYYMMDD.bond_usdom_returns.txt';;1
+T;1447;Source from filename, convert from YYMMDD to YYYYMMDD;;1
+T;1448;Source from filename: DDMMYYY_SingaporeCON.csv£pv£ Should be "YYYYMMDD";;1
+T;1449;Source from first line£pv£ Convert to YYYYMMDD;;1
+T;1450;Source from https://index.db.com/dbiqweb2/index/eonia_total_return;;1
+T;1451;Source from ISIN;passthrough:ISIN:col;0
+T;1452;Source from ISIN_TRI;passthrough:ISIN_TRI:int;0
+T;1453;Source from MCAP;passthrough:MCAP:int;0
+T;1454;Source from NAME;passthrough:NAME:int;0
+T;1455;Source from NAME (CONS_FILE);;1
+T;1456;Source from OFACTOR;passthrough:OFACTOR:int;0
+T;1457;source from PCHG_1D;passthrough:PCHG_1D:int;0
+T;1458;Source from PRICE;passthrough:PRICE:int;0
+T;1459;Source from PRICE_BID/100£pv£if bond is new, populate with PRICE/100 from the EOM components file;;0
+T;1460;Source from PRICE_BID/100£pv£if bond is new, populate with PRICE/100 from the EOM components file, else, PRICE_BID/100;;1
+T;1461;Source from Row 12;;1
+T;1462;Source from SEDOL;passthrough:SEDOL:int;0
+T;1463;Source from SHARES;passthrough:SHARES:int;0
+T;1464;Source from SHARES_TRI;passthrough:SHARES_TRI:int;0
+T;1465;Source from SPLIT_FACTOR;passthrough:SPLIT_FACTOR:int;0
+T;1466;Source from the first line of each index section.;;1
+T;1467;Source from TICKER and See Mappings;passthrough:TICKER:int;0
+T;1468;Source from TOTAL_DIVS;passthrough:TOTAL_DIVS:int;0
+T;1469;source from TRET_CHG_1D_GROSS;passthrough:TRET_CHG_1D_GROSS:int;0
+T;1470;Source from TRET_CHG_1D_GROSS*100;;1
+T;1471;Source from TRET_CHG_1D_GROSS_LOC;passthrough:TRET_CHG_1D_GROSS_LOC:int;0
+T;1472;Source from XRATE_LOC_TO_GBP;passthrough:XRATE_LOC_TO_GBP:int;0
+T;1473;Sourced from AMOUNT;passthrough:AMOUNT:int;0
+T;1474;Sourced from CURRENCY_ISO;passthrough:CURRENCY_ISO:int;0
+T;1475;Sourced from iboxx_albi_php_dom_fe_eod_underlyings_YYYYMMDD.csv (D-1);;1
+T;1476;Sourced from IDX_FILE;;1
+T;1477;Sourced from NAME;passthrough:NAME:int;0
+T;1478;SPECIAL DIVS;passthrough:SPECIAL_DIVS:int;0
+T;1479;SPECIAL_DIV_FACTOR*PRICE;passthrough:SPECIAL_DIV_FACTOR * PRICE:int;0
+T;1480;SPECIAL_DIV_FACTOR*PRICE_LOC;passthrough:SPECIAL_DIV_FACTOR * PRICE_LOC:int;0
+T;1481;SPECIAL_DIVS_LOC*XRATE_LOC_TO_AUD;;0
+T;1482;SPECIAL_DIVS_LOC*XRATE_LOC_TO_EUR;passthrough:SPECIAL_DIVS_LOC * XRATE_LOC_TO_EUR:int;0
+T;1483;SPECIAL_DIVS_LOC*XRATE_LOC_TO_JPY;passthrough:SPECIAL_DIVS_LOC * XRATE_LOC_TO_JPY:int;0
+T;1484;SPECIAL_DIVS_LOC*XRATE_LOC_TO_USD;passthrough:SPECIAL_DIVS_LOC * XRATE_LOC_TO_USD:int;0
+T;1485;SPECIAL_DIVS_LOC*XRATE_LOC_TO_ZAR;passthrough:SPECIAL_DIVS_LOC * XRATE_LOC_TO_ZAR:int;0
+T;1486;SPECIAL_DIVS_NET_LOC*XRATE_LOC_TO_AUD;;0
+T;1487;SPECIAL_DIVS_NET_LOC*XRATE_LOC_TO_EUR;passthrough:SPECIAL_DIVS_NET_LOC * XRATE_LOC_TO_EUR:int;0
+T;1488;SPECIAL_DIVS_NET_LOC*XRATE_LOC_TO_JPY;passthrough:SPECIAL_DIVS_NET_LOC * XRATE_LOC_TO_JPY:int;0
+T;1489;SPECIAL_DIVS_NET_LOC*XRATE_LOC_TO_USD;passthrough:SPECIAL_DIVS_NET_LOC * XRATE_LOC_TO_USD:int;0
+T;1490;SPECIAL_DIVS_NET_LOC*XRATE_LOC_TO_ZAR;passthrough:SPECIAL_DIVS_NET_LOC * XRATE_LOC_TO_ZAR:int;0
+T;1491;SPECIAL_DIVS+DIVS;passthrough:SPECIAL_DIVS + DIVS:int;0
+T;1492;SPIN_MCAP_UNADJ_LOC/MCAP_UNADJ_LOC;passthrough:SPIN_MCAP_UNADJ_LOC / MCAP_UNADJ_LOC:int;0
+T;1493;SPIN_MCAP_UNADJ_USD/MCAP_UNADJ_USD;passthrough:SPIN_MCAP_UNADJ_USD / MCAP_UNADJ_USD:int;0
+T;1494;SPLIT;passthrough:SPLIT:int;0
+T;1495;SPLIT_FACTOR;passthrough:SPLIT_FACTOR:int;0
+T;1496;SPLIT_FACTOR_ND(t-1);logic:SPLIT_FACTOR_ND(-1D):int;0
+T;1497;Strip "." and pad to 8 digits with prepending 0s;passthrough:LeftPad(substituteRegex(<SELF>,'\.',''),'0',8):col;0
+T;1498;Strip white space£pv£/1000000;;1
+T;1499;sum all constituents MCAP_EUR;logic:sum(MCAP_EUR):int;0
+T;1500;sum all constituents MCAP_USD;logic:sum(MCAP_USD):int;0
+T;1501;SUM if more than one entry exists;;1
+T;1502;SUM OF DIVS£pv£ 0 by default;;0
+T;1503;SUM OF MCAP;logic:sum(MCAP):int;0
+T;1504;SUM values if more than one entry exists;;0
+T;1505;Surce from NAME;;1
+T;1506;the index mapping here is to prefix "ML" to the file header "Index" in order to load the 2 fields to the database for the 44 indices present;;1
+T;1507;to be populated starting 20160613;;1
+T;1508;To: Between 0 and 1 for Growth and Value Weights/0 to 3.0 for Pure Indices;;1
+T;1509;TOTAL_RETURN/WEIGHTS;passthrough:TOTAL_RETURN / WEIGHTS:int;0
+T;1510;TOTAL_RETURN_GROSS_LOC*XRATE_LOC_TO_CHF;passthrough:TOTAL_RETURN_GROSS_LOC * XRATE_LOC_TO_CHF:int;0
+T;1511;TOTAL_RETURN_GROSS_LOC*XRATE_LOC_TO_EUR;passthrough:TOTAL_RETURN_GROSS_LOC * XRATE_LOC_TO_EUR:int;0
+T;1512;TOTAL_RETURN_GROSS_LOC*XRATE_LOC_TO_GBP;;0
+T;1513;TOTAL_RETURN_GROSS_LOC*XRATE_LOC_TO_USD;passthrough:TOTAL_RETURN_GROSS_LOC * XRATE_LOC_TO_USD:int;0
+T;1514;TOTAL_RETURN_NET_LOC*XRATE_LOC_TO_EUR;passthrough:TOTAL_RETURN_NET_LOC * XRATE_LOC_TO_EUR:int;0
+T;1515;TOTAL_RETURN_NET_LOC*XRATE_LOC_TO_USD;passthrough:TOTAL_RETURN_NET_LOC * XRATE_LOC_TO_USD:int;0
+T;1516;TRBC;passthrough:'TRBC':int;0
+T;1517;TRET_CHG_1D_GROSS;passthrough:TRET_CHG_1D_GROSS:int;0
+T;1518;TRET_CHG_1D_GROSS*100;passthrough:TRET_CHG_1D_GROSS * 100:int;0
+T;1519;TRET_CHG_1D_GROSS/100;passthrough:TRET_CHG_1D_GROSS / 100:int;0
+T;1520;TRET_CHG_1D_NET*100;;0
+T;1521;TRET_CHG_1D_NET_USD;passthrough:TRET_CHG_1D_NET_USD:int;0
+T;1522;trim digits starting from "_" (underscores);;1
+T;1523;USD;passthrough:'USD':int;0
+T;1524;use "^=WMR_EXCHANGE_RATE(USD,EUR,DATE)";passthrough:FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',USD,',DATE,')£pv£')):int;0
+T;1525;Use ^=SBF_CURRENCY(#1,,,"CODE") to derive;passthrough:FetchFromFqlCodeWithSymbol(append('SBF_CURRENCY(',UPDATE_DATE,',,,&apos£pv£CODE&apos£pv£)£pv£'),PERM_ID):int;0
+T;1526;use ACCRUED(-1D)+COUPON_ADJ(-1D);logic:ACCRUED(-1D) + COUPON_ADJ(-1D):int;0
+T;1527;Use FactSet formula "^=FI_NAME(ISS)";passthrough:FetchFromFqlCodeWithSymbol('FI_NAME(ISS)£pv£',IDENTIFIER):int;0
+T;1528;Use FactSet Perm ID£pv£ ^=FSYM_SECURITY_PERM_ID('DEFAULT');;1
+T;1529;use PRICE(-1D) or PRICE_BID(-1D);logic:avail(PRICE(-1D),PRICE_BID(-1D)):int;0
+T;1530;use PRICE(-1D) or PRICE_BID(-1D)£pv£ Sourced from iboxx_b160302_sgd_eod_underlyings_YYYYMMDD.csv (D-1);;1
+T;1531;Value in Mln.;;1
+T;1532;VENDOR_ID;passthrough:VENDOR_ID:int;0
+T;1533;VENDOR_ID£pv£ Prepend "S" and Pad 0s to 8 digits;;1
+T;1534;WEIGHT/((MCAP/Sum of MCAP)*100);logic:WEIGHT / ((MCAP / sum(MCAP)) * 100):int;0
+T;1535;WEIGHT/(100*MCAP_UNADJ_USD/SUM(MCAP_UNADJ_USD));logic:WEIGHT / (100 * MCAP_UNADJ_USD / sum(MCAP_UNADJ_USD)):int;0
+T;1536;WEIGHT/(MCAP/Sum of MCAP);logic:WEIGHT / (MCAP / sum(MCAP)):int;0
+T;1537;WEIGHT_BASE/WEIGHT;;0
+T;1538;WeightAdjustedT0*100;;1
+T;1539;WMR_EXCHANGE_RATE(CURRENCY_ISO,USD,DATE);passthrough:FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',USD,',DATE,')£pv£')):int;0
+T;1540;WMR_EXCHANGE_RATE(USD,CAD,0);passthrough:FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',CAD,',DATE,')£pv£')):int;0
+T;1541;WMR_EXCHANGE_RATE(USD,EUR,DATE);passthrough:FetchFromFqlCodeDbl(append('WMR_EXCHANGE_RATE(',CURRENCY_ISO,',EUR,',DATE,')£pv£')):int;0
+T;1542;Write the value 1;;1
+T;1543;XRATE_LOC_TO_EUR (cons)*AMOUNT_LOC;;1
+T;1544;XRATE_LOC_TO_EUR (cons)*MCAP_BASE_LOC;passthrough:XRATE_LOC_TO_EUR * MCAP_BASE_LOC:int;0
+T;1545;XRATE_LOC_TO_EUR (cons)*MCAP_REAL_LOC;;1
+T;1546;XRATE_LOC_TO_EUR*AMOUNT_LOC;;1
+T;1547;XRATE_LOC_TO_EUR*MCAP_LOC;passthrough:XRATE_LOC_TO_EUR * MCAP_LOC:int;0
+T;1548;XRATE_LOC_TO_EUR*MCAP_REAL_LOC;;1
+T;1549;XRATE_LOC_TO_GBP (cons)*AMOUNT_LOC;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'XRATE_LOC_TO_GBP',DATE) * AMOUNT_LOC:int;0
+T;1550;XRATE_LOC_TO_GBP (cons)*MCAP_BASE_LOC;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'XRATE_LOC_TO_GBP',DATE) * MCAP_BASE_LOC:int;0
+T;1551;XRATE_LOC_TO_GBP (cons)*MCAP_REAL_LOC;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'XRATE_LOC_TO_GBP',DATE) * MCAP_REAL_LOC:int;0
+T;1552;XRATE_LOC_TO_GBP*AMOUNT_LOC;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'XRATE_LOC_TO_GBP',DATE) * AMOUNT_LOC:int;0
+T;1553;XRATE_LOC_TO_GBP*MCAP_LOC;passthrough:XRATE_LOC_TO_GBP * MCAP_LOC:int;0
+T;1554;XRATE_LOC_TO_GBP*MCAP_REAL_LOC;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'XRATE_LOC_TO_GBP',DATE) * MCAP_REAL_LOC:int;0
+T;1555;XRATE_LOC_TO_USD*(1/(XRATE_FILE)USD Exchange Rate=GBP);;1
+T;1556;XRATE_LOC_TO_USD*XRATE_USD_TO_CAD;passthrough:XRATE_LOC_TO_USD * XRATE_USD_TO_CAD:int;0
+T;1557;YYYYMM99;;1
+T;1558;YYYYMMDD format;;1
+T;1559;YYYY-MM-DD to YYYYMMDD;;1
+T;1561;Already in YYYYMMDD;passthrough:convertToInt(<SELF>):int;0
+T;1562;MCAP_UNADJ_USD/MCAP_UNADJ_EUR;passthrough:MCAP_UNADJ_USD / MCAP_UNADJ_EUR:int;0
+T;1577;(DIVS_NET * SPLIT_FACTOR) converted from DIVS_ISO to CURRENCY_ISO;;0
+T;1578;(DIVS * SPLIT_FACTOR) converted from DIVS_ISO to CURRENCY_ISO;;0
+T;1585;If (CORP_ACTION_CODE="RIGHTS_OFFERING", NEW PRICE/CURRENT PRICE, Null);;1
+T;1586;Adjusts historically based on SPLIT_FACTOR;;1
+T;1588;PRICE_USD of SPIN_STOCK_KEY;;1
+T;1589;MARKET_UNADJ_USD for SPIN_STOCK_KEY symbol, else NA;;1
+T;1591;SPIN_MCAP_UNADJ_USD / MCAP_UNADJ_USD;;0
+T;1592;Avail(PRICE_LOC_ND(t),PRICE_LOC(t));passthrough:avail(fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'PRICE_LOC',DATE),PRICE_LOC):int;0
+T;1595;DIVS_LOC_TOTAL;passthrough:DIVS_LOC_TOTAL:int;0
+T;1597;((((PRICE_USD + SPIN_DIV_USD ) + DIVS_NET_USD ) / PRICE_USD univ=CONS_ND from t-1 ) - 1) * 100;;0
+T;1598;((((PRICE_LOC + SPIN_DIV_LOC ) + DIVS_LOC ) / PRICE_LOC univ=CONS_ND from t-1 ) - 1) * 100;;0
+T;1600;Should be 2D;;1
+T;1601;CURRENCY_ISO_ND else CURRENCY_ISO;;1
+T;1602;If data is present for SPLIT_FACTOR, write date in YYYYMMDD;;1
+T;1603;If (CORP_ACTION_CODE="STOCK SPLIT" or "REVERSE SPLIT", NEW PRICE/CURRENT PRICE, Null);;1
+T;1604;If (CORP_ACTION_CODE="PRICE ADJUSTMENT", NEW PRICE/CURRENT PRICE, Null);;1
+T;1607;PRICE of SPIN_STOCK_KEY;;1
+T;1610;SPIN_MCAP_UNADJ_LOC / MCAP_UNADJ_LOC;passthrough:SPIN_MCAP_UNADJ_LOC / MCAP_UNADJ_LOC:int;0
+T;1613;TRET_CHG_1D_GROSS_LOC;passthrough:TRET_CHG_1D_GROSS_LOC:int;0
+T;1614;TRET_CHG_1D_NET_LOC;passthrough:TRET_CHG_1D_NET_LOC:int;0
+T;1616;((((PRICE_LOC + SPIN_DIV_LOC ) + DIVS_NET_LOC ) / PRICE_LOC univ=CONS_ND from t-1 ) - 1) * 100;;0
+T;1619;DIVS_LOC + SPECIAL_DIVS_LOC;passthrough:DIVS_LOC + SPECIAL_DIVS_LOC:int;0
+T;1620;TRET_CHG_1D_GROSS_LOC * 100;passthrough:TRET_CHG_1D_GROSS_LOC * 100:int;0
+T;1621;(((PA_PRICE(t)+PA_DIVS)/PA_PRICE(t-1))-1)*100;passthrough:(((PA_PRICE + PA_DIVS) / PA_PRICE(-1D)) - 1) * 100:int;0
+T;1622;Source from XRATE_LOC_TO_USD;passthrough:XRATE_LOC_TO_USD:int;0
+T;1623;If ACCRUED (t-1) > ACCRUED (0), (ACCRUED (t-1)-ACCRUED (0))/100, else 0;logic:if(ACCRUED(-1D) gt ACCRUED,(ACCRUED(-1D) - ACCRUED) / 100,0):int;0
+T;1627;Source from filename;;1
+T;1634;SHARES/SHARES_UNADJ;passthrough:SHARES / SHARES_UNADJ:int;0
+T;1637;Divide by 1000000;passthrough:<SELF> / 1000000:int;0
+T;1638;Please refer to Mappings;;1
+T;1639;DATE+1D;passthrough:UPDATE_DATE:int;0
+T;1640;If CURRENCY_ISO = "GBX" or "BWT", divide by 100;;0
+T;1641;IF ACCRUED(0)<ACCRUED(-1), then PA_COUPON=Accrued interest (-1);logic:(-1D):int;0
+T;1647;load only 9th to 12th digit;;0
+T;1648;load only 13th to 16th digit;;0
+T;1649;Set to USD;;1
+T;1655;*100;;1
+T;1656;DIVS + SPECIAL_DIVS;passthrough:DIVS + SPECIAL_DIVS:int;0
+T;1674;Prepend "S" and pad 0s up to 8 digit;;1
+T;1675;N_DATE-1 Day;;1
+T;1683;PRICE_LOC*SHARES_UNADJ;passthrough:PRICE_LOC * SHARES_UNADJ:int;0
+T;1692;GICS;;1
+T;1707;PRICE_USD of STOCK_KEY_SPIN;;0
+T;1724;PRICE of STOCK_KEY_SPIN;;0
+T;1747;Omit "D"£pv£ load only first 4 digits;;1
+T;1752;PRICE_LOC*XRATE_LOC_TO_USD;passthrough:PRICE_LOC * XRATE_LOC_TO_USD:int;0
+T;1759;If (ACTION TYPE="Spin-Off",load SPIN/TARGET STOCK KEY ("S"+pad zero+SPIN/TARGET STOCK KEY = LEN(8)), else NA;;1
+T;1766;load only 5th to 8th digit;;0
+T;1772;See mappings sheet;;1
+T;1773;FFLOAT*OFACTOR;;0
+T;1774;PRICE_LOC*SHARES;passthrough:PRICE_LOC * SHARES:int;0
+T;1780;( (DIVS_NET * SPLIT_FACTOR) converted from DIVS_ISO to CURRENCY_ISO ) + PA_SPECIAL_DIVS;;0
+T;1781;( (DIVS * SPLIT_FACTOR) converted from DIVS_ISO to CURRENCY_ISO ) + PA_SPECIAL_DIVS;;0
+T;1784;MARKET_UNADJ_AUD for SPIN_STOCK_KEY symbol, else NA;;1
+T;1785;SPIN_MCAP_UNADJ_AUD / MCAP_UNADJ_AUD;passthrough:SPIN_MCAP_UNADJ_AUD / MCAP_UNADJ_AUD:int;0
+T;1786;PRICE_AUD of SPIN_STOCK_KEY;;1
+T;1787;DIVS_TOTAL_LOC;passthrough:DIVS_TOTAL_LOC:int;0
+T;1813;((((PRICE_AUD + SPIN_DIV_AUD ) + DIVS_AUD ) / PRICE_AUD univ=CONS_ND from t-1 ) - 1) * 100;;0
+T;1815;((((PRICE + SPIN_DIV ) + DIVS ) / PRICE univ=CONS_ND from t-1 ) - 1) * 100;;0
+T;1819;SPIN_MCAP_UNADJ_AUD/MCAP_UNADJ_AUD;passthrough:SPIN_MCAP_UNADJ_AUD / MCAP_UNADJ_AUD:int;0
+T;1854;PRICE_AUD*SPIN_FACTOR_AUD;passthrough:PRICE_AUD * SPIN_FACTOR_AUD:int;0
+T;1857;MCAP_UNADJ for SPIN_STOCK_KEY symbol, else NA;;1
+T;1862;SPIN_MCAP_UNADJ / MCAP_UNADJ;;0
+T;1909;AMOUNT_UNADJ*AFACTOR;passthrough:AMOUNT_UNADJ * AFACTOR:int;0
+T;1911;MCAP_UNADJ/XRATE_LOC_TO_XXX;;1
+T;1916;AMOUNT_UNADJ_XXX*AFACTOR;;1
+T;1918;AMOUNT_UNADJ_LOC*XRATE_LOC_TO_XXX;;1
+T;1919;Set to XXX;;1
+T;1920;AMOUNT_UNADJ_LOC*AFACTOR;passthrough:AMOUNT_UNADJ_LOC * AFACTOR:int;0
+T;1937;TRET_CHG_1D_NET;passthrough:TRET_CHG_1D_NET:int;0
+T;1940;MCAP_UNADJ_LOC for SPIN_STOCK_KEY symbol, else NA;;1
+T;1943;((((PRICE_AUD + SPIN_DIV_AUD ) + DIVS_NET_AUD ) / PRICE_AUD univ=CONS_ND from t-1 ) - 1) * 100;;0
+T;1945;((((PRICE + SPIN_DIV ) + DIVS_NET ) / PRICE univ=CONS_ND from t-1 ) - 1) * 100;;0
+T;2007;PA_PRICE from CONS;passthrough:PA_PRICE:int;0
+T;2008;source from (MEMB)SHARES;;1
+T;2010;source from (CONS)CURRENCY_ISO;passthrough:CURRENCY_ISO:int;0
+T;2014;source from (MEMB)AFACTOR;;1
+T;2016;source from (CONS)CSPLIT;passthrough:CSPLIT:int;0
+T;2022;TRET_CHG_1D_GROSS_USD;passthrough:TRET_CHG_1D_GROSS_USD:int;0
+T;2024;Convert from YYYY-MM-DD;;1
+T;2025;Convert from YYYY.MM.DD;;1
+T;2037;Remove "D", Remove first 4 and last 8 digits;;1
+T;2039;Pad 0's to 7 digit;;1
+T;2041;Pad 0's to 9 digit;;1
+T;2043;Se to EUR;;1
+T;2044;Prepend "S" then pad 0s up to 8 digit;;1
+T;2046;Remove "D", Remove first 8 and last 4 digits;;1
+T;2048;Pad 0's to 7 digit£pv£ remove check digit;;1
+T;2050;Pad 0's to 9 digit£pv£ remove check digit;;1
+T;2053;DIVS(t)*XRATE_LOC_TO_USD(t)£pv£ Write 0 if DIVS is 0;passthrough:DIVS * XRATE_LOC_TO_USD:int;0
+T;2054;Write 0 if DIVIDEND is blank;passthrough:if(isBlank(DIVIDEND), 0, ''):int;0
+T;2073;DIVS_USD;passthrough:DIVS_USD:int;0
+T;2076;Alreaday in yyyymmdd;;1
+T;2087;PRICE_LOC / XRATE_LOC_TO_GBP;passthrough:PRICE_LOC / XRATE_LOC_TO_GBP:int;0
+T;2091;TRET_CHG_1D_NET_GBP;passthrough:TRET_CHG_1D_NET_GBP:int;0
+T;2100;PRICE_GBP*SPIN_FACTOR_LOC;passthrough:PRICE_GBP * SPIN_FACTOR_LOC:int;0
+T;2105;DIVS_NET*XRATE_LOC_TO_GBP;passthrough:DIVS_NET * XRATE_LOC_TO_GBP:int;0
+T;2108;PRICE_GBP*SPIN_FACTOR_GBP;passthrough:PRICE_GBP * SPIN_FACTOR_GBP:int;0
+T;2110;((((PRICE_LOC+SPIN_DIV_LOC )+DIV_LOC )/PRICE_LOC univ=CONS_ND from t-1 )-1)*100;;0
+T;2111;((((PRICE_GBP+SPIN_DIV_GBP )+DIV_GBP )/PRICE_GBP univ=CONS_ND from t-1 )-1)*100;;0
+T;2114;DIVS*XRATE_LOC_TO_GBP;passthrough:DIVS_NET * XRATE_LOC_TO_GBP:int;0
+T;2116;PCHG_1D_GBP*100;passthrough:PCHG_1D_GBP * 100:int;0
+T;2119;SPIN_MCAP_UNADJ_GBP/MCAP_UNADJ_GBP;passthrough:SPIN_MCAP_UNADJ_GBP / MCAP_UNADJ_GBP:int;0
+T;2122;((((PRICE_GBP+SPIN_DIV_GBP )+DIV_NET_GBP )/PRICE_GBP univ=CONS_ND from t-1 )-1)*100;;0
+T;2124;((TOTAL_RETURN_GROSS(0) / TOTAL_RETURN_GROSS(-1))-1)*100;passthrough:((TOTAL_RETURN_GROSS / TOTAL_RETURN_GROSS(-1D)) - 1) * 100:int;0
+T;2137;((TOTAL_RETURN_GROSS_CHF(0) / TOTAL_RETURN_GROSS_CHF(-1))-1)*100;passthrough:((TOTAL_RETURN_GROSS_CHF / TOTAL_RETURN_GROSS_CHF(-1D)) - 1) * 100:int;0
+T;2139;((TOTAL_RETURN_GROSS_CHF(0)/TOTAL_RETURN_GROSS_CHF (-1))-1)/100;passthrough:((TOTAL_RETURN_GROSS_CHF / TOTAL_RETURN_GROSS_CHF(-1D)) - 1) / 100:int;0
+T;2140;MCAP_UNADJ_USD/MCAP_UNADJ_AUD;passthrough:MCAP_UNADJ_USD / MCAP_UNADJ_AUD:int;0
+T;2144;Set to "BRL";passthrough:'BRL':int;0
+T;2145;MCAP_UNADJ_USD/MCAP_UNADJ_BRL;passthrough:MCAP_UNADJ_USD / MCAP_UNADJ_BRL:int;0
+T;2146;MCAP_UNADJ_USD/MCAP_UNADJ_CAD;passthrough:MCAP_UNADJ_USD / MCAP_UNADJ_CAD:int;0
+T;2147;MCAP_UNADJ_USD/MCAP_UNADJ_CNY;passthrough:MCAP_UNADJ_USD / MCAP_UNADJ_CNY:int;0
+T;2149;Load only if DQ Expression = DB(BIGI,US,1_10,RM);;1
+T;2156;Load only if DQ Expression = DB(BIGI,US,1_10,TR,,USD);;1
+T;2158;Load only if DQ Expression = DB(BIGI,US,1_10,TR,,EUR);;1
+T;2159;Load only if Column B = DB(BIGI,US,1_10,TR,,LOC);;1
+T;2163;Load only if DQ Expression = DB(BIGI,US,1_10,TR,1DR,LOC);;1
+T;2165;Load only if DQ Expression = DB(BIGI,US,1_10,TR,YTDR,LOC);;1
+T;2167;Load only if DQ Expression = DB(BIGI,US,1_10,TR,MTDR,EUR);;1
+T;2169;Load only if DQ Expression = DB(BIGI,US,1_10,YD);;1
+T;2170;Load only if DQ Expression = DB(BIGI,US,1_10,PO);;1
+T;2173;Load only if DQ Expression = DB(BIGI,US,1_10,CN);;1
+T;2174;Load only if DQ Expression = DB(BIGI,US,1_10,MD);;1
+T;2177;Load only if DQ Expression = DB(BIGI,US,1_10,MV,,EUR);;1
+T;2183;Load only if DQ Expression = DB(BIGI,US,1_10,TR,MTDR,USD);;1
+T;2192;MCAP_UNADJ_USD/MCAP_UNADJ_HKD;passthrough:MCAP_UNADJ_USD / MCAP_UNADJ_HKD:int;0
+T;2230;Load only if DQ Expression = DB(BIGI,US,1_10,TR,MTDR,LOC);;1
+T;2232;Load only if DQ Expression = DB(BIGI,US,1_10,TR,1DR,EUR);;1
+T;2238;Load only if DQ Expression = DB(BIGI,US,1_10,CX);;1
+T;2241;Load only if DQ Expression = DB(BIGI,US,1_10,MV,,USD);;1
+T;2242;Load only if DQ Expression = DB(BIGI,US,1_10,MV);;1
+T;2245;Load only if DQ Expression = DB(BIGI,US,1_10,TR,,LOC);;1
+T;2247;Load only if DQ Expression = DB(BIGI,US,1_10,TR,1DR,USD);;1
+T;2249;Load only if DQ Expression = DB(BIGI,US,1_10,TR,YTDR,USD);;1
+T;2255;Load only if DQ Expression = DB(BIGI,US,1_10,TR,YTDR,EUR);;1
+T;2280;MCAP_UNADJ_USD/MCAP_UNADJ_INR;passthrough:MCAP_UNADJ_USD / MCAP_UNADJ_INR:int;0
+T;2399;PRICE_AUD*SPIN_FACTOR_USD;passthrough:PRICE_AUD * SPIN_FACTOR_USD:int;0
+T;2401;SPIN_MCAP_UNADJ_LOC/MCAP_UNADJ_USD;passthrough:SPIN_MCAP_UNADJ_LOC / MCAP_UNADJ_USD:int;0
+T;2402;MCAP_UNADJ_EUR for SPIN_STOCK_KEY symbol, else NA;;1
+T;2404;PRICE_EUR of SPIN_STOCK_KEY;;1
+T;2405;PRICE_AUD*SPIN_FACTOR_EUR;passthrough:PRICE_AUD * SPIN_FACTOR_EUR:int;0
+T;2407;SPIN_MCAP_UNADJ_LOC/MCAP_UNADJ_EUR;passthrough:SPIN_MCAP_UNADJ_LOC / MCAP_UNADJ_EUR:int;0
+T;2410;SPIN_MCAP_UNADJ_USD/MCAP_UNADJ_LOC;passthrough:SPIN_MCAP_UNADJ_USD / MCAP_UNADJ_LOC:int;0
+T;2419;"MV_"+TICKER;;1
+T;2422;Adjust ~t-2 cumulatively for SPLIT_FACTOR;;0
+T;2423;Adjust ~t-1 cumulatively for SPLIT_FACTOR;;0
+T;2426;Adjusts t-2 historically based on SPLIT_FACTOR£pv£ Default value is 1;;0
+T;2427;Adjusts t-1 historically based on SPLIT_FACTOR£pv£ Default value is 1;;0
+T;2428;Adjusts historically on t-2 day based on SPLIT_FACTOR£pv£ Default value is 1;;0
+T;2431;Adjusts historically starting with t-1 day based on SPLIT_FACTOR£pv£ Default value is 1;;0
+T;2432;-1D;#N/A;1
+T;2436;TRET_CHG_1D_NET_EUR;passthrough:TRET_CHG_1D_NET_EUR:int;0
+T;2437;PRICE_EUR*SPIN_FACTOR_LOC;passthrough:PRICE_EUR * SPIN_FACTOR_LOC:int;0
+T;2439;((((PRICE_EUR+SPIN_DIV_EUR )+DIV_NET_EUR )/PRICE_EUR univ=CONS_ND from t-1 )-1)*100;;0
+T;2441;DIVS_NET*XRATE_LOC_TO_EUR;;0
+T;2461;DIVS*XRATE_LOC_TO_EUR;passthrough:DIVS_EUR * XRATE_LOC_TO_EUR:int;0
+T;2463;PCHG_1D_EUR*100;passthrough:PCHG_1D_EUR * 100:int;0
+T;2466;SPIN_MCAP_UNADJ_EUR/MCAP_UNADJ_EUR;passthrough:SPIN_MCAP_UNADJ_EUR / MCAP_UNADJ_EUR:int;0
+T;2490;Convert from YYYY.MM.DD to YYYYMMDD;passthrough:substituteRegex(<SELF>,'.',''):col;0
+T;2494;"USD"+TICKER;passthrough:append('USD', TICKER):int;0
+T;2495;"USD"+VENDOR_ID;passthrough:append('USD', VENDOR_ID):int;0
+T;2501;PRICE +ACCRUED;;1
+T;2502;TOTAL RETURN 1 DAY;;1
+T;2507;SHARES_UNADJ*AFACTOR;passthrough:fetchExternalValue(<CONS_UNIV>,<CONSTITUENTS_ID>,'SHARES_UNADJ',DATE) * AFACTOR:int;0
+T;2510;FFLOAT*CFACTOR;passthrough:FFLOAT * CFACTOR:int;0
+T;2513;If ISO Currency Code="GBX", Divide by 100;;1
+T;2514;"DA_"+VENDOR_ID;#N/A;0
+T;2515;DIVS*XRATE_GBP_TO_LOC;passthrough:DIVS * XRATE_GBP_TO_LOC:int;0
+T;2516;DIVS_NET*XRATE_GBP_TO_LOC;passthrough:DIVS_NET * XRATE_GBP_TO_LOC:int;0
+T;2517;IF(CORP_ACTION_CODE(t)=="CX",IF(SPECIAL_DIVS(t)>0,SHARES_UNADJ(t-1)/SHARES_UNADJ(t),1),IF(CORP_ACTION_CODE(t)=="CP",if(SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1);logic:if(CORP_ACTION_CODE == 'CX', if(SPECIAL_DIVS > 0, SHARES_UNADJ(-1D) / SHARES_UNADJ, 1), if(CORP_ACTION_CODE == 'CP', if(SPECIAL_DIVS > 0, SPLIT_FACTOR , 1), 1)):int;0
+T;2518;Convert from ddmmmyyyy to yyyymmdd;passthrough:convertToInt(convertDateYYYYMMDD(<SELF>,'DDMMMYYYY')):col;0
+T;2520;MCAP_UNADJ_USD for SPIN_STOCK_KEY symbol, else NA;;1
+T;2521;avail(CURRENCY_ISO_ND(t),CURRENCY_ISO(t));passthrough:avail(fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'CURRENCY_ISO',DATE),CURRENCY_ISO):int;0
+T;2526;SHARES_UNANDJ*PRICE_JPY;passthrough:SHARES_UNANDJ * PRICE_JPY:int;0
+T;2527;(PRICE_JPY (t)/PRICE_JPY(t-1))-1;logic:((PRICE_JPY / PRICE_JPY(-1D)) - 1:int;0
+T;2538;((((PRICE_JPY + SPIN_DIV_JPY ) + DIVS_JPY ) / PRICE_JPY univ=CONS_ND from t-1 ) - 1) * 100;;0
+T;2540;SPIN_MCAP_UNADJ_JPY/MCAP_UNADJ_JPY;passthrough:SPIN_MCAP_UNADJ_JPY / MCAP_UNADJ_JPY:int;0
+T;2541;MCAP_UNADJ_JPY for SPIN_STOCK_KEY symbol, else NA;;1
+T;2542;PRICE_JPY*SPIN_FACTOR_JPY;passthrough:PRICE_JPY * SPIN_FACTOR_JPY:int;0
+T;2546;PRICE_USD*SPIN_FACTOR_USD;passthrough:PRICE_USD * SPIN_FACTOR_USD:int;0
+T;2549;-1D£pv£ Convert to YYYYMMDD;#N/A;1
+T;2550;PRICE + ACCRUED;passthrough:PRICE + ACCRUED:int;0
+T;2558;See Index Key Mapping;;1
+T;2559;Index ID;;1
+T;2561;TRET_CHG_1D_GROSS *100;;1
+T;2562;"DC_"+VENDOR_ID;#N/A;0
+T;2568;SPECIAL_DIVS;passthrough:SPECIAL_DIVS:int;0
+T;2569;((((PRICE_USD+SPIN_DIV_EUR)+DIV_NET_EUR)/PRICE_EUR univ=CONS_ND from t-1 )-1)*100;;0
+T;2570;Source from SPECIAL_DIVS;passthrough:SPECIAL_DIVS:int;0
+T;2573;PRICE_LOC * XRATE_LOC_TO_USD£pv£ If ISO Currency Code="GBX" then PRICE_LOC*XRATE_LOC*100;;1
+T;2585;((((PRICE_GBP+SPIN_DIV_GBP )+DIVS_NET_GBP )/PRICE_GBP univ=CONS_ND from t-1 )-1)*100;;0
+T;2587;((((PRICE_LOC+SPIN_DIV_LOC )+DIVS_NET_LOC )/PRICE_LOC univ=CONS_ND from t-1 )-1)*100;;0
+T;2589;((((PRICE_GBP+SPIN_DIV_GBP )+DIVS_GBP )/PRICE_GBP univ=CONS_ND from t-1 )-1)*100;;0
+T;2593;PCHG_1D_GBP;passthrough:PCHG_1D_GBP:int;0
+T;2596;Source from UK_CORP_ACTION_FACTOR in FTSE_DB:FTSE_GLOBAL_COMP.FDB;;1
+T;2603; if COUPON_PAID > 0,  populate COUPON_PAYMENT for today only;;0
+T;2605;Zero on FOM, else, source from CASH_PAY (-1D);;0
+T;2610;If Bond is new, source from the CONS_PF file;;0
+T;2612;(ACCRUED + COUPON_ADJ)/100 £pv£ If Bond is new, source from PF ACCRUED then divide by 100;;0
+T;2635;Set as 1;;1
+T;2637;If ISO Currency Code = "GBX", XRATE_LOC_TO_USD = (MCAP_UNADJ_USD/MCAP_UNADJ_LOC)*100£pv£ MCAP_UNADJ_USD/MCAP_UNADJ_LOC;;0
+T;2640;PRICE_EUR*SPIN_FACTOR_EUR;passthrough:PRICE_EUR * SPIN_FACTOR_EUR:int;0
+T;2641;See Mappings (SPLIT_FACTOR Calculation);;1
+T;2643;#45 * QUOTATION_VALUE;;1
+T;2644;PRICE_LOC * SPECIAL_DIV_FACTOR;passthrough:PRICE_OC * SPECIAL_DIV_FACTOR:int;0
+T;2646;If we have a value for SPLIT_FACTOR, write the date. Otherwise, leave it NA£pv£ Format is in YYYYMMDD;;0
+T;2647;If (PRICE_ADJ_FACTOR - SPLIT_FACTOR) >0.005 then (PRICE_ADJ_FACTOR - SPLIT_FACTOR)/SPLIT_FACTOR, else Null;;0
+T;2648;if CORP_ACTION_NOTES begins with "R " or contains "+ R " then load ( PRICE_ADJFACTOR * SHARES_UNADJ(t-1) / SHARES_UNADJ) );;0
+T;2661;#44 * QUOTATION_VALUE;;1
+T;2671;(cons)SHARES_UNADJ*(mems)AFACTOR;passthrough:SHARES_UNADJ * AFACTOR:int;0
+T;2675;By default, set to "1"£pv£ adjusts historically according to SPLIT_FACTOR£pv£ next updates should be "1";logic:calc_split(SPLIT_FACTOR,DATE,<SELF>,-1):int;0
+T;2696;( ( (MEMB)PA_DIVS * (CONS)SPLIT_FACTOR) converted from DIVS_ISO to CURRENCY_ISO ) + (CONS)PA_SPECIAL_DIVS;;0
+T;2702;Close * XRATE_LOC_TO_USD;;1
+T;2704;((((PRICE_LOC+SPIN_DIV_LOC )+DIVS_LOC )/PRICE_LOC univ=CONS_ND from t-1 )-1)*100 ;;0
+T;2705;((((PRICE_LOC+SPIN_DIV_NET_LOC )+DIVS_LOC )/PRICE_LOC univ=CONS_ND from t-1 )-1)*100 ;;0
+T;2707;((CASH_PAY*INDEX_RATIO)+Base Market Value_LC)/10,000;;1
+T;2708;((CASH_PAY*INDEX_RATIO)+MarketValue)/10,000;;1
+T;2709;( ( (MEMB)DIVS_TOTAL * (CONS)SPLIT_FACTOR) converted from DIVS_ISO to CURRENCY_ISO ) + (CONS)PA_SPECIAL_DIVS;;0
+T;2711;DIVS_TOTAL*XRATE_LOC_TO_USD;passthrough:DIVS_TOTAL * XRATE_LOC_TO_USD:int;0
+T;2712;PRICE_LOC * XRATE_LOC_TO_GBP;passthrough:PRICE_LOC / XRATE_LOC_TO_GBP:int;0
+T;2713;DIVS_TOTAL*XRATE_LOC_TO_GBP;passthrough:DIVS_TOTAL * XRATE_LOC_TO_GBP:int;0
+T;2714;Source from XRATE_LOC_TO_EUR;passthrough:XRATE_LOC_TO_EUR:int;0
+T;2715;DIVS_TOTAL*XRATE_LOC_TO_EUR;passthrough:DIVS_TOTAL * XRATE_LOC_TO_EUR:int;0
+T;2716;Divide by 1, 000, 000;;1
+T;2717;NET DIVIDEND * XRATE_LOC_TO_USD;passthrough:NET DIVIDEND * XRATE_LOC_TO_USD:int;0
+T;2718;DIVIDEND * XRATE_LOC_TO_USD;passthrough:DIVIDEND * XRATE_LOC_TO_USD:int;0
+T;2719;DIVS_NET + SPECIAL_DIVS_NET;passthrough:DIVS_NET + SPECIAL_DIVS_NET:int;0
+T;2724;PRICE - ACCRUED;passthrough:PRICE - ACCRUED:int;0
+T;2735;SHARES_UNADJ*FFLOAT;passthrough:SHARES_UNADJ * FFLOAT:int;0
+T;2737;Pad zeroes to 7 digits;;1
+T;2740;Pad zeroes to 7 digits£pv£ remove check digit;;1
+T;2745;PRICE/PRICE_LOC;passthrough:PRICE / PRICE_LOC:int;0
+T;2747;((((PRICE_LOC+SPIN_DIV_LOC )+DIVS_NET_LOC)/PRICE_LOC univ=CONS_ND from t-1 )-1)*100;;0
+T;2750;((((PRICE_USD+SPIN_DIV_USD )+DIVS_NET_USD )/PRICE_USD univ=CONS_ND from t-1 )-1)*100;;0
+T;2758;MCAP;passthrough:MCAP:int;0
+T;2763;PRICE * XRATE_LOC_TO_USD;passthrough:PRICE * XRATE_LOC_TO_USD:int;0
+T;2765;Set to "IRR";passthrough:'IRR':int;0
+T;2768;((TOTAL_RETURN_NET_USD/previous day TOTAL_RETURN_NET_USD)-1)*100;;0
+T;2769;((TOTAL_RETURN_NET_JPY/previous day TOTAL_RETURN_NET_JPY)-1)*100;;0
+T;2770;((TOTAL_RETURN_NET_GBP/previous day TOTAL_RETURN_NET_GBP)-1)*100;;0
+T;2771;((TOTAL_RETURN_NET_EUR/previous day TOTAL_RETURN_NET_EUR)-1)*100;;0
+T;2772;((TOTAL_RETURN_NET/previous day TOTAL_RETURN_NET)-1)*100;;0
+T;2774;Close*FX_Rate;;1
+T;2775;PRICE;passthrough:PRICE:int;0
+T;2776;Set to "1";passthrough:1:int;0
+T;2777;PRICE_LOC * XRATE_LOC_TO_JPY;passthrough:PRICE_LOC * XRATE_LOC_TO_JPY:int;0
+T;2782;100* (PRICE(t) / (PA_PRICE(t-1) * avail(PA_SPLIT_FACTOR, 1) * PA_SPIN_FACTOR - avail(DIVS, 0)) -1;logic:(-1D):int;0
+T;2793;Pad 0s to 7£pv£ Remove check digit;;1
+T;2798;Convert from MM/DD/YYYY;;1
+T;2802;Pad 0s to 9£pv£ Remove check digit;;1
+T;2835;SHARES/AFACTOR;passthrough:SHARES / AFACTOR:int;0
+T;2836;OFACTOR * FFLOAT;passthrough:OFACTOR * FFLOAT:int;0
+T;2857;ICB;;1
+T;2859;Multiply to 100;;1
+T;2861;OFACTOR*FFLOAT;passthrough:OFACTOR * FFLOAT:int;0
+T;2877;Source from "PRICE";passthrough:PRICE:int;0
+T;2878;Pad 0s to 7;;1
+T;2881;Pad 0s to 9;;1
+T;2882;Proper Case;;1
+T;2887;MCAP/XRATE_LOC_TO_USD;passthrough:MCAP / XRATE_LOC_TO_USD:int;0
+T;2890;((((PRICE_EUR+SPIN_DIV_EUR )+DIVS_NET_EUR )/PRICE_EUR univ=CONS_ND from t-1 )-1)*100;;0
+T;2891;((((PRICE_JPY+SPIN_DIV_JPY )+DIVS_NET_JPY )/PRICE_EUR univ=CONS_ND from t-1 )-1)*100;;0
+T;2894;((((PRICE_USD+SPIN_DIV_USD )+DIVS_NET_USD )/PRICE_USD univ=CONS_ND from t-1 )-1);;0
+T;2895;((((PRICE_USD+SPIN_DIV_USD )+DIV_NET_USD )/PRICE_USD univ=CONS_ND from t-1 )-1);;0
+T;2896;((((PRICE_LOC+SPIN_DIV_LOC )+DIVS_LOC )/PRICE_LOC univ=CONS_ND from t-1 )-1);;0
+T;2897;((((PRICE_LOC+SPIN_DIV_LOC )+DIVS_NET_LOC)/PRICE_LOC univ=CONS_ND from t-1 )-1);;0
+T;2905;COUNTRY_ISO;passthrough:COUNTRY_ISO:int;0
+T;2906;avail(SEDOL, SNETWORD ID);;1
+T;2919;Avail(PRICE(t),PRICE_ND(t));passthrough:avail(PRICE,fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'PRICE',DATE)):int;0
+T;2921;If ACCRUED (t-1) > ACCRUED (0), then CASH/100£pv£ If bond is new, source from CASH/100;;0
+T;2922;Load only if DQ_Expression = "DB(SAGE,JACI,hedgedIndexLevelEUR)";;1
+T;2925;Load only if DQ_Expression = "DB(SAGE,JACI,hedgedIndexLevelGBP)";;1
+T;2926;Avail(PRICE_LOC univ=CONS_ND(t),PRICE_LOC(t)));;1
+T;2928;Refer to Mappings;;1
+T;2929;MKV-AUD or MKT-AUD;;1
+T;2936;If EOM, source from CONS_M_FILE;;0
+T;2938;(MCAP/PRICE_DIRTY)*100£pv£ If EOM, source from CONS_M_FILE;;0
+T;2940;MCAP/Sum(MCAP);;0
+T;2941;PRICE*SHARES_UNADJ;passthrough:PRICE * SHARES_UNADJ:int;0
+T;2946;PRICE_USD*SHARES_UNADJ;passthrough:PRICE_USD * SHARES_UNADJ:int;0
+T;2947;Source from "AMOUNT"£pv£ If EOM, source from CONS_M_FILE;;0
+T;2949;MCAP/(SUM OF MCAP)*100£pv£ If EOM, source from CONS_M_FILE;;0
+T;2951;(MCAP_LOC/PRICE_DIRTY)*100£pv£ If EOM, source from CONS_M_FILE;;0
+T;2964;100*((PRICE_RETURN_LOC(0)/PRICE_RETURN_LOC(t-1))-1);logic:100 * ((PRICE_RETURN_LOC/PRICE_RETURN_LOC(-1D)) - 1):int;0
+T;2965;Source from "NAME";passthrough:NAME:int;0
+T;2966;100*((TOTAL_RETURN_GROSS_LOC(0)/TOTAL_RETURN_GROSS_LOC(t-1))-1);logic:100 * ((TOTAL_RETURN_GROSS_LOC/TOTAL_RETURN_GROSS_LOC(-1D)) - 1):int;0
+T;2969;IF(Avail(PRICE(t),PRICE_ND(t))=0,IF(PA_PRICE(t-1)!=0 && ISAV(PA_PRICE(t-1))=1,0,0.000000001),Avail(PRICE(t),PRICE_ND(t)));logic:(-1D):int;0
+T;2971;See ;;1
+T;2973;Soruce from TRET_CHG_1D_GROSS;;1
+T;2974;Soruce from PCHG_1D;;1
+T;2975;source from CSPLIT(ND);passthrough:fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'CSPLIT',DATE):int;0
+T;2978;See Mappings£pv£ if VENDOR_ID is in map, load from IDENTIFIER, else "DC_"+VENDOR_ID;logic:map():int;0
+T;2979;IF(Avail(PRICE(t),PRICE_ND(t))=0,IF(PA_PRICE(t-1)!=0 && ISAV(PA_PRICE(t-1))=1,0.000000001,0),Avail(PRICE(t),PRICE_ND(t)));logic:(-1D):int;0
+T;2980;Source from http://www.csindex.com.cn/en/indices/index-detail/*VENDOR_ID*£pv£ Column J of the Index Performance file;;1
+T;2981;DIVS + DIVS_NET;passthrough:DIVS + DIVS_NET:int;0
+T;2982;PRICE_DIRTY*AMOUNT_UNADJ_LOC;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_LOC:int;0
+T;2983;Avail(PRICE(t) univ=CONS_ND,PRICE(t));;1
+T;2984;avail(CURRENCY_IDX(t) univ=CONS_ND,CURRENCY_IDX(t));;0
+T;2985;Source from CASH_LOC;passthrough:CASH_LOC:int;0
+T;2986;Source from TRET_CHG_1D_GROSS_LOC*100;;1
+T;2987;Source from AMOUNT_LOC;passthrough:AMOUNT_LOC:int;0
+T;2988;Convert dd/mmm/yy to yyyymmdd£pv£ Load from "Date" if Index ID = JPM00946;;1
+T;2992;Load from "Bam Id" if Index ID = JPM00946;;1
+T;2994;Convert from DD-MMM-YYYY to YYYYMMDD£pv£ Load from "Date" if Index ID = JPM00946;;1
+T;2996;Load from "Mkt Cap" if Index ID = JPM00946;;1
+T;2997;Load from "Daily Change (%) for Index ID = JPM00946;;1
+T;2998;Load from "Avr. Life" if Index ID = JPM00946;;1
+T;3000;Only available for Index ID = JPM00946;;1
+T;3002;Load from "Current Face Price Bid" if Index ID = JPM00946;;1
+T;3003;Load from "Current Face Price Offer" if Index ID = JPM00946;;1
+T;3004;See Indexes;;1
+T;3005;N/A;;1
+T;3006;((PA_SPOT_RET+PA_ROLL_RET+PA_COLLATERAL_RET)/WEIGHT(t-1))*100;logic:((PA_SPOT_RET + PA_ROLL_RET + PA_COLLATERAL_RET) / WEIGHT(-1D)) * 100:int;0
+T;3007;PRICE_DIRTY*AMOUNT_UNADJ_GBP;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_GBP:int;0
+T;3009;Convert dd/mmm/yy to yyyymmdd;;1
+T;3010;Append "-IR";passthrough:append(<SELF>, '-IR'):int;0
+T;3011;Set to blank if value ="-";passthrough:if(matchRegex(<SELF>,'-'),'',<SELF>):int:forcedcalc;0
+T;3012;From MM/DD/YYYY to YYYYMMDD;;1
+T;3013;If 3rd character in CURRENCY_ISO is small letter, then divide by 100;;0
+T;3014;ALL CAPS;;1
+T;3015;If 3rd character in CURRENCY_ISO is small letter, then multiply by 101;;0
+T;3016;Only load first 2 digits;;0
+T;3017;Only load first 4 digits;;0
+T;3018;Only load first 6 digits;;0
+T;3019;Write YYYYMMDD if SPLIT_FACTOR has data;;1
+T;3020;PRICE_LOC * XRATE_LOC_TO_CAD;passthrough:PRICE_LOC * XRATE_LOC_TO_CAD:int;0
+T;3021;PRICE_CAD*SPIN_FACTOR_CAD;passthrough:PRICE_CAD * SPIN_FACTOR_CAD:int;0
+T;3022;SPIN_MCAP_UNADJ_CAD/MCAP_UNADJ_CAD;passthrough:SPIN_MCAP_UNADJ_CAD / MCAP_UNADJ_CAD:int;0
+T;3023;MCAP_UNADJ_CAD for SPIN_STOCK_KEY symbol, else NA;;1
+T;3024;((((PRICE_CAD+SPIN_DIV_CAD)+DIVS_NET_CAD )/PRICE_CAD univ=CONS_ND from t-1 )-1)*100;;0
+T;3025;See Mapping Table;;1
+T;3026;PRICE_LOC * XRATE_LOC_TO_AUD;passthrough:PRICE_LOC * XRATE_LOC_TO_AUD:int;0
+T;3027;DIVS*XRATE_LOC_TO_AUD;passthrough:DIVS_LOC * XRATE_LOC_TO_AUD:int;0
+T;3028;DIVS_NET*XRATE_LOC_TO_AUD;;0
+T;3029;PRICE_USD*SPIN_FACTOR_AUD;passthrough:PRICE_USD * SPIN_FACTOR_AUD:int;0
+T;3030;SPIN_MCAP_UNADJ_USD/MCAP_UNADJ_AUD;passthrough:SPIN_MCAP_UNADJ_USD / MCAP_UNADJ_AUD:int;0
+T;3031;MCAP_UNADJ_AUD for SPIN_STOCK_KEY symbol, else NA;;1
+T;3032;100*((TOTAL_RETURN_GROSS_LOC(0) / TOTAL_RETURN_GROSS_LOC(t-1))-1)£pv£ If bond is new, source TOTAL_RETURN_GROSS_LOC(0) from CONS_M_FILE;logic:if is_new_security() ??:int;0
+T;3033;If REIT=Y, set to 1, else if REIT=N, set to 0;;0
+T;3034;DIVS_GBP * XRATE;;0
+T;3035;DIVS_NET_GBP * XRATE;;0
+T;3036;DIVS_GBP / XRATE;;0
+T;3037;DIVS_NET_GBP / XRATE;;0
+T;3042;PRICE_LOC / XRATE;;0
+T;3050;FFLOAT *CONS_PF (SHARES_UNADJ);;1
+T;3051;Proper Capitalization;;1
+T;3052;(MCAP_PREV_JPY/(Sum of MCAP_PREV_JPY))*100;;0
+T;3053;MCAP_USD*XRATE_USD_TO_CAD;passthrough:MCAP_USD * XRATE_USD_TO_CAD:int;0
+T;3054;MCAP_UNADJ_USD*XRATE_USD_TO_CAD;passthrough:MCAP_UNADJ_USD * XRATE_USD_TO_CAD:int;0
+T;3055;PRICE_USD*XRATE_USD_TO_CAD;passthrough:PRICE_USD * XRATE_USD_TO_CAD:int;0
+T;3056;PRICE_LOC/PRICE_USD;passthrough:PRICE_LOC / PRICE_USD:int;0
+T;3057;((((PRICE_CAD+SPIN_DIV_CAD )+DIVS_NET_CAD)/PRICE_CAD univ=CONS_ND from t-1 )-1)*100;;0
+T;3061;(MCAP/(Sum of MCAP))*100;;1
+T;3062;(MCAP_JPY/(Sum of MCAP_JPY))*100;;0
+T;3063;If DIVS_ISO="USD", load DIVS_LOC. Otherwise, load DIVS_LOC*XRATE_LOC_TO_USD;;0
+T;3064;If SPECIAL_DIVS_ISO="USD", load from SPECIAL_DIVS_LOC. Otherwise, load DIVS_LOC*XRATE_LOC_TO_USD;;0
+T;3065;If SPECIAL_DIVS_ISO="USD", load from SPECIAL_DIVS_LOC. Otherwise, load SPECIAL_DIVS_LOC*XRATE_LOC_TO_USD;;0
+T;3066;If DIVS_ISO="USD", load from DIVS_LOC. Otherwise, load DIVS_LOC*XRATE_LOC_TO_USD;;0
+T;3067;Avail(SEDOL, CUSIP, VENDOR_ID);;1
+T;3068;If 3rd digit in CURRENCY_ISO is small letter, then multiply by 100;;1
+T;3069;DIVS*XRATE_LOC_TO_CAD;passthrough:DIVS_LOC * XRATE_LOC_TO_CAD:int;0
+T;3070;DIVS_NET*XRATE_LOC_TO_CAD;passthrough:DIVS_NET * XRATE_LOC_TO_CAD:int;0
+T;3071;((((PRICE_CAD+SPIN_DIV_CAD )+DIVS_NET_CAD )/PRICE_CAD univ=CONS_ND from t-1 )-1)*100;;0
+T;3072; Set where Currency (vendor file header)="USD";#N/A;1
+T;3073;Set to "USD 50%/Euro 50% ABS FRN ex Spain";;1
+T;3074;Source from database date;;1
+T;3075;See Mapping Tables;;1
+T;8883;PRICE_DIRTY*AMOUNT_UNADJ_HKD;passthrough:PRICE_DIRTY * AMOUNT_UNADJ_HKD:int;0
+T;8884;PRICE_DIRTY*AMOUNT_HKD;passthrough:PRICE_DIRTY * AMOUNT_HKD:int;0
+T;8885;TRET_CHG_1D_GROSS_GBP;passthrough:TRET_CHG_1D_GROSS_GBP:int;0
+T;8886;PRICE_DIRTY*AMOUNT_UNADJ;passthrough:PRICE_DIRTY * AMOUNT_UNADJ:int;0
+T;8887;^=FSYM_SECURITY_PERM_ID ("DEFAULT");;1
+T;8904;Source from CASH_PAY_LOC;passthrough:CASH_PAY_LOC:int;0
+T;8905;PRICE_DIRTY *AMOUNT;passthrough:PRICE_DIRTY * AMOUNT:int;0
+T;8906;Source from "SHARES";passthrough:SHARES:int;0
+T;8907;((TRET_CONT_GROSS/Previous TRET_CONT_GROSS)-1)*100;logic:((TRET_CONT_GROSS / TRET_CONT_GROSS(-1D)) - 1) * 100:int;0
+T;8908;Refer to Indexes;;1
+T;8909;MCAP_UNADJ_USD/SHARES_UNADJ;passthrough:MCAP_UNADJ_USD / SHARES_UNADJ:int;0
+T;8910;((TRET_CONT_1D_G/Previous TRET_CONT_1D_G)-1)*100;;0
+T;8911;((PRICE(t)/PRICE(t-1))-1)*100;;0
+T;8912;((PRICE_USD(t)/PRICE_USD(t-1))-1)*100;;0
+T;8913;Source frm PRICE_USD;;1
+T;8914; if COUPON_PAID > 0,  populate COUPON_AMOUNT for today only;;0
+T;8915;Zero on FOM, else, source from CASH_PAY_UNADJ (-1D);;0
+T;8916;MCAP/(SUM(MCAP+CASH_PAY_UNADJ))*100;;0
+T;8917;((TOTAL_RETURN_GROSS_USD(t)/TOTAL_RETURN_GROSS_USD(t-1))-1)*100;;0
+T;8918;(SHARES_UNADJ*DIVS_USD*AFACTOR)/1000000;passthrough:(SHARES_UNADJ * DIVS_USD * AFACTOR) / 1000000:int;0
+T;8919;ZAV(100*((MCAP_USD(t)/(MCAP_USD(t-1)-DIVS_USD(t)))-1));;0
+T;8920;PRICE+ACCRUED;passthrough:PRICE + ACCRUED:int;0
+T;8921;Refer from Mapping Tables;;1
+T;8922;(ACCRUED + COUPON_ADJ)/100 £pv£ If Bond is new, source from  (ACCRUED+COUPON_ADJ)/100 (from EOM PF file);;0
+T;8923;Zero on FOM, else, source from CASH_PAY_LOC (-1D);;0
+T;8924;Divide by 100,000;passthrough:<SELF> / 100000:int;0
+T;8925;PRICE_DIRTY-PRICE;passthrough:PRICE_DIRTY - PRICE:int;0
+T;8926;Set to "RGS";passthrough:'RGS':int;0
+T;8927;Load only the last 3 digits;passthrough:extractRegex(<SELF>, '(\d){3}$'):col;0
+T;8928;Load only the percent;passthrough:substituteRegex(extractRegex(<SELF>, '\d+%'), '%', ''):col;0
+T;8929;MCAP/(SUM(MCAP+CASH_PAY))*100;logic:MCAP / sum(MCAP+CASH_PAY)) * 100:int;0
+T;8930;Source from HISTORY_FILE£pv£ See Mappings for Column Position;;1
+T;8931;Avail(SHARES, SHARES_ND);passthrough:avail(SHARES,fetchExternalValue('CONS_ND',<CONSTITUENTS_ID>,'SHARES',DATE)):int;0
+T;8932;MCAP_UNADJ_MYR / SHARES_UNADJ;passthrough:MCAP_UNADJ_MYR / SHARES_UNADJ:int;0
+T;8933;((TOTAL_RETURN_GROSS(t)/TOTAL_RETURN_GROSS(t-1))-1)*100;;0
+T;8934;If sheet name = VENDOR_ID, load in corresponding index;;1
+T;8935;source from (MEMB)SHARES_UNADJ * 1000000;;1
+T;8936;load SHARES_UNADJ * 1000000;;1
+T;8937;PRICE_DIRTY*AMOUNT;passthrough:PRICE_DIRTY * AMOUNT:int;0
+T;8938;((PRICE_EUR(t)/PRICE_EUR(t-1))-1)*100;;0
+T;8939;((PRICE_EUR(t)/PRICE_EUR(t-1)-DIVS (t)))-1)*100;;0
+T;8940;((PRICE_USD(t)/PRICE_USD(t-1)-DIVS (t)))-1)*100;;0
+T;8941;Set to "THB";passthrough:'THB':int;0
+T;8942;(PRICE+ACCRUED)*AMOUNT_PREV;passthrough:(PRICE + ACCRUED) * AMOUNT_PREV:int;0
+T;8943;(MCAP_PREV/(SUM OF MCAP_PREV))*100;;0
+T;8944;Set to AUD;;1
+T;8945;PRICE_BID+ ACCRUED;passthrough:PRICE_BID + ACCRUED:int;0
+T;8946;Remove %;passthrough:substituteRegex(<SELF>,'%',''):col;0
+T;8947;"HUF";passthrough:'HUF':int;0
+T;8948;SHARES_UNADJ * 1000000;passthrough:SHARES_UNADJ * 1000000:int;0
+T;8949;"USD";;1
+T;8950;See Mappings£pv£ VENDOR_ID;;1
+T;8951;LOCAL PRICE;;1
+T;8952;See Mappings£pv£ Index Id;;1
+T;8953;See Mappings£pv£ Name;;1
+T;8954;See Mappings£pv£ Currency;;1
+T;8955;If COUPON_PAID > 0,  populate Coupon Payment for today only£pv£ If COUPON_PAID = 0, leave as blank;;0
+T;8956;See Mappings: INDEX_ID;;1
+T;8957;See Mappings: INDEX_NAME;;1
+T;8958;See Mappings: INDEX_CURRENCY;;1
+T;8959;WEIGHT;;1
+T;8960;If (CORP_ACT_CODE="Ex-Rights", T1 Adjusted Close/Close Price, Null);;1
+T;8961;If (CORP_ACT_CODE="Cash and Stock Dividend or Split", "Stock Dividend or Split" or "Reverse Split", T1 Adjusted Close/Close Price, Null);;1
+T;8962;If (CORP_ACT_CODE="Spin Off", T1 Adjusted Close/Close Price, Null);;1
+T;8963;PRICE * SPECIAL_DIV_FACTOR;passthrough:PRICE * SPECIAL_DIV_FACTOR:int;0
+T;8964;See Mappings: Index Name;;1
+T;8965;See Mappings: Index ID;;1
+T;8966;SPIN_MCAP_UNADJ_EUR / MCAP_UNADJ_EUR;passthrough:SPIN_MCAP_UNADJ_EUR / MCAP_UNADJ_EUR:int;0
+T;8967;If SECURITY_CODE appears more than once and DIVS_NOTES = "Extra", load SUM OF instances;;0
+T;8968;Load "TS" + SECURITY CONSTITUENTS FUTURE.*\.06 #5 (MSCI Timeseries Code);;0
+T;8969;MCAP - (DPS (cons) + SPECIAL_DPS (cons));passthrough:MCAP - (DPS + SPECIAL_DPS):int;0
+T;8970;See Mappings Tables;;1
+T;8971;If LEAD_NEXT=L ,1 else NA;;1
+T;8972;If LEAD_NEXT=N ,1 else NA;;1
+T;8973;((((PRICE_USD+SPIN_DIV_AUD )+DIVS_NET_AUD )/PRICE_USD univ=CONS_ND from t-1 )-1)*100;;0
+T;8974;((((PRICE_AUD+SPIN_DIV_AUD )+DIVS_NET_AUD )/PRICE_AUD univ=CONS_ND from t-1 )-1)*100;;0
+T;8975;PRICE_USD*SHARES;passthrough:PRICE_USD * SHARES:int;0
+T;8976;Avail(PRICE(t), PRICE(t) univ=CONS_ND);;0
+T;8977;Avail(CURRENCY_IDX(t), CURRENCY_IDX(t) univ=CONS_ND);;0
+T;8978;Avail(PRICE,PRICE,_ND);;1
+T;8979;DIVS_NET converted from DIVS_ISO to CURRENCY_IDX;;0
+T;8980;DIVS converted from DIVS_ISO to CURRENCY_IDX;;0
+T;8981;^=FSYM_SECURITY_PERM_ID("DEFAULT");passthrough:getSymbologyPermId(IDENTIFIER):col;0
+T;8982;((((PRICE_LOC+SPIN_DIV_LOC)+DIVS_LOC)/PRICE_LOC univ=CONS_ND from t-1 )-1)*100;;0
+T;8983;PRICE_USD * SHARES_TRI;passthrough:PRICE_USD * SHARES_TRI:int;0
+T;8984;PRICE_LOC * SHARES_TRI;passthrough:PRICE_LOC * SHARES_TRI:int;0
+T;8985;PRICE * SHARES_TRI;passthrough:PRICE * SHARES_TRI:int;0
+T;8986;PRICE_USD * SHARES_NRI;passthrough:PRICE_USD * SHARES_NRI:int;0
+T;8987;PRICE_LOC * SHARES_NRI;passthrough:PRICE_LOC * SHARES_NRI:int;0
+T;8988;PRICE * SHARES_NRI;passthrough:PRICE * SHARES_NRI:int;0
+T;8989;Avail(SHARES(t), SHARES(t) univ = MEMB_ND);;0
+T;8990;DIVS_NET;;1
+T;8991;DIVS;;1
+T;8992;MCAP_USD/SHARES;;1
+T;8993;cons_nd(SHARES_UNADJ(t))/cons(SHARES_UNADJ(t-1))£pv£ blank if 1;;0
+T;8994;cons(SHARES_UNADJ(t))/cons_nd(SHARES_UNADJ(t))£pv£ blank if 1£pv£ If cons(SHARES_UNADJ(t)) or cons_nd(SHARES_UNADJ(t)) is 0 or Null then Null;;0
+T;8995;(CONS_FD)MCAP_UNADJ_LOC*(mems_PF)AFACTOR;;0
+T;8996;Convert from MM/DD/YYYY to YYYYMM99;passthrough:month99date(convertDateYYYYMMDD(<SELF>,'MM/DD/YYYY'),1):int;0
+T;8997;See Mappings£pv£ Index Map;;1
+T;8998;SHARES_UNADJ * AFACTOR * WEIGHT_SUB;passthrough:SHARES_UNADJ * AFACTOR * WEIGHT_SUB:int;0
+T;8999;CONS_M_FILE_2 (Mkt Cap/1000000) + CONS_FILE_2 (MVal-USD MM);;0
+T;9000;CONS_M_FILE_2 (Mkt Cap/1000000) + (CONS_FILE_2 (MVal-LOC MM)) * XRATE_LOC_TO_USD;;0
+T;9001;PRICE_DIRTY * AMOUNT_UNADJ_<Currency>;;0
+T;9002;cons_nd(SHARES_UNADJ(t))/cons(SHARES_UNADJ(t))£pv£ blank if 1;;0
+T;9003;cons_nd(SHARES_UNADJ(t))/cons(SHARES_UNADJ(t))£pv£ blank if 1£pv£ If cons_nd(SHARES_UNADJ(t)) or cons(SHARES_UNADJ(t)) is 0 or Null then Null;;0
+T;9004;SHARES_UNADJ(t)/SHARES_UNADJ(t-1)£pv£ blank if 1£pv£ If SHARES_UNADJ(t) or SHARES_UNADJ(t-1) is 0 or Null then Null;;0
+T;9005;(cons_nd)SHARES_UNADJ(t)/(cons)SHARES_UNADJ(t)£pv£ blank if 1;;0
+T;9006;(cons_nd)SHARES_UNADJ(t)/(cons)SHARES_UNADJ(t)£pv£ blank if 1£pv£ If cons_nd(SHARES_UNADJ(t)) or cons(SHARES_UNADJ(t)) is 0 or Null then Null;;0
+T;9007;Pad zeros to 9 digits;;1
+T;9008;Avail (ISIN, CUSIP);;1
+T;9009;Set to Proper Case (ISSUER) + COUPON_AMOUNT + "%" + dd-Mmm-YYYY(MATURITY);;1
+T;9010;PRICE_DIRTY_REAL - ACCRUED_REAL;passthrough:PRICE_DIRTY_REAL - ACCRUED_REAL:int;0
+T;9011;((1+TRET_CHG_1D_GROSS_LOC)*(XRATE_LOC_TO_<Currency>(0)/XRATE_LOC_<Currency>(-1D))-1)*100;;0
+T;9012;((1+TRET_CHG_1D_GROSS_REAL_LOC)*(XRATE_LOC_TO_<Currency>(0)/XRATE_LOC_<Currency>(-1D))-1)*100;;0
+T;9013;((1+TRET_CHG_MTD_GROSS_LOC)*(XRATE_LOC_TO_<Currency>(0)/XRATE_LOC_<Currency>(-1D))-1)*100;;0
+T;9014;((1+TRET_CHG_MTD_GROSS_REAL_LOC)*(XRATE_LOC_TO_<Currency>(0)/XRATE_LOC_<Currency>(-1D))-1)*100;;0
+T;9015;1/MID_RATE;passthrough:1 / MID_RATE:int;0
+T;9016;Set to Proper Case (ISSUER) + COUPON_AMOUNT_REAL + "%" + dd-Mmm-YYYY(MATURITY);;1
+T;9017;PRICE_REAL + ACCRUED_REAL;passthrough:PRICE_REAL + ACCRUED_REAL:int;0
+T;9018;XRATE_LOC_TO_<Currency> (cons) * AMOUNT_LOC;;0
+T;9019;PRICE_DIRTY * AMOUNT_<Currency>;;0
+T;9020;XRATE_LOC_TO_<Currency> (cons) * MCAP_BASE_LOC;;0
+T;9021;XRATE_LOC_TO_<Currency> (cons) * MCAP_REAL_LOC;;0
+T;9022;100*(MCAP/SUM(MCAP));;1
+T;9023;XRATE_LOC_TO_<Currency> * AMOUNT_LOC;;0
+T;9024;XRATE_LOC_TO_<Currency> * MCAP_LOC;;0
+T;9025;XRATE_LOC_TO_<Currency> * MCAP_REAL_LOC;;0
+T;9026;Index Currency;;1
+T;9027;If bond is new, (ACCRUED + COUPON_ADJ) / 100 (from EOM PF file)£pv£ Else, ACCRUED + COUPON_ADJ / 100£lf££lf£;;0
+T;9028;Load only at the first date where the "Coupon Payment" has value.;;1
+T;9029;If bond is new, PRICE / 100 (from EOM PF file)£pv£ else, PRICE_BID / 100£lf£;;0
+T;9030;Source from XRATE_LOC_TO_<Currency>;;1
+T;9031;Load Previous day CASH_PAY_LOC£pv£ Set to zero in every first business day of the month;;0
+T;9032;CONS_M_FILE_3 (Mkt Cap/1000000) + CONS_FILE_2 (MVal-USD MM);;0
+T;9033;CONS_M_FILE_3 (Mkt Cap/1000000) + (CONS_FILE_2 (MVal-LOC MM)) * XRATE_LOC_TO_USD;;0
+T;9034;Source from (IDX_FILE)B2;;1
+T;9035;Source from (IDX_FILE) cell B2;;1
+T;9036;(MCAP+CASH_PAY)/(SUM(MCAP+CASH_PAY))*100;;0
+T;9038;(MCAP+CASH_PAY_UNADJ)/(SUM(MCAP+CASH_PAY_UNADJ))*100;;0
+T;9039;Convert from YYYY-MM-DD to YYYYMM99;;0
+T;9040;Load if column A= "Total Market";;1
+T;9041;(PRICE_LOC * SHARES);;0
+T;9042;If TERMS DETAIL = "x" X "y" STOCK SPLIT then SPLIT = "y"/"x";;1
+T;9043;Avail(SPLIT*RIGHTS_FACTOR,SPLIT,RIGHTS_FACTOR);;0
+T;9044;Pad 0s to the left up to 7 digits;;0
+T;9045;Pad 0s to the left up to 4 digits;;0
+T;9046;IF((CHANGE TYPE=""Split"" && SHARES CHANGE > 0)=1,SHARES CHANGE,null)";;0
+T;9047;IF((CHANGE TYPE=""Rights"" && SHARES CHANGE>0)=1,SHARES CHANGE,null)";;0
+T;9048;If (CHANGE TYPE=""Price Adjustment"" or ""rights"", ADJUSTMENT FACTOR, null)";;0
+T;9049;If constituent is listed twice,load "L,N", otherwise load as is.;;0
+T;9050;If DIVS_ISO == CURRENCY_IDX, load DIVS_LOC£pv£ else, DIVS_LOC*XRATE_LOC_TO_USD;;0
+T;9051;((PRICE/PRICE (-1D))-1)*100;;0
+T;9052;((PA_PRICE + PA_DIVS_TOTAL/PA_PRICE (-1D))-1)*100;;0
+T;9053;Convert from {DDMM} to YYYYMMDD£pv£ YYYY taken from current year;;0
+T;9054;ISSUER + COUPON_AMOUNT(%) + MATURITY (in DD-MMM-YYYY)£pv£ Set to Proper Case;;0
+T;9055;Convert from YY-MM-DD to YYYYMMDD;;0
+T;9056;source from (CONS)CURRENCY_IDX;;1
+T;9057;( ( (MEMB)DIVS_TOTAL * (CONS)SPLIT_FACTOR) converted from DIVS_ISO to PA_CURRENCY_ISO ) + (CONS)PA_SPECIAL_DIVS;;0
+T;9058;/1000000;;1
+T;9059;#45*QUOTATION_VALUE / 1000000;;1
+T;9080;1/SPLIT;;0
+T;9082;Load only if B = DB(SAGE,JACI,unhedgedIndexLevelEUR);;0
+T;9083;(CONS)PA_DIVS;;0
+T;9084;(CONS)DIVS;;0
+T;9085;(CONS_ND)DIVS;;0
+T;9086;See Mappings£pv£ TICKER_CPI;;0
+T;9087;Load if CURRENCY_ISO= EUR;;0
+T;9088;Load if CURRENCY_ISO= USD;;0
+T;9089;Load if CURRENCY_ISO= JPY;;0
+T;9090;Load only if GICS CODE = string;;0
+T;9091;100* (PRICE(t) / (PRICE(t-1) * avail(PA_SPLIT_FACTOR, 1) * PA_SPIN_FACTOR - avail(DIVS, 0)) -1;;0
+T;9092;Multiply by -1;;0
+T;9093;See Mappings£pv£ ISIN;logic:map('INDEX_MAPPING','INDEX_ID',<ID_FIELD>,'ISIN'):int;0
+T;9094;See Mappings£pv£ ISIN_TRI;logic:map('INDEX_MAPPING','INDEX_ID',<ID_FIELD>,'ISIN_NRI'):int;0
+T;9095;See Mappings£pv£ ISIN_NRI;logic:map('INDEX_MAPPING','INDEX_ID',<ID_FIELD>,'ISIN_TRI'):int;0
+T;9096;See Mappings£pv£ VENDOR_ID_NRI;;0
+T;9097;See Mappings£pv£ VENDOR_ID_TRI;;0
+T;9098;PRICE * SHARES * AFACTOR;passthrough:PRICE * SHARES * AFACTOR:int;0
+T;9099;Corporate_Action_Description =Rights offering "x for y", SPLIT="y/x";;0
+T;9100;Corporate_Action_Description =Stock Split "x for y", SPLIT="y/x";;0
+T;9101;PRICE_VWAP * SHARES;passthrough:PRICE_VWAP * SHARES:int;0
+T;9102;Set to "<Currency>";;0
+T;9103;See mappings£pv£ INDEX_IDX;;1
+T;9104;PRICE_<Currency> * SHARES_UNADJ;;0
+T;9105;Load all constituents in the file;;0
+T;9106;SHARES (SCIBETA_MULTISTRAT_HLIQ_APAC_EXKOR)*PRICE_USD(SCIBETA_MULTISTRAT_HLIQ_APAC_EXKOR);;0
+T;9107;SHARES (SCIBETA_MULTISTRAT_DEV_USD)*PRICE_USD(SCIBETA_MULTISTRAT_DEV_USD);;0
+T;9108;SHARES (SCIBETA_MULTISTRAT_DEV_EUR)*PRICE_EUR (SCIBETA_MULTISTRAT_DEV_EUR);;0
+T;9109;SHARES(SCIBETA_MULTISTRAT_DEV_MULTI_BS_EWI)*PRICE_EUR(SCIBETA_MULTISTRAT_DEV_MULTI_BS_EWI);;0
+T;9110;SHARES(SCIBETA_MULTISTRAT_EXTDEV_EUR)*PRICE_EUR(SCIBETA_MULTISTRAT_EXTDEV_EUR);;0
+T;9111;SHARES (SCIBETA_MULTISTRAT_DEV_EUR)*PRICE_USD(SCIBETA_MULTISTRAT_DEV_EUR);;0
+T;9112;SHARES(SCIBETA_MULTISTRAT_DEV_MULTI_BS_EWI)*PRICE_USD(SCIBETA_MULTISTRAT_DEV_MULTI_BS_EWI);;0
+T;9113;SHARES(SCIBETA_MULTISTRAT_EXTDEV_EUR)*PRICE_USD(SCIBETA_MULTISTRAT_EXTDEV_EUR);;0
+T;9114;SHARES (SCIBETA_MULTISTRAT_HLIQ_APAC_EXKOR)*PRICE_LOC (SCIBETA_MULTISTRAT_HLIQ_APAC_EXKOR);;0
+T;9115;SHARES (SCIBETA_MULTISTRAT_DEV_USD)*PRICE_LOC (SCIBETA_MULTISTRAT_DEV_USD);;0
+T;9116;SHARES (SCIBETA_MULTISTRAT_DEV_EUR)*PRICE_LOC(SCIBETA_MULTISTRAT_DEV_EUR);;0
+T;9117;SHARES(SCIBETA_MULTISTRAT_DEV_MULTI_BS_EWI)*PRICE_LOC(SCIBETA_MULTISTRAT_DEV_MULTI_BS_EWI);;0
+T;9118;SHARES(SCIBETA_MULTISTRAT_EXTDEV_EUR)*PRICE_LOC(SCIBETA_MULTISTRAT_EXTDEV_EUR);;0
+T;9119;SHARES(SCIBETA_MULTISTRAT_DEV_EUR)*PRICE_EUR(SCIBETA_MULTISTRAT_DEV_EUR);;0
+T;9120;See Mappings£pv£ BBGID;;0
+T;9121;avail(SPLIT, 1) * avail(RIGHTS_FACTOR, 1) OR NULL if SPLIT and RIGHTS_FACTOR not available;passthrough:if(isBlank(SPLIT) and isBlank(RIGHTS_FACTOR), '', avail(SPLIT, 1) * avail(RIGHTS_FACTOR, 1)):int;0
+T;9122;Set to "NOMU";passthrough:'NOMU':int;0
+T;9123;Convert from DD/MM/YYYY to YYYYMM99;;0
+T;9124;((PA_PRICE(t)+ZAV(PA_DIVS(t)))*((SHARES_UNADJ(-1M)/SHARES_UNADJ(t))/CSPLIT(t)))-(PA_PRICE(t)-ZAV(PA_DIVS(t)));;0
+T;9125;IF(CORP_ACTION_CODE(t)=="CX",IF(PA_SPECIAL_DIVS(t)>0,SHARES_UNADJ(-1M)/SHARES_UNADJ(t),1),IF(CORP_ACTION_CODE(t)=="CP",if(PA_SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1);;0
+T;9126;100*((PA_PRICE(t)*PA_CSPLIT(t))/((PA_PRICE(-1M)*(PA_CSPLIT(-1M)*PA_SPIN_FACTOR(-1M)))-ZAV(PA_DIVS(t)))-1);;0
+T;9127;((PRICE(t)+ZAV(DIVS(t)))*((SHARES_UNADJ(-1M)/SHARES_UNADJ(t))/CSPLIT(t)))-(PRICE(t)-ZAV(DIVS(t)));;0
+T;9128;Convert from {DDMM} to YYYYMM99£pv£ YYYY taken from current year;;0
+T;9129;((TOTAL_RETURN_GROSS/previous month TOTAL_RETURN_GROSS)-1)*100;;0
+T;9130;((TOTAL_RETURN_GROSS_USD/previous month TOTAL_RETURN_GROSS_USD)-1)*100;;0
+T;9131;Set to "Proper Case(ISSUER) + COUPON +'%' + (dd-mmm-yyyy)MATURITY";;0
+T;9132;YYYYMMDD£pv£ use absolute date = first working day of the month;;0
+T;9133;Load all constituents from the file;;0
+T;9134;DIVS_USD+SPECIAL_DIVS_USD;;0
+T;9135;DIVS_EUR+SPECIAL_DIVS_EUR;;0
+T;9136;(((PRICE_USD(t)+DIVS_USD (t))/PRICE_USD(t-1)-1))*100;;0
+T;9137;(((PRICE_EUR(t)+DIVS_EUR (t))/PRICE_EUR(t-1)-1))*100;;0
+T;9138;(((PRICE(t)+DIVS/PRICE(t-1)-1))*100;;0
+T;9139;If Further Details="x for y", then SPLT="y/x";;0
+T;9140;Avail(SEDOL,CUSIP);passthrough:avail(SEDOL,CUSIP):col;0
+T;9141;100* (PRICE(t) / (PRICE(t-1) * avail(PA_SPLIT_FACTOR, 1) * PA_SPIN_FACTOR - avail(DIVS_NET, 0)) -1;;0
+T;9142;DIVS*(1-TAX_RATE);;0
+T;9143;CONS_FILE_3 (Mkt Cap/1000000) + CONS_FILE_2 (MVal-USD MM);;0
+T;9144;CONS_FILE_3 (Mkt Cap/1000000) + (CONS_FILE_2 (MVal-LOC MM)) * XRATE_LOC_TO_USD;;0
+T;9145;Avail(CONS_FILE_3(Mkt Cap), CONS_FILE_2(MVal-USD MM));;0
+T;9146;Avail(CONS_FILE_3(Mkt Cap), CONS_FILE_2(MVal-USD MM))*XRATE_LOC_TO_USD;;0
+T;9147;DIVS_LOC*XRATE_LOC_TO_USD(t-1);;0
+T;9148;((TOTAL_RETURN_GROSS_HUF/previous day TOTAL_RETURN_GROSS_HUF)-1)*100;;0
+T;9149;Pad 0s to 9 digits£pv£ Remove check digit;;0
+T;9150;Pad 0s to 9 digits;;0
+T;9151;Already in YYYYMMDD£pv£ If 0, Set to blank;;0
+T;9152;Pad 0s to 12 digits;;0
+T;9153;Sourced from ;;0
+T;9154;Convert from DDMMMYY to YYYYMMDD;;0
+T;9155;Source from filename£pv£ Convert from DDMMMYY to YYYYMMDD;;0
+T;9156;Prepend "GSCI" to the  VENDOR_ID;;0
+T;9157;Refer to Commodity Mappings;;0
+T;9158;IF(CORP_ACTION_CODE(t)==""CX"",IF(PA_SPECIAL_DIVS(t)>0,SHARES_UNADJ(t-1)/SHARES_UNADJ(t),1),IF(CORP_ACTION_CODE(t)==""CP"",if(PA_SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1);;0
+T;9159;Multiply by 100£pv£ Sum up "Weight" of the same "Comdty";;0
+T;9160;See Mappings£pv£ TICKER_TRI;;0
+T;9161;avail(SEDOL, SNETWORK ID);;0
+T;9162;Refer to NAME Calculation;;0
+T;9163;Remove the appended "# Comdty";;0
+T;9164;Refer to Commodity Mappings£pv£ Commodity Symbols;;0
+T;9165;Multiply by 100£pv£ Sum up "Weight" of the same "Commodity";;0
+T;9166;DIVS_NET converted from DIVS_ISO to CURRENCY_IDX * (if isav(SPLIT_FACTOR)=1, SPLIT_FACTOR , 1);;0
+T;9167;DIVS converted from DIVS_ISO to CURRENCY_IDX * (if isav(SPLIT_FACTOR)=1, SPLIT_FACTOR , 1);;0
+T;9168;SHARES(SCIBETA_MULTISTRAT_JPY)*PRICE_JPY(SCIBETA_MULTISTRAT_JPY);;0
+T;9169;SHARES(SCIBETA_MULTISTRAT_JPY)*PRICE_LOC(SCIBETA_MULTISTRAT_JPY);;0
+T;9170;SHARES(SCIBETA_MULTISTRAT_JPY)*PRICE_USD(SCIBETA_MULTISTRAT_JPY);;0
+T;9171;SHARES(SCIBETA_MULTISTRAT_JPY)*PRICE_JPY£pv£ Restriction: Load only if CURRENCY_IDX=JPY;;0
+T;9172;((MCAP+MCAP_DIV_GROSS)-MCAP(-1D))/MCAP(-1D);;0
+T;9173;Prepend "GSCS" to the  VENDOR_ID;;0
+T;9174;Refer to NAME Calculation Sample;;0
+T;9175;DIVS*XRATE_LOC_TO_JPY;;0
+T;9176;DIVS_NET*XRATE_LOC_TO_JPY;;0
+T;9177;((((PRICE_JPY+SPIN_DIV_JPY )+DIVS_NET_JPY )/PRICE_JPY univ=CONS_ND from t-1 )-1)*100;;0
+T;9178;MCAP_UNADJ_GBP for SPIN_STOCK_KEY symbol, else NA;;0
+T;9179;DATE;;0
+T;9180;Avail(CONS_FILE_3(Mkt Cap), CONS_FILE_2(MVal-Loc MM))*XRATE_LOC_TO_USD;;0
+T;9181;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="*" AND RATING_VENDOR="AA" OR RATING_VENDOR="AAA";;0
+T;9182;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="AA" OR RATING_VENDOR="AAA";;0
+T;9183;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="AA" OR RATING_VENDOR="AAA";;0
+T;9184;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="AA" OR RATING_VENDOR="AAA";;0
+T;9185;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Long" AND RATING_VENDOR="AA" RATING_VENDOR="AAA";;0
+T;9186;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Mid" AND RATING_VENDOR="AA" RATING_VENDOR="AAA";;0
+T;9187;If INDUSTRY_SECTOR="Corporate" AND INDUSTRY_GROUP="*" AND INDUSTRY_SUBGROUP="*" AND TERM="Short" AND RATING_VENDOR="AA" RATING_VENDOR="AAA";;0
+T;9188;Source from COUPON_AMOUNT;;0
+T;9189;PRICE_USD*SPIN_FACTOR_EUR;;0
+T;9190;PRICE_LOC * SHARES * AFACTOR;;0
+T;9191;PRICE_USD*SPIN_FACTOR_JPY;;0
+T;9192;((((PRICE_AUD+SPIN_DIV_AUD )+DIVS_NET_AUD )/PRICE_USD univ=CONS_ND from t-1 )-1)*100;;0
+T;9193;Source from PRICE_BID/100£pv£if bond is new, populate source from CONS_M universe PRICE/100, else, PRICE_BID/100;;0
+T;9194;(ACCRUED + COUPON_ADJ)/100 £pv£ If Bond is new, source from CONS_M universe ACCRUED/100, else, (ACCRUED+COUPON_ADJ)/100;;0
+T;9195;Source from CURRENCY_ISO£pv£ If bond is new, source from PF CURRENCY_ISO;;0
+T;9196;(PRICE_BID[0]-PRICE_BID[-1])/(PRICE_BID[-1]+ACCRUED_INTEREST[-1])*100;;0
+T;9197;Source from REDEMPTION_FACTOR(-1)£pv£ If bond is new source from CONS_M REMPTION_FACTOR, else, REDEMPTION_FACTOR(-1);;0
+T;9198;DIVS_LOC*DIVS_XRATE_LOC_TO_USD(t-1);;0
+T;9199;populate using ^=WMR_EXCHANGE_RATE(<DIVS_ISO>,USD,<DATE-1D>);;0
+T;9200;100*[((PRICE[0]+ACCRUED[0]+COUPON_PAID[0])/(PRICE[-1]+ACCRUED[-1]))-1]*WEIGHT;;0
+T;9201;Source from "FFLOAT";;0
+T;9202;PRICE * SHARES*XRATE_LOC_TO_EUR;;0
+T;9236;Remove "(EUR)";;0
+T;9237;IF(CORP_ACTION_CODE(t)=='CX',IF(SPECIAL_DIVS(t)>0,(SPLIT_FACTOR/(SHARES_UNADJ(t-1)/SHARES_UNADJ(t))),1)),IF(CORP_ACTION_CODE(t)=='CP',if(SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1);;0
+T;9238;IF(CORP_ACTION_CODE(t)=='CX',IF(PA_SPECIAL_DIVS(t)>0,(SHARES_UNADJ(T-1)/SHARES_UNADJ(T)),SPLIT_FACTOR(t))),IF(CORP_ACTION_CODE(t)=='CP',if(PA_SPECIAL_DIVS(t)>0,1,SPLIT_FACTOR(t)),SPLIT_FACTOR(t));;0
+T;9239;((MCAP+avail(MCAP_DIV_GROSS,0))-MCAP(-1D))/MCAP(-1D);;0
+T;9240;[(PRICE_PF + ACCRUED_PF + PA_COUPON)/(PRICE_PF(-1D) + ACCRUED_PF(-1D))]-1;;0
+T;9241;ACCRUED(-1M)/100;;0
+T;9242;Source from AMOUNT_UNADJ (-1M);;0
+T;9243;If ACCRUED (-1D)> ACCRUED (0), [ACCRUED (-1D) +(ACCRUED (-1D) - ACCRUED (-2D))], else 0;;0
+T;9244;source from PRICE(1M)/100;;0
+T;9245;T[0]=Header:A_t£pv£ T[-1]=Header:A_t_1;;0
+T;9246;T[0]=Header:P_t£pv£ T[-1]=Header:P_t_1;;0
+T;9247;T[0]=Header:Y_t£pv£ T[-1]=Header:Y_t_1;;0
+T;9248;T[0]=ACCRUED(t)/100£pv£ T[-1]=ACCRUED(t-1)/100;;0
+T;9249;T[0]=PRICE(t)/100£pv£ T[-1]=PRICE(t-1)/100;;0
+T;9250;Daily Weight;;0
+T;9251;T[0]=Header:N_t£pv£ T[-1]=Header:N_t_1;;0
+T;9252;If (CORP_ACTION_CODE=""PRICE ADJUSTMENT"", NEW PRICE / CURRENT PRICE, Null);;0
+T;9253;If (ACTION TYPE=""Spin-Off"",load SPIN/TARGET STOCK KEY (""S""+Pad with 0s+SPIN/TARGET STOCK KEY=LEN(8)), else NA;;0
+T;9254;DATE +1D;;0
+T;9255;Source from file name£pv£ Convert from MMDDYY to YYYYMMDD;;0
+T;9256;Set to "OMR";;0
+T;9257;If PERM_ID is available, load "Adjusted_Close_local_Priceindex". Else, load "Close_adjusted_local" from VENDOR_ND_FILE;;0
+T;9258;100*((PA_PRICE(t)*PA_CSPLIT(t))/((PA_PRICE(t-1)*(PA_CSPLIT(t-1)*Avail(PA_SPIN_FACTOR(t-1))))-Avail(PA_DIVS(t)))-1);;0
+T;9259;If SPECIAL_DIVS_ISO="USD", load from SPECIAL_DIVS_LOC. Otherwise, load DIVS_LOC*DIVS_XRATE_LOC_TO_USD_PREV;;0
+T;9260;If DIVS_ISO="USD", load DIVS_LOC. Otherwise, load DIVS_LOC*DIVS_XRATE_LOC_TO_USD_PREV;;0
+T;9261;DIVS_USD/XRATE_LOC_TO_USD;;0
+T;9262;If SPECIAL_DIVS_ISO="USD", load from SPECIAL_DIVS_LOC. Otherwise, load SPECIAL_DIVS_LOC*DIVS_XRATE_LOC_TO_USD_PREV;;0
+T;9263;If DIVS_ISO="USD", load from DIVS_LOC. Otherwise, load DIVS_LOC*DIVS_XRATE_LOC_TO_USD_PREV;;0
+T;9264;Convert from Julian date format to YYYYMMDD;;0
+T;9265;TRET_CHG_1D_GROSS_EXCESS*100;;0
+T;9266;If (CORP_ACTION_CODE=""RIGHTS OFFERING"", NEW PRICE / CURRENT PRICE, Null)";;0
+T;9267;SET TO "IDR";;0
+T;9268;((MCAP/SUM OF MCAP)*100) / WEIGHT;;0
+T;9269;use "^=WMR_EXCHANGE_RATE(USD,CHF,DATE)";;0
+T;9270;SharesFreeFloat/AFACTOR;;0
+T;9271;IF COUNTRY_ISO=USA, OFACTOR=0.4 else, 1;;0
+T;9272;(PRICE(t)/(PRICE_ND(t-1)-ZAV(DIVS(t)))-1)£pv£ If new security, return '';;0
+T;9273;Set to "KWD";;0
+T;9274;Remove "'R"£pv£ Append "-KW";;0
+T;9275;Avail(SPLIT*RIGHTS_FACTOR*BONUS_FACTOR,SPLIT,RIGHTS_FACTOR,BONUS_FACTOR);;0
+T;9276;IF(ISNA(PRICE_BID[-1])=1,PRICE_ASK_M/100, PRICE_BID/100);;0
+T;9277;IF(ISNA(PRICE_BID[-1])=1,(ACCRUED_M/100), ((ACCRUED+COUPON_ADJ)/100));;0
+T;9278;IF(ISNA(PRICE_BID[-1])=1,CURRENCY_ISO_M,CURRENCY_ISO);;0
+T;9279;Zero on FOM, else source from CASH_PAY(-1);;0
+T;9280;Zero on FOM, else source from CASH_PAY[-1];;0
+T;9281;IF(ISNA(PRICE_BID[-1])=1, AMOUNT*REDEMPTION_FACTOR_M,AMOUNT*REDEMPTION_FACTOR[-1]);;0
+T;9282;if CORP_ACTION_NOTES begins with "R " or contains "+R " then load ( PRICE_ADJ_FACTOR*SHARES_UNADJ(t-1)/SHARES_UNADJ) );;0
+T;9283;SHARES_UNADJ_JAN * AFACTOR_JAN * WEIGHT_SUB_JAN;;0
+T;9284;SHARES_UNADJ_FEB * AFACTOR_FEB * WEIGHT_SUB_FEB;;0
+T;9285;SHARES_UNADJ_MAR * AFACTOR_MAR * WEIGHT_SUB_MAR;;0
+T;9286;SHARES_UNADJ_APR * AFACTOR_APR * WEIGHT_SUB_APR;;0
+T;9287;SHARES_UNADJ_MAY * AFACTOR_MAY * WEIGHT_SUB_MAY;;0
+T;9288;SHARES_UNADJ_JUN * AFACTOR_JUN * WEIGHT_SUB_JUN;;0
+T;9289;SHARES_UNADJ_JUL * AFACTOR_JUL * WEIGHT_SUB_JUL;;0
+T;9290;SHARES_UNADJ_AUG * AFACTOR_AUG * WEIGHT_SUB_AUG;;0
+T;9291;SHARES_UNADJ_SEP * AFACTOR_SEP * WEIGHT_SUB_SEP;;0
+T;9292;SHARES_UNADJ_OCT * AFACTOR_OCT * WEIGHT_SUB_OCT;;0
+T;9293;SHARES_UNADJ_NOV * AFACTOR_NOV * WEIGHT_SUB_NOV;;0
+T;9294;SHARES_UNADJ_DEC * AFACTOR_DEC * WEIGHT_SUB_DEC;;0
+T;9295;(MCAP_JAN/Sum(Mkt Value (t));;0
+T;9296;(MCAP_FEB/Sum(Mkt Value (t));;0
+T;9297;(MCAP_MAR/Sum(Mkt Value (t));;0
+T;9298;(MCAP_APR/Sum(Mkt Value (t));;0
+T;9299;(MCAP_MAY/Sum(Mkt Value (t));;0
+T;9300;(MCAP_JUN/Sum(Mkt Value (t));;0
+T;9301;(MCAP_JUL/Sum(Mkt Value (t));;0
+T;9302;(MCAP_AUG/Sum(Mkt Value (t));;0
+T;9303;(MCAP_SEP/Sum(Mkt Value (t));;0
+T;9304;(MCAP_OCT/Sum(Mkt Value (t));;0
+T;9305;(MCAP_NOV/Sum(Mkt Value (t));;0
+T;9306;(MCAP_DEC/Sum(Mkt Value (t));;0
+T;9307;Source from TICKER;;0
+T;9308;AMOUNT_UNADJ_HKD*PRICE;;0
+T;9309;(MCAP_APR/Sum(Mkt Value (t+1));;0
+T;9310;(MCAP_AUG/Sum(Mkt Value (t+1));;0
+T;9311;(MCAP_DEC/Sum(Mkt Value (t+1));;0
+T;9312;(MCAP_FEB/Sum(Mkt Value (t+1));;0
+T;9313;(MCAP_JAN/Sum(Mkt Value (t+1));;0
+T;9314;(MCAP_JUL/Sum(Mkt Value (t+1));;0
+T;9315;(MCAP_JUN/Sum(Mkt Value (t+1));;0
+T;9316;(MCAP_MAR/Sum(Mkt Value (t+1));;0
+T;9317;(MCAP_MAY/Sum(Mkt Value (t+1));;0
+T;9318;(MCAP_NOV/Sum(Mkt Value (t+1));;0
+T;9319;(MCAP_OCT/Sum(Mkt Value (t+1));;0
+T;9320;(MCAP_SEP/Sum(Mkt Value (t+1));;0
+T;9321;OFACTOR_JAN*CFACTOR_JAN;;0
+T;9322;OFACTOR_FEB*CFACTOR_FEB;;0
+T;9323;OFACTOR_MAR*CFACTOR_MAR;;0
+T;9324;OFACTOR_APR*CFACTOR_APR;;0
+T;9325;OFACTOR_MAY*CFACTOR_MAY;;0
+T;9326;OFACTOR_JUN*CFACTOR_JUN;;0
+T;9327;OFACTOR_JUL*CFACTOR_JUL;;0
+T;9328;OFACTOR_AUG*CFACTOR_AUG;;0
+T;9329;OFACTOR_SEP*CFACTOR_SEP;;0
+T;9330;OFACTOR_OCT*CFACTOR_OCT;;0
+T;9331;OFACTOR_NOV*CFACTOR_NOV;;0
+T;9332;OFACTOR_DEC*CFACTOR_DEC;;0
+T;9333;PRICE_USD * SHARES_UNADJ_JAN;;0
+T;9334;PRICE_USD * SHARES_UNADJ_FEB;;0
+T;9335;PRICE_USD * SHARES_UNADJ_MAR;;0
+T;9336;PRICE_USD * SHARES_UNADJ_APR;;0
+T;9337;PRICE_USD * SHARES_UNADJ_MAY;;0
+T;9338;PRICE_USD * SHARES_UNADJ_JUN;;0
+T;9339;PRICE_USD * SHARES_UNADJ_JUL;;0
+T;9340;PRICE_USD * SHARES_UNADJ_AUG;;0
+T;9341;PRICE_USD * SHARES_UNADJ_SEP;;0
+T;9342;PRICE_USD * SHARES_UNADJ_OCT;;0
+T;9343;PRICE_USD * SHARES_UNADJ_NOV;;0
+T;9344;PRICE_USD * SHARES_UNADJ_DEC;;0
+T;9345;PRICE_EUR * SHARES_UNADJ_JAN;;0
+T;9346;PRICE_EUR * SHARES_UNADJ_FEB;;0
+T;9347;PRICE_EUR * SHARES_UNADJ_MAR;;0
+T;9348;PRICE_EUR * SHARES_UNADJ_APR;;0
+T;9349;PRICE_EUR * SHARES_UNADJ_MAY;;0
+T;9350;PRICE_EUR * SHARES_UNADJ_JUN;;0
+T;9351;PRICE_EUR * SHARES_UNADJ_JUL;;0
+T;9352;PRICE_EUR * SHARES_UNADJ_AUG;;0
+T;9353;PRICE_EUR * SHARES_UNADJ_SEP;;0
+T;9354;PRICE_EUR * SHARES_UNADJ_OCT;;0
+T;9355;PRICE_EUR * SHARES_UNADJ_NOV;;0
+T;9356;PRICE_EUR * SHARES_UNADJ_DEC;;0
+T;9357;PRICE_LOC * SHARES_UNADJ_JAN;;0
+T;9358;PRICE_LOC * SHARES_UNADJ_FEB;;0
+T;9359;PRICE_LOC * SHARES_UNADJ_MAR;;0
+T;9360;PRICE_LOC * SHARES_UNADJ_APR;;0
+T;9361;PRICE_LOC * SHARES_UNADJ_MAY;;0
+T;9362;PRICE_LOC * SHARES_UNADJ_JUN;;0
+T;9363;PRICE_LOC * SHARES_UNADJ_JUL;;0
+T;9364;PRICE_LOC * SHARES_UNADJ_AUG;;0
+T;9365;PRICE_LOC * SHARES_UNADJ_SEP;;0
+T;9366;PRICE_LOC * SHARES_UNADJ_OCT;;0
+T;9367;PRICE_LOC * SHARES_UNADJ_NOV;;0
+T;9368;PRICE_LOC * SHARES_UNADJ_DEC;;0
+T;9369;PRICE_LOC * SHARES_JAN;;0
+T;9370;PRICE_LOC * SHARES_FEB;;0
+T;9371;PRICE_LOC * SHARES_MAR;;0
+T;9372;PRICE_LOC * SHARES_APR;;0
+T;9373;PRICE_LOC * SHARES_MAY;;0
+T;9374;IF(CORP_ACTION_CODE(t)=="CX",IF(PA_SPECIAL_DIVS(t)>0,(SPLIT_FACTOR/(SHARES_UNADJ(t-1)/SHARES_UNADJ(t))),1)),IF(CORP_ACTION_CODE(t)=="CP",if(PA_SPECIAL_DIVS(t)>0,SPLIT_FACTOR(t),1),1) £pv£ If new security,;;0
+T;9375;IF(CORP_ACTION_CODE(t)=="CX",IF(PA_SPECIAL_DIVS(t)>0,(SHARES_UNADJ(T-1)/SHARES_UNADJ(T)),SPLIT_FACTOR(t))),IF(CORP_ACTION_CODE(t)=="CP",if(PA_SPECIAL_DIVS(t)>0,1,SPLIT_FACTOR(t)),SPLIT_FACTOR(t));;0
+T;9376;(CONS_FD)MCAP_UNADJ_LOC*(mems_fd)AFACTOR;;0
+T;9377;SHARES(t-1)/SHARES(t)£pv£ If 1, load NA;;0
+T;9378;100*(PA_PRICE(t)/((PA_PRICE(t-1)*Avail(PA_SPLIT_FACTOR(1),PA_SPLIT_FACTOR,1)*PA_SPIN_FACTOR(t)))-ZAV(PA_DIVS(t)))-1) £pv£ If new security, return '';;0
+T;9379;100*(PA_PRICE(t)/((PA_PRICE(t-1)*avail(PA_SPLIT_FACTOR(t), 1)*PA_SPIN_FACTOR(t)))-ZAV(PA_DIVS(t)))-1) £pv£ If new security, return '' ;;0
+T;9380;((PA_PRICE(t)+ZAV(PA_DIVS(t)))*((SHARES_UNADJ(t-1)/SHARES_UNADJ(t))/Avail(SPLIT_FACTOR(t), 1)))-(PA_PRICE(t)-ZAV(PA_DIVS(t))) £pv£ If new security, use the calculation: 2*ZAV(PA_DIVS(t));;0
+T;9381;AMOUNT_UNADJ_HKD*PRICE_HKD;;0
+T;9382;PRICE*SHARES;;0
+T;9383;PRICE*SHARES_HKD;;0
+T;9384;Source from PRICE_ND;;0
+T;9385;(((PA_PRICE(t) - PA_DIVS (t))/PA_PRICE(t-1))-1)*100;;0
+T;9386;PCHG_1D/PRICE_PREV;;0
+T;9387;PCHG_1D_IDR/PRICE_PREV;;0
+T;9388;(((PRICE(t)+DIVS_TOTAL(t))/(PRICE(t-1)*SPIN_FACTOR(t)))-1)*100;;0
+T;9389;Remove "`R"£pv£ Append "-KW";;0
+T;9390;((PRICE(t)+ZAV(DIVS(t)))*((SHARES_UNADJ(t-1)/SHARES_UNADJ(t))/Avail (SPLIT_FACTOR(t), 1)))-(PRICE(t)-ZAV(DIVS(t))) £pv£ If new security, use the calculation: 2*ZAV(DIVS(t));;0
+T;9391;((PA_PRICE(t)+ZAV(PA_DIVS(t)))*((SHARES_UNADJ(t-1)/SHARES_UNADJ(t))/Avail(SPLIT_FACTOR(t),1)))-(PA_PRICE(t)-ZAV(PA_DIVS(t))) £pv£ If new security, use the calculation: 2*ZAV(PA_DIVS(t));;0
+T;9392;((((PRICE_GBP+SPIN_DIV_GBP)+DIVS_NET_GBP )/PRICE_GBP univ=CONS_ND from t-1 )-1)*100;;0
+T;9393;Avail(CSPLIT(t) univ=CONS_ND,CSPLIT(t));;0
+T;9394;Divide by 1,000;;0
+T;9395;PRICE_JPY*SHARES;;0
+T;9396;SharesFreeFloat/FFLOAT;;0
+T;9397;See Mappings table;;0
+T;9398;((TRET_CONT_1D_G (t)/TRET_CONT_1D_G_ND (t-1))-1)*100;;0
+T;9399;((TRET_CONT_1D_G/TRET_CONT_1D_G_ND(t-1))-1)*100;;0
+T;9400;TRET_CHG_1D_GROSS_EXCESS;;0
+T;9401;Convert to YYYYMMDD from YYYY-MM-DD;;0
+T;9402;SPECIAL_DIVS_LOC*XRATE_LOC_TO_GBP;;0
+T;9403;SPECIAL_DIVS_NET_LOC*XRATE_LOC_TO_GBP;;0
+T;9404;DIVS_LOC*XRATE_LOC_TO_GBP;;0
+T;9405;DIVS_NET_LOC*XRATE_LOC_TO_GBP;;0
+T;9406;See Notes;;0
+T;9407;IF(CORP_ACTION_CODE(t)==""CX"",IF(SPECIAL_DIVS(t)>0,1,Load to existing constituent),IF(CORP_ACTION_CODE(t)==""CP"",if(SPECIAL_DIVS(t)>0,1,SPLIT_FACTOR(t)),Load to existing constituent);;0
+T;9408;IF(CORP_ACTION_CODE(t)=="CX",IF(SPECIAL_DIVS(t)>0,1,Load to existing constituent),IF(CORP_ACTION_CODE(t)=="CP",if(SPECIAL_DIVS(t)>0,1,Load to existing constituent),Load to existing constituent);;0
+T;9409;Avail(SPLIT,RIGHTS_FACTOR);;0
+T;9410;Load (cons) SPLIT_FACTOR if (cons)DATE=N_DATE;;0
+T;9411;Avail(SPLIT,RIGHTS_FACTOR) else if SHARES[t]/SHARES[t-1] == 1/(PRICE_ADJ_FACTOR) then load PRICE_ADJ_FACTOR, null;;0
+T;9412;IF(CORP_ACTION_CODE(t)=="CX",IF(SPECIAL_DIVS(t)>0,SHARES_UNADJ(t-1)/SHARES_UNADJ(t),Load to existing constituent),IF(CORP_ACTION_CODE(t)=="CP",if(SPECIAL_DIVS(t)>0,1,Load to existing constituent),Load to existing constituent);;0
+T;9413;DATE + 2D;;0
+T;9414;SHARES(t-1)/SHARES(t)£pv£ If 1, do not load;;0
+T;9415;See Mappings£pv£ RIC;;0
+T;9416;T[0]=#N/A£pv£ T[-1]=Header:N_t_1;;0
+T;9417;(PRICE(t)/(PRICE(t-1)-ZAV(DIVS(t)))-1)£pv£ If new security, return '';;0
+T;9418;See Mappings£pv£ VENDOR_ID_CPI;;0
+T;9419;See Mappings£pv£ ISIN_CPI;;0
+T;9420;See Mappings£pv£ IDENTIFIER_TRI;;0
+T;9421;See Mappings£pv£ IDENTIFIER_CPI;;0
+T;9422;See Mappings£pv£ BBGID_TRI;;0
+T;9423;See Mappings£pv£ BBGID_CPI;;0
+T;9424;See Mappings£pv£ RIC_TRI;;0
+T;9425;See Mappings£pv£ IDENTIFIER_NRI;;0
+T;9426;See Mappings£pv£ RIC_NRI;;0
+T;9427;See Mappings£pv£ BBGID_NRI;;0
+T;9428;((CASH_PAY*INDEX_RATIO)+Base Market Value_LC)/1,000,000;;0
+T;9429;CASH_PAY+Base Market Value_LC£pv£ Divide by 1,000,000;;0
+T;9430;((CASH_PAY*INDEX_RATIO)+MarketValue)/1,000,000;;0
+T;9431;((TRET_CONT_1D_NET (t)/TRET_CONT_1D_NET_ND (t-1))-1)*100;;0
+T;9432;Populate with xrate factor that converts DIVS_ISO (t-1) to USD;;0
+T;9433;If ( PRICE_LOC[t-1] == '' OR PRICE_LOC_ND[t-1] == '' ), return ''  £pv£ If ( SHARES_ND[t-1] == '' OR PRICE_LOC_ND[t-1] == '' ), return '' £pv£ If ( PRICE_LOC_ND[t-1] == '0' && SHARES_ND[t-1] == '0' ), return '' £pv£ If ( (PRICE_LOC[t-1] / PRICE_ND[t-1]) == 1 ), return '' £pv£ If ( (SHARES[t-1] / SHARES_ND[t-1]) != 1), return '' £pv£ IF(PRICE_LOC[t-1] - PRICE_LOC_ND[t-1] > 0, then PA_SPECIAL_DIVS = PRICE_LOC[t-1] - PRICE_LOC_ND[t-1]£pv£ else, return ''.;;0
+T;9434;By default, set to "1"£pv£ adjusts historically according to PA_SPLIT_FACTOR£pv£ next updates should be "1";;0
+T;9435;If Corporate_Action_Type (in CONS_CA_FILE) for a security contains "added" AND "deleted", return SPLIT_FACTOR = Adjusted_Close_local_returnindex ('added' line) / Close_local ('deleted' line)£pv£ Else if PriceIndex_Adj_Factor != 1 ('added' line), return PriceIndex_Adj_Factor;;0
+T;9436;PA_DIVS_LOC*DIVS_XRATE_LOC_TO_USD_PREV;;0
+T;9437;IF (PA_SPECIAL_DIVIDEND is not null, SPLIT_FACTOR(t-1), 1);;0
+T;9438;IF (PA_SPECIAL_DIVS is not null, SPLIT_FACTOR(t-1), 1);;0
+T;9439;If DIVS_ISO="USD", load DIVS_NET_LOC. Otherwise, load DIVS_NET_LOC*DIVS_XRATE_LOC_TO_USD_PREV;;0
+T;9440;MCAP_NRI/XRATE_LOC_TO_EUR;passthrough:MCAP_NRI / XRATE_LOC_TO_EUR:int;0
+T;9441;MCAP_UNADJ_NRI/XRATE_LOC_TO_EUR;passthrough:MCAP_UNADJ_NRI / XRATE_LOC_TO_EUR:int;0
+T;9442;populate using ^=WMR_EXCHANGE_RATE(<DIVS_ISO>,USD,<DATE>);;0
+T;9443;If DIVS_ISO="USD", load from DIVS_LOC. Otherwise, load DIVS_NET_LOC*DIVS_XRATE_LOC_TO_USD;;0
+T;9444;If DIVS_ISO="USD", load from DIVS_LOC. Otherwise, load DIVS_LOC*DIVS_XRATE_LOC_TO_USD;;0
+T;9445;100* (PRICE(t) / (PRICE(t-1) * avail(PA_SPLIT_FACTOR, 1) - avail(DIVS_NET, 0)) -1;;0
+T;9446;Source from DIVS_JPY or DIVS_USD;;0
+T;9447;100* (PRICE(t) / (PA_PRICE(t-1) * avail(PA_SPLIT_FACTOR, 1)) -1;;0
+T;9448;MCAP / XRATE_LOC_TO_EUR;;0
+T;9449;Convert from DD/MM/YYYY to YYYYMMDD£pv£ DATE - 1D;;0
+T;9450;SOURCE from DIVS_USD;;0
+T;9451;SOURCE from DIVS_JPY;;0
+T;9452;((PRICE(t)/PRICE(t-1)*PA_SPLIT_FACTOR)-1)*100;;0
+T;9453;Source from PRICE_HKD_ND;;0
+T;9454;PRICE_HKD * SHARES_UNADJ;;0
+T;9455;PRICE_HKD * SHARES;;0
+T;9456;If Last traded price = 0, then PRICE = PRICE(t-1);;0
+T;9457;load DIV_PER_SHARE_EX if INFO_BENEFIT is XD and previous value of DIV_PER_SHARE_EX is null);;0
+T;9458;Load 'Y' if Column O of su.csv is equal to Y. If it is 'N', load 'Y' if INFO_BENEFIT is equal to 'XR' but leave it blank if not.;;0
+T;9459;fieldwidth(0,10)£pv£ (First 10 characters);;0
+T;9460;fieldwidth(25,10)£pv£ (starts after "25th" character, and is 10 characters long);;0
+T;9461;fieldwidth(17,8)£pv£ (starts after "17th" character, and is 8 characters long);;0
+T;9462;If INFO_BENEFIT = 'XD', EX_DATE = UPDATE_DATE,  else blank;;0
+T;9463;Source from PRICE£pv£ If new security, PA_PRICE=0;;0
+T;9464;PRICE_GBP * SHARES;;0
+T;9465;PRICE_GBP * SHARES_NRI;;0
+T;9466;PRICE_JPY * SHARES;;0
+T;9467;PRICE_JPY * SHARES_NRI;;0
+T;9468;PRICE_GBP * SHARES_TRI;;0
+T;9469;Source from SHARES_ND;;0
+T;9470;Avail(LX_ID,CUSIP);;0
+T;9471;(MCAP(t-1)/(SUM(MCAP(t-1)+CASH_PAY(t)))*100;;0
+T;9472;Avail(SPLIT,RIGHTS_FACTOR) else if SHARES_UNADJ[t]/SHARES_SHARES_UNADJ[t-1] == 1/(PRICE_ADJ_FACTOR) then load PRICE_ADJ_FACTOR, null;;0
+T;9473;Avail(SPLIT,RIGHTS_FACTOR) else if SHARES_UNADJ[t]/SHARES_UNADJ[t-1] == 1/(PRICE_ADJ_FACTOR) then load PRICE_ADJ_FACTOR, null;;0
+T;9474;Set where SECURITY CONSTITUENTS SAME DAY.*\.05 #3=INDEX_ID;;0
+T;9475;Set where SECURITY CONSTITUENTS FUTURE.*\.06 #3=INDEX_ID;;0
+T;9476;Avail(PRICE,PRICE_ND);;0
+T;9477;Source from "TRET_CONT_1M_G";;0
+T;9478;(((PRICE_USD(t)+DIVS_TOTAL(t))/(PRICE_USD(t-1)*SPIN_FACTOR(t)))-1)*100;;0
+T;9479;If SPECIAL_DIVS_ISO="USD", load from SPECIAL_DIVS_LOC. Otherwise, load SPECIAL_DIVS_LOC*DIVS_XRATE_LOC_TO_USD;;0
+T;9480;Populate with xrate factor that converts DIVS_ISO to USD;;0
+T;9481;Load SPECIAL_DIVS(t-1) univ = CONS_ND;;0
+T;9482;Load DIVS(t-1) univ = CONS_ND;;0
+T;9483;Load DIVS_USD(t-1) univ = CONS_ND;;0
+T;9484;Load SPECIAL_DIVS_USD(t-1) univ = CONS_ND;;0
+T;9485;If SHARES(t-1)/SHARES_ND(t-1)=1, load SPLIT_FACTOR(t-1)£pv£ else, return "1".;;0
+T;9486;Load DIVS_NET(t-1) univ = CONS_ND;;0
+T;9487;Load DIVS_NET_USD(t-1) univ = CONS_ND;;0
+T;9488;If ( (SHARES[t-1] / SHARES_ND [t-1]) == 1 , return "1"£pv£ else, return SPLIT_FACTOR[t-1] );;0
+EOF
